@@ -6,7 +6,9 @@ NAME_BONUS = $(NAME)_bonus
 
 SRC_PATH = srcs
 
-SRC = main.c parsing.c
+
+
+SRC = main.c
 
 SRC := $(addprefix $(SRC_PATH)/,$(SRC))
 

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/08 16:04:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/08 17:23:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,32 @@
 
 typedef struct s_tokens
 {
-	t_tokens	*next;
-	char		*content;
-}				t_tokens;
+	struct s_tokens	*next;
+	size_t			type;
+	size_t			index;
+	char			*content;
+}					t_tokens;
 
 typedef struct s_vars
 {
-	t_tokens	*tokens;
-	int			pipe;
-}				t_vars;
+	t_tokens		*tokens;
+	int				pipe;
+}					t_vars;
+
+typedef enum e_type
+{
+	WORD = 0,
+	PIPE = 1,
+	AND_IF = 2,
+	OR_IF = 3,
+	LESS = 4,
+	GREAT = 5,
+	DLESS = 6,
+	DGREAT = 7,
+	FILE_IN = 8,
+	FILE_OUT = 9,
+	HEREDOC_DELIM = 10,
+}					t_type;
 
 /* FUNCTIONS */
 
