@@ -14,13 +14,13 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -pthread -g3 $(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 
 RM = rm -f
 
 INCLUDES = -I $(LIBFT_PATH) -I.
 
-LIBFT_PATH = ./QuoicouLibft
+LIBFT_PATH = includes/quoicoulibft
 
 LIBFT = $(LIBFT_PATH)/libft.a
 
@@ -36,9 +36,12 @@ bonus: $(NAME)
 
 clean :
 	@ $(RM) $(NAME) $(OBJ)
+	@make clean -C $(LIBFT_PATH)
 
-fclean : clean
+fclean :
 	@ $(RM) $(NAME) $(NAME_BONUS)
+	@ $(RM) $(NAME) $(OBJ)
+	@make fclean -C $(LIBFT_PATH)
 
 re : fclean all
 
