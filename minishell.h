@@ -32,10 +32,12 @@ typedef struct s_tokens
 
 typedef struct s_vars
 {
-	t_tokens		*tokens;
-	char			**envp;
-	int				pipe;
-}					t_vars;
+	t_tokens	*tokens;
+	char		**envp;
+	int			fildes[2];
+	int			last_pid;
+	int			pipe;
+}				t_vars;
 
 typedef enum e_type
 {
