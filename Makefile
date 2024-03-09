@@ -5,7 +5,7 @@ HEADER = $(NAME).h
 
 SRC_PATH = srcs
 PARS_PATH = $(SRC_PATH)/parsing
-SRC = main.c
+SRC = main.c exec.c
 PARS_SRC = parsing.c utils.c tokens_utils.c
 
 SRC := $(addprefix $(SRC_PATH)/, $(SRC))
