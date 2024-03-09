@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/08 17:38:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/09 11:02:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -49,8 +50,23 @@ typedef enum e_type
 	FILE_IN = 8,
 	FILE_OUT = 9,
 	HEREDOC_DELIM = 10,
+	ENV_VAR = 11,
+	EXIT_STATUS = 12,
 }					t_type;
 
-/* FUNCTIONS */
+/* PARSING */
+void				parsing(t_tokens **tokens, char *line);
+
+/*		TOKENS UTILS */
+t_tokens			*tok_new(char *content, size_t type);
+void				tok_addback(t_tokens **tokens, t_tokens *new);
+void				tok_clear(t_tokens **tokens);
+void				tok_print(t_tokens *tokens);
+
+/* COLOR CODES */
+# define BLUE "\033[0;34m"
+# define PINK "\033[0;35m"
+# define BOLD "\033[1m"
+# define RESET "\033[0m"
 
 #endif // !MINISHELL_H
