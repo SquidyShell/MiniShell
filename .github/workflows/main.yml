@@ -1,0 +1,9 @@
+
+on: [pull_request]
+jobs:
+  check-norm:
+    runs-on: ubuntu-latest
+    steps:
+      - run:  npm python3 -m pip install --upgrade pip setuptools
+              python3 -m pip install norminette
+              norminette
