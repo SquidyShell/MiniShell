@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/09 11:02:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/09 11:44:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ size_t	search_for_lenght(char *line, size_t *len, size_t type)
 	return (type);
 }
 
-size_t	get_type_and_len(char *line, size_t *len)
+int	get_type_and_len(char *line, size_t *len)
 {
 	if (!is_symbol(*line))
 		return (search_for_lenght(line, len, WORD));
+	else
+	{
+		if (*line == '|' && line[1] == '|' && line[2] == '|')
+		{
+			berr("||");
+			exit(1);
+		}
+	}
 	return (0);
 }
 
@@ -54,8 +62,6 @@ void	parsing(t_tokens **tokens, char *line)
 	size_t	type;
 	size_t	len;
 
-	while (is_whitespace(*line))
-		line++;
 	while (*line)
 	{
 		while (is_whitespace(*line))

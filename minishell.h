@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/09 11:02:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/09 11:41:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ t_tokens			*tok_new(char *content, size_t type);
 void				tok_addback(t_tokens **tokens, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
+
+/*		UTILS */
+void				berr(char *token);
+void				s(void);
 
 /* COLOR CODES */
 # define BLUE "\033[0;34m"
