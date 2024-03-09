@@ -6,10 +6,11 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:58:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/09 23:50:46 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/10 00:08:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "first_libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
