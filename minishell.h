@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/08 16:20:00 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:45:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_vars
 {
 	t_tokens	*tokens;
 	char		**envp;
+	int			fildes[2];
+	int			last_pid;
 	int			pipe;
 }				t_vars;
 
