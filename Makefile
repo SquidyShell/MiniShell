@@ -1,19 +1,18 @@
 NAME = minishell
+NAME_BONUS = $(NAME)_bonus
 
 HEADER = $(NAME).h
 
-NAME_BONUS = $(NAME)_bonus
-
 SRC_PATH = srcs
+PARS_PATH = $(SRC_PATH)/parsing
+SRC = main.c
+PARS_SRC = parsing.c utils.c tokens_utils.c
 
-SRC = main.c parsing.c
-
-SRC := $(addprefix $(SRC_PATH)/,$(SRC))
-
+SRC := $(addprefix $(SRC_PATH)/, $(SRC))
+SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-
 CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 
 RM = rm -f
@@ -21,7 +20,6 @@ RM = rm -f
 INCLUDES = -I $(LIBFT_PATH) -I.
 
 LIBFT_PATH = includes/quoicoulibft
-
 LIBFT = $(LIBFT_PATH)/libft.a
 
 all : $(NAME)
