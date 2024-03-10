@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/09 11:03:16 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 21:28:28 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
 
+void	printfd(int fd, const char *s, ...);
 int		ft_printf(const char *s, ...);
 int		ft_printfd(int fd, const char *s, ...);
 void	v_printf(const char *s, ...);

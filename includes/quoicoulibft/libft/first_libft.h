@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_libft.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 00:05:14 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:23:53 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define FIRST_LIBFT_H
 # include <unistd.h>
 
-// PREMIERE PARTIE
+typedef int				t_v2i __attribute__((vector_size (8)));
+
+// PREMIERE PARTIES
 // easy
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
