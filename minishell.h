@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/10 18:30:58 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 19:11:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 # define MINISHELL_H
 
 # include "includes/quoicoulibft/libft.h"
+# include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
+
+extern int			g_exit_status;
 
 typedef struct s_tokens
 {
@@ -30,10 +34,22 @@ typedef struct s_tokens
 	char			*content;
 }					t_tokens;
 
+typedef struct s_cmd
+{
+	size_t			len;
+	char			**args;
+	t_tokens		*infiles;
+	t_tokens		*outfiles;
+	char			*path;
+	int				builtin;
+}					t_cmd;
+
 typedef struct s_vars
 {
+	char			**env_path;
+	char			**env;
 	t_tokens		*tokens;
-	char			**envp;
+	t_cmd			cmd;
 	int				fildes[2];
 	int				last_pid;
 	int				pipe;
@@ -75,6 +91,24 @@ void				s(void);
 # define PINK "\033[0;35m"
 # define BOLD "\033[1m"
 # define RESET "\033[0m"
+
+/* FUNCTIONS */
+int					get_cmd_infos(t_tokens **curr, t_vars *vars);
+int					get_path(char *command, t_vars *vars);
+int					wait_commands(t_vars *vars);
+void				syntax_error(t_tokens *tokens);
+int					is_metachar(t_tokens token);
+void				get_paths(t_vars *vars);
+void				free_matrix(char **t);
+int					is_builtin(t_vars *vars);
+int					exec(t_vars *vars);
+void				ft_echo(char **cmd, t_vars *vars);
+void				ft_cd(char **cmd, t_vars *vars);
+void				ft_pwd(char **cmd, t_vars *vars);
+void				ft_export(char **cmd, t_vars *vars);
+void				ft_unset(char **cmd, t_vars *vars);
+void				ft_env(char **cmd, t_vars *vars);
+void				ft_exit(char **cmd, t_vars *vars);
 # define SQUIDYSHELL "\033[1;35mSquidyShell\033[0m$ "
 
 #endif // !MINISHELL_H

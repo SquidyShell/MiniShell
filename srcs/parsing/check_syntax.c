@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 18:44:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 19:16:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	check_quotes(char *line)
 			if (*line == '\'')
 				in_quote = 1;
 	}
+	return (0);
 }
 
 bool	is_syntax_correct(char *line)
