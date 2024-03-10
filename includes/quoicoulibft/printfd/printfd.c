@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printfd.c                                       :+:      :+:    :+:   */
+/*   printfd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 18:50:18 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/10 18:47:49 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/10 19:04:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "limits.h"
 #include <stdarg.h>
 
-static int	case_percent(const char *s, int i, va_list ap, int fd)
+static int	case_percent(const char *s, char *to_print, int i, va_list ap)
 {
 	i++;
 	if (s[i] == '%')
@@ -42,49 +42,22 @@ int	ft_printfd(int fd, const char *s, ...)
 	va_list	ap;
 	int		i;
 	int		nb_printed;
+	char	*to_print;
+	t_list	*lst;
 
 	if (!s || fd < 0)
 		return (-1);
-	va_start(ap, s);
+	to_print = NULL;
 	nb_printed = 0;
-	i = 0;
-	while (s[i])
+	va_start(ap, s);
+	i = -1;
+	while (s[++i])
 	{
 		if (s[i] == '%')
-			nb_printed += case_percent(s, i++, ap, fd);
+			nb_printed += case_percent(s, to_print, i++, ap);
 		else
-		{
-			ft_putchar_fd(s[i], fd);
 			nb_printed++;
-		}
-		i++;
 	}
 	va_end(ap);
 	return (nb_printed);
-}
-
-void	v_printfd(int fd, const char *s, ...)
-{
-	va_list	ap;
-	int		i;
-
-	if (!s || fd < 0)
-		return ;
-	va_start(ap, s);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '%')
-			case_percent(s, i++, ap, fd);
-		else
-			ft_putchar_fd(s[i], fd);
-		i++;
-	}
-	va_end(ap);
-}
-
-/* Prints a bold red string ended with a return on the standard error */
-void	perr(const char *s)
-{
-	ft_printfd(STDERR_FILENO, "%s%s%s%s\n", BOLD, RED, s, RESET);
 }

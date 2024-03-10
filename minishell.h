@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/09 11:41:17 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 18:30:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,33 @@ typedef struct s_tokens
 
 typedef struct s_vars
 {
-	t_tokens	*tokens;
-	char		**envp;
-	int			fildes[2];
-	int			last_pid;
-	int			pipe;
-}				t_vars;
+	t_tokens		*tokens;
+	char			**envp;
+	int				fildes[2];
+	int				last_pid;
+	int				pipe;
+}					t_vars;
 
 typedef enum e_type
 {
-	WORD = 0,
-	PIPE = 1,
-	AND_IF = 2,
-	OR_IF = 3,
-	LESS = 4,
-	GREAT = 5,
-	DLESS = 6,
-	DGREAT = 7,
-	FILE_IN = 8,
-	FILE_OUT = 9,
-	HEREDOC_DELIM = 10,
-	ENV_VAR = 11,
-	EXIT_STATUS = 12,
+	WORD,
+	PIPE,
+	AND_IF,
+	OR_IF,
+	LESS,
+	GREAT,
+	DLESS,
+	DGREAT,
+	FILE_IN,
+	FILE_OUT,
+	HEREDOC_DELIM,
+	ENV_VAR,
+	EXIT_STATUS,
 }					t_type;
 
 /* PARSING */
 void				parsing(t_tokens **tokens, char *line);
+bool				is_syntax_correct(char *line);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
@@ -74,5 +75,6 @@ void				s(void);
 # define PINK "\033[0;35m"
 # define BOLD "\033[1m"
 # define RESET "\033[0m"
+# define SQUIDYSHELL "\033[1;35mSquidyShell\033[0m$ "
 
 #endif // !MINISHELL_H
