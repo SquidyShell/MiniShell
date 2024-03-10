@@ -5,8 +5,8 @@ HEADER = $(NAME).h
 
 SRC_PATH = srcs
 PARS_PATH = $(SRC_PATH)/parsing
-SRC = main.c
-PARS_SRC = parsing.c utils.c tokens_utils.c
+SRC = main.c exec.c utils.c path.c wait.c  ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
+PARS_SRC = parsing.c parsing3.c utils.c tokens_utils.c
 
 SRC := $(addprefix $(SRC_PATH)/, $(SRC))
 SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))
