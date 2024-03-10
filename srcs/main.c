@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 18:27:41 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 19:07:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **envp)
 		line = readline(SQUIDYSHELL);
 		if (!line)
 			break ;
-		if (check_syntax(line))
+		if (is_syntax_correct(line))
 		{
 			parsing(&vars.tokens, line);
 			tok_print(vars.tokens);
