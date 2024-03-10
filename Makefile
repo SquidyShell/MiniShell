@@ -28,7 +28,7 @@ $(LIBFT) :
 	make -C $(LIBFT_PATH)
 
 $(NAME) : $(LIBFT) ${OBJ} $(HEADER) Makefile
-	$(CC) $(CFLAGS) -o $(NAME) -lreadline $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lreadline
 
 bonus: $(NAME)
 

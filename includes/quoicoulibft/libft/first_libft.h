@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_libft.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 18:31:05 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 00:05:14 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
 						size_t len);
@@ -51,6 +52,8 @@ char				*ft_strdup(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_free(char *s1, char *s2);
+char				*ft_strjoin3(char const *s1, char const *s2,
+						char const *s3);
 char				*ft_strjoin_4(char const *s1, char const *s2,
 						char const *s3, char const *s4);
 char				*ft_strtrim(char const *s1, char const *set);
