@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 08:41:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:29:18 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)
 			break ;
-		if (parsing(&vars) != -1)
+		if (parsing(&vars) != -1 && vars.tokens)
 			exec(&vars);
 		free(vars.line);
 		tok_clear(&vars.tokens);
