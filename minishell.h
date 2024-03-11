@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 18:15:35 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:33:27 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef enum e_type
 int					parsing(t_vars *vars);
 int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(char *line);
+void				there_is_a_quote(t_vars *v);
+void				there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
 
 /*		TOKENS UTILS */
