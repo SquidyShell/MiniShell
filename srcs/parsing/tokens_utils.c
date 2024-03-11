@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 18:15:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:22:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	tok_close(t_vars *vars)
 					- vars->tokens->last->start);
 		else
 			vars->tokens->last->content = ft_substr_skip(vars->line,
-					vars->last_token->start, vars->index
-					- vars->last_token->start, '\'');
+					vars->tokens->last->start, vars->index
+					- vars->tokens->last->start, '\'');
 		if (!vars->tokens->last->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
 		if (vars->tokens->last->error)
