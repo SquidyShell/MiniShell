@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 13:24:56 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:06:04 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef enum e_type
 int					parsing(t_vars *vars);
 int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(char *line);
+void				there_is_a_quote(t_vars *v);
 int					not_in_quote(t_vars *v);
 
 /*		TOKENS UTILS */

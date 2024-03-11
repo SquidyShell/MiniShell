@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:14:04 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:23:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:55:23 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,39 +54,43 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-// char	*ft_substr_skip(char const *s, size_t start, size_t len, char to_skip)
-// {
-// 	char	*substr;
-// 	size_t	i;
-// 	size_t	j;
+char	*ft_substr_skip(char const *s, size_t start, size_t len, char to_skip)
+{
+	char	*substr;
+	size_t	i;
+	size_t	j;
 
-// 	if (!s)
-// 		return (NULL);
-// 	i = 0;
-// 	if (start >= ft_strlen(s))
-// 		return (create_null_char());
-// 	while (i < len && s[i + start])
-// 		i++;
-// 	substr = malloc((i + 1) * sizeof(char));
-// 	if (!substr)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (i < len && s[j + start])
-// 	{
-// 		if (s[j + start] != to_skip)
-// 		substr[i] = s[j + start];
-// 		i++;
-// 	}
-// 	substr[i] = 0;
-// 	return (substr);
-// }
+	if (!s)
+		return (NULL);
+	i = 0;
+	if (start >= ft_strlen(s))
+		return (create_null_char());
+	while (i < len && s[i + start])
+		i++;
+	substr = malloc((i + 1) * sizeof(char));
+	if (!substr)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (j < len && s[j + start])
+	{
+		if (s[j + start] != to_skip)
+			substr[i++] = s[j + start];
+		j++;
+	}
+	substr[i] = 0;
+	return (substr);
+}
 
 // int	main(int ac, char **av)
 // {
-// 	if (ac == 4)
+// 	char *str;
+
+// 	if (ac == 5)
 // 	{
-// 		printf("ft_substr : %s\n", ft_substr(av[1], atoi(av[2]), atoi(av[3])));
+// 		str = ft_substr_skip(av[1], atoi(av[2]), atoi(av[3]), av[4][0]);
+// 		printf("ft_substr_skip : %s\n", str);
+// 		free(str);
 // 	}
 // 	else
 // 		printf("ratio");

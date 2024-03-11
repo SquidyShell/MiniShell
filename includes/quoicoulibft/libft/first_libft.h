@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 21:23:53 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 19:09:22 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char				*ft_strdup(const char *s);
 
 // DEUXIEME PARTIE
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr_skip(char const *s, size_t start, size_t len,
+						char to_skip);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_free(char *s1, char *s2);
 char				*ft_strjoin3(char const *s1, char const *s2,

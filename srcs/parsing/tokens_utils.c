@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:35:59 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:56:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	tok_close(t_vars *vars)
 					vars->last_token->start, vars->index
 					- vars->last_token->start);
 		else
-			vars->last_token->content = ft_substr(vars->line,
+			vars->last_token->content = ft_substr_skip(vars->line,
 					vars->last_token->start, vars->index
-					- vars->last_token->start);
+					- vars->last_token->start, '\'');
 		if (!vars->last_token->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
 		if (vars->last_token->error)
