@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing4.c                                         :+:      :+:    :+:   */
+/*   tokens_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:22:52 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/11 17:27:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// Maniere cramptée, fonctions temporaires.
-t_tokens	*tok_new_closed(char *content, size_t type)
+t_tokens	*tok_new_quoted(char *content, size_t type, bool s_quote,
+		bool d_quote)
 {
 	t_tokens	*tok;
 
@@ -22,20 +22,16 @@ t_tokens	*tok_new_closed(char *content, size_t type)
 		return (NULL);
 	tok->content = content;
 	tok->type = type;
-	tok->closed = 1;
+	tok->closed = 0;
 	tok->next = NULL;
 	tok->error = false;
+	if (s_quote)
+		tok->is_single_quoted = 1;
+	else
+		tok->is_single_quoted = 0;
+	if (d_quote)
+		tok->is_double_quoted = 1;
+	else
+		tok->is_double_quoted = 0;
 	return (tok);
-}
-
-int	not_in_quote(t_vars *v)
-{
-	if (is_whitespace(v->line[v->index]))
-	{
-		if (tok_close(v) == -1)
-			return (-1);
-	}
-	else if (get_type_and_len(v) == -1)
-		return (-1);
-	return (1);
 }

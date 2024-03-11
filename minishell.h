@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 16:25:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:22:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_tokens
 	size_t			len;
 	size_t			start;
 	bool			closed;
+	bool			is_single_quoted;
+	bool			is_double_quoted;
 }					t_tokens;
 
 typedef struct s_cmd
@@ -61,6 +63,7 @@ typedef struct s_vars
 	int				last_pid;
 	size_t			pipe_nb;
 	bool			in_quote;
+	bool			in_dquote;
 }					t_vars;
 
 typedef enum e_type
@@ -82,15 +85,23 @@ typedef enum e_type
 
 /* PARSING */
 int					parsing(t_vars *vars);
+int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(char *line);
-void				if_quote(t_vars *v);
+int					not_in_quote(t_vars *v);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
+t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
+						bool d_quote);
 t_tokens			*tok_new_closed(char *content, size_t type);
 void				tok_addback(t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
+
+/*		PARSING UTILS */
+bool				is_whitespace(char c);
+bool				is_symbol(char c);
+int					search_for_lenght(t_vars *vars);
 
 /*		UTILS */
 void				berr(char *token);
