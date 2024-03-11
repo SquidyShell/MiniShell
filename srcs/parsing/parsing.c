@@ -6,54 +6,32 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 20:17:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:26:42 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-bool	is_symbol(char c)
+void	init_vars(t_vars *v)
 {
-	if (c == '|' || c == '&' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}
-
-bool	is_whitespace(char c)
-{
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
-}
-
-int	search_for_lenght(t_vars *vars)
-{
-	if (vars->line[vars->index] == '|')
-		return (case_pipe(vars));
-	else if (vars->line[vars->index] == '<')
-		return (case_less(vars));
-	else if (vars->line[vars->index] == '>')
-		return (case_great(vars));
-	else
-		return (case_word(vars));
-}
-
-int	get_type_and_len(t_vars *vars)
-{
-	return (search_for_lenght(vars));
+	v->pipe_nb = 0;
+	v->cmd_i = 0;
+	v->index = 0;
+	v->in_quote = 0;
+	v->in_dquote = 0;
+	v->tokens = NULL;
 }
 
 int	parsing(t_vars *v)
 {
 	if (!is_syntax_correct(v->line))
 		return (-1);
-	v->in_quote = 0;
-	v->in_dquote = 0;
-	v->tokens = NULL;
 	while (v->line[v->index])
 	{
 		if (v->line[v->index])
 		{
+			if (needs_to_be_expanded(v))
+				expand_this_shit(v);
 			if (v->line[v->index] == '\"')
 				there_is_a_dquote(v);
 			if (v->line[v->index] == '\'')
@@ -70,7 +48,3 @@ int	parsing(t_vars *v)
 	tok_print(v->tokens);
 	return (0);
 }
-
-// if (v->line[v->index] == '$' && !v->in_quote
-// 	&& v->tokens->last->type != HEREDOC_DELIM)
-// 	expand_this_shit(v);
