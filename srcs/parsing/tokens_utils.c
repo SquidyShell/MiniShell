@@ -29,6 +29,21 @@ t_tokens	*tok_new(char *content, size_t type)
 	return (tok);
 }
 
+t_tokens	*tok_new_closed(char *content, size_t type)
+{
+	t_tokens	*tok;
+
+	tok = malloc(sizeof(t_tokens));
+	if (!tok)
+		return (NULL);
+	tok->content = content;
+	tok->type = type;
+	tok->closed = 1;
+	tok->next = NULL;
+	tok->error = false;
+	return (tok);
+}
+
 void	tok_addback(t_vars *vars, t_tokens *new)
 {
 	new->start = vars->index;
