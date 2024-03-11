@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 13:02:16 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:22:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,21 @@ t_tokens	*tok_new(char *content, size_t type)
 	tok->content = content;
 	tok->type = type;
 	tok->closed = 0;
+	tok->next = NULL;
+	tok->error = false;
+	return (tok);
+}
+
+t_tokens	*tok_new_closed(char *content, size_t type)
+{
+	t_tokens	*tok;
+
+	tok = malloc(sizeof(t_tokens));
+	if (!tok)
+		return (NULL);
+	tok->content = content;
+	tok->type = type;
+	tok->closed = 1;
 	tok->next = NULL;
 	tok->error = false;
 	return (tok);

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 12:20:25 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:17:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_vars
 {
 	char			*line;
 	size_t			index;
+	size_t			close_index;
 	char			**env_path;
 	char			**env;
 	t_tokens		*tokens;
@@ -59,6 +60,7 @@ typedef struct s_vars
 	int				fildes[2];
 	int				last_pid;
 	size_t			pipe_nb;
+	bool			in_quote;
 }					t_vars;
 
 typedef enum e_type
@@ -84,6 +86,7 @@ bool				is_syntax_correct(char *line);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
+t_tokens			*tok_new_closed(char *content, size_t type);
 void				tok_addback(t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
