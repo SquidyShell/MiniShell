@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 19:32:24 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:17:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,7 @@ int	parsing(t_vars *v)
 	tok_print(v->tokens);
 	return (0);
 }
+
+// if (v->line[v->index] == '$' && !v->in_quote
+// 	&& v->tokens->last->type != HEREDOC_DELIM)
+// 	expand_this_shit(v);
