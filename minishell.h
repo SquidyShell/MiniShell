@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/10 19:11:39 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 08:41:41 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef struct s_tokens
 {
 	struct s_tokens	*next;
 	size_t			type;
-	size_t			index;
 	char			*content;
+	size_t			len;
+	size_t			start;
+	bool			closed;
 }					t_tokens;
 
 typedef struct s_cmd
@@ -46,9 +48,12 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	char			*line;
+	size_t			index;
 	char			**env_path;
 	char			**env;
 	t_tokens		*tokens;
+	t_tokens		*last_token;
 	t_cmd			cmd;
 	int				fildes[2];
 	int				last_pid;
@@ -73,12 +78,12 @@ typedef enum e_type
 }					t_type;
 
 /* PARSING */
-void				parsing(t_tokens **tokens, char *line);
+int					parsing(t_vars *vars);
 bool				is_syntax_correct(char *line);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
-void				tok_addback(t_tokens **tokens, t_tokens *new);
+void				tok_addback(t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
 
@@ -93,6 +98,11 @@ void				s(void);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					case_pipe(t_vars *vars);
+int					case_less(t_vars *vars);
+int					case_great(t_vars *vars);
+int					case_word(t_vars *vars);
+int					tok_close(t_vars *vars);
 int					get_cmd_infos(t_tokens **curr, t_vars *vars);
 int					get_path(char *command, t_vars *vars);
 int					wait_commands(t_vars *vars);

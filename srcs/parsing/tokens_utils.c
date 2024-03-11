@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/09 11:08:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 08:21:24 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@ t_tokens	*tok_new(char *content, size_t type)
 		return (NULL);
 	tok->content = content;
 	tok->type = type;
+	tok->closed = 0;
 	tok->next = NULL;
 	return (tok);
 }
 
-void	tok_addback(t_tokens **tokens, t_tokens *new)
+void	tok_addback(t_vars *vars, t_tokens *new)
 {
-	t_tokens	*current;
-
-	if (!(*tokens))
+	new->start = vars->index;
+	if (!vars->tokens)
 	{
-		*tokens = new;
+		vars->tokens = new;
+		vars->last_token = new;
 		return ;
 	}
-	current = *tokens;
-	while (current->next)
-		current = current->next;
-	current->next = new;
+	vars->last_token->next = new;
+	vars->last_token = new;
 }
 
 void	tok_clear(t_tokens **tokens)
@@ -57,6 +56,19 @@ void	tok_clear(t_tokens **tokens)
 		free(current);
 	}
 	*tokens = NULL;
+}
+
+int	tok_close(t_vars *vars)
+{
+	if (vars->tokens && vars->last_token->closed == false)
+	{
+		vars->last_token->closed = true;
+		vars->last_token->content = ft_substr(vars->line,
+				vars->last_token->start, vars->index - vars->last_token->start);
+		if (!vars->last_token->content)
+			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
+	}
+	return (0);
 }
 
 void	tok_print(t_tokens *tokens)
