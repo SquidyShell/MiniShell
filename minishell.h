@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 17:48:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:53:11 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_vars
 	bool			in_dquote;
 	size_t			cmd_i;
 	bool			in_quote;
-	bool			in_dquote;
 }					t_vars;
 
 typedef enum e_type
