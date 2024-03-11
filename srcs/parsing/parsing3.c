@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 08:34:16 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:24:20 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 	vars->cmd.len = 0;
 	while (tokens && tokens->type != PIPE)
 	{
+		dprintf(2, "%ld\n", tokens->type);
 		if (tokens->type == WORD)
 			vars->cmd.len++;
 		tokens = tokens->next;
