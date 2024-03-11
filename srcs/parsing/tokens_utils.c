@@ -6,19 +6,14 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-<<<<<<<<<Temporary merge branch 1
-				/*   Updated: 2024/03/11 13:08:44 by legrandc         ###   ########.fr       */
-				== == == ==
-			=
-				/*   Updated: 2024/03/11 16:26:30 by cviegas          ###   ########.fr       */
-			>>>>>>>>> Temporary merge branch 2
+/*   Updated: 2024/03/11 13:08:44 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:26:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-	t_tokens *
-	tok_new(char *content, size_t type)
+t_tokens	*tok_new(char *content, size_t type)
 {
 	t_tokens	*tok;
 

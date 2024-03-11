@@ -6,18 +6,14 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-<<<<<<<<<Temporary merge branch 1
-				/*   Updated: 2024/03/11 14:21:08 by legrandc         ###   ########.fr       */
-				== == == ==
-			=
-				/*   Updated: 2024/03/11 14:24:10 by cviegas          ###   ########.fr       */
-			>>>>>>>>> Temporary merge branch 2
+/*   Updated: 2024/03/11 14:21:08 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:24:10 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-	int g_exit_status;
+int	g_exit_status;
 
 int	main(int ac, char **av, char **env)
 {

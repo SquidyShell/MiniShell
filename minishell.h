@@ -6,12 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-<<<<<<<<<Temporary merge branch 1
-				/*   Updated: 2024/03/11 13:24:56 by legrandc         ###   ########.fr       */
-				== == == ==
-			=
-				/*   Updated: 2024/03/11 16:25:30 by cviegas          ###   ########.fr       */
-			>>>>>>>>> Temporary merge branch 2
+/*   Updated: 2024/03/11 17:48:36 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +24,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-	extern int g_exit_status;
+extern int			g_exit_status;
 
 typedef struct s_tokens
 {
