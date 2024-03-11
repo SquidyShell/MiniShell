@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
 /*   Updated: 2024/03/11 16:44:25 by legrandc         ###   ########.fr       */
@@ -38,7 +38,7 @@ void	search_and_execve(t_vars *vars)
 	{
 		if (args[0])
 			ft_putstr_fd(args[0], STDERR_FILENO);
-		ft_printfd(STDERR_FILENO, ": command not found\n");
+		printfd(STDERR_FILENO, ": command not found\n");
 	}
 	else if (access(vars->cmd.path, F_OK) == -1 && errno == ENOENT)
 		perror(vars->cmd.path);

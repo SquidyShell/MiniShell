@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 13:02:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:18:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,41 @@ int	get_type_and_len(t_vars *vars)
 	return (search_for_lenght(vars));
 }
 
-int	parsing(t_vars *vars)
+int	parsing(t_vars *v)
 {
-	if (!is_syntax_correct(vars->line))
+	if (!is_syntax_correct(v->line))
 		return (-1);
-	while (vars->line[vars->index])
+	v->in_quote = 0;
+	while (v->line[v->index])
 	{
-		if (is_whitespace(vars->line[vars->index]))
+		if (v->line[v->index] && !v->in_quote)
 		{
-			if (tok_close(vars) == -1)
+			if (is_whitespace(v->line[v->index]))
+			{
+				if (tok_close(v) == -1)
+					return (-1);
+			}
+			else if (v->line[v->index] == '\'')
+				if_quote(v);
+			{
+				v->index++;
+				v->close_index = v->index;
+				while (v->line[v->close_index] != '\'')
+					v->close_index++;
+				tok_addback(v, tok_new_closed(ft_substr(v->line, v->index,
+							v->close_index - v->index), WORD));
+				// printfd(2, ft_substr(v->line, v->index, 2));
+				v->index = v->close_index;
+			}
+			else if (get_type_and_len(v) == -1)
 				return (-1);
 		}
-		else if (get_type_and_len(vars) == -1)
-			return (-1);
-		vars->index++;
+		v->index++;
 	}
-	if (tok_close(vars) == -1)
+	if (tok_close(v) == -1)
 		return (-1);
-	if (vars->tokens && is_metachar(*vars->last_token))
+	if (v->tokens && is_metachar(*v->last_token))
 		return (berr("newline"), -1);
+	tok_print(v->tokens);
 	return (0);
 }
