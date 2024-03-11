@@ -6,8 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 13:08:44 by legrandc         ###   ########.fr       */
-/*   Updated: 2024/03/11 16:26:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 18:15:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +35,11 @@ void	tok_addback(t_vars *vars, t_tokens *new)
 	if (!vars->tokens)
 	{
 		vars->tokens = new;
-		vars->last_token = new;
+		vars->tokens->last = new;
 		return ;
 	}
-	vars->last_token->next = new;
-	vars->last_token = new;
+	vars->tokens->last->next = new;
+	vars->tokens->last = new;
 }
 
 void	tok_clear(t_tokens **tokens)
@@ -64,23 +63,23 @@ void	tok_clear(t_tokens **tokens)
 
 int	tok_close(t_vars *vars)
 {
-	if (vars->tokens && vars->last_token->closed == false)
+	if (vars->tokens && vars->tokens->last->closed == false)
 	{
-		if (vars->last_token->type == PIPE)
+		if (vars->tokens->last->type == PIPE)
 			vars->pipe_nb++;
-		vars->last_token->closed = true;
-		if (!vars->last_token->is_single_quoted)
-			vars->last_token->content = ft_substr(vars->line,
-					vars->last_token->start, vars->index
-					- vars->last_token->start);
+		vars->tokens->last->closed = true;
+		if (!vars->tokens->last->is_single_quoted)
+			vars->tokens->last->content = ft_substr(vars->line,
+					vars->tokens->last->start, vars->index
+					- vars->tokens->last->start);
 		else
-			vars->last_token->content = ft_substr(vars->line,
-					vars->last_token->start, vars->index
-					- vars->last_token->start);
-		if (!vars->last_token->content)
+			vars->tokens->last->content = ft_substr(vars->line,
+					vars->tokens->last->start, vars->index
+					- vars->tokens->last->start);
+		if (!vars->tokens->last->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
-		if (vars->last_token->error)
-			return (berr(vars->last_token->content), -1);
+		if (vars->tokens->last->error)
+			return (berr(vars->tokens->last->content), -1);
 	}
 	return (0);
 }

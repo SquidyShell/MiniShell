@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:37:00 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 18:15:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parsing(t_vars *v)
 	}
 	if (tok_close(v) == -1)
 		return (-1);
-	if (v->tokens && is_metachar(*v->last_token))
+	if (v->tokens && is_metachar(*v->tokens->last))
 		return (berr("newline"), -1);
 	tok_print(v->tokens);
 	return (0);
