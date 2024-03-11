@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 05:29:11 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:41:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,22 @@ int	g_exit_status;
 
 int	main(int ac, char **av, char **env)
 {
-	char	*line;
 	t_vars	vars;
 
 	((void)ac, (void)av);
 	vars.env = env;
 	vars.tokens = NULL;
-	line = NULL;
+	vars.line = NULL;
 	get_paths(&vars);
 	while (1)
 	{
-		line = readline(SQUIDYSHELL);
-		if (!line)
+		vars.index = 0;
+		vars.line = readline(SQUIDYSHELL);
+		if (!vars.line)
 			break ;
-		parsing(&vars, line);
-		tok_print(vars.tokens);
-		exec(&vars);
-		free(line);
+		if (parsing(&vars) != -1)
+			exec(&vars);
+		free(vars.line);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;
 	}

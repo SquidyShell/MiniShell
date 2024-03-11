@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 05:32:08 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:41:41 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef struct s_tokens
 {
 	struct s_tokens	*next;
 	size_t			type;
-	size_t			index;
 	char			*content;
+	size_t			len;
+	size_t			start;
+	bool			closed;
 }					t_tokens;
 
 typedef struct s_cmd
@@ -46,6 +48,8 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	char			*line;
+	size_t			index;
 	char			**env_path;
 	char			**env;
 	t_tokens		*tokens;
@@ -74,7 +78,7 @@ typedef enum e_type
 }					t_type;
 
 /* PARSING */
-void				parsing(t_vars *vars, char *line);
+int					parsing(t_vars *vars);
 bool				is_syntax_correct(char *line);
 
 /*		TOKENS UTILS */
@@ -94,6 +98,11 @@ void				s(void);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					case_pipe(t_vars *vars);
+int					case_less(t_vars *vars);
+int					case_great(t_vars *vars);
+int					case_word(t_vars *vars);
+int					tok_close(t_vars *vars);
 int					get_cmd_infos(t_tokens **curr, t_vars *vars);
 int					get_path(char *command, t_vars *vars);
 int					wait_commands(t_vars *vars);

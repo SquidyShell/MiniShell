@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 05:29:01 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:48:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,40 @@ bool	is_whitespace(char c)
 	return (0);
 }
 
-size_t	search_for_lenght(char *line, size_t *len, size_t type)
+int	search_for_lenght(t_vars *vars)
 {
-	size_t	i;
-
-	i = 0;
-	if (type == WORD)
-		while (line[i] && !is_whitespace(line[i]) && !is_symbol(line[i]))
-			i++;
-	*len = i;
-	return (type);
+	if (vars->line[vars->index] == '|')
+		return (case_pipe(vars));
+	else if (vars->line[vars->index] == '<')
+		return (case_less(vars));
+	else if (vars->line[vars->index] == '>')
+		return (case_great(vars));
+	else
+		return (case_word(vars));
 }
 
-int	get_type_and_len(char *line, size_t *len)
+int	get_type_and_len(t_vars *vars)
 {
-	if (!is_symbol(*line))
-		return (search_for_lenght(line, len, WORD));
-	else if (*line == '|')
-		return (search_for_lenght(line, len, PIPE));
-	return (0);
+	return (search_for_lenght(vars));
 }
 
-void	parsing(t_vars *vars, char *line)
+int	parsing(t_vars *vars)
 {
-	size_t	type;
-	size_t	len;
-
-	while (*line)
+	while (vars->line[vars->index])
 	{
-		while (is_whitespace(*line))
-			line++;
-		if (!*line)
-			break ;
-		type = get_type_and_len(line, &len);
-		tok_addback(vars, tok_new(ft_substr(line, 0, len), type));
-		line += len;
+		if (is_whitespace(vars->line[vars->index]))
+		{
+			if (tok_close(vars) == -1)
+				return (-1);
+		}
+		else if (get_type_and_len(vars) == -1)
+			return (-1);
+		vars->index++;
 	}
+	if (tok_close(vars) == -1)
+		return (-1);
+	if (is_metachar(*vars->last_token))
+		return (berr("newline"), -1);
+	tok_print(vars->tokens);
+	return (0);
 }

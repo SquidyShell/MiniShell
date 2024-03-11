@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/10 18:51:10 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:34:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 	vars->cmd.len = 0;
 	while (tokens && tokens->type != PIPE)
 	{
-		if (is_metachar(*tokens))
-		{
-			if (!tokens->next || is_metachar(*tokens->next))
-				return (syntax_error(tokens), -1);
-			if (tokens->type == LESS || tokens->type == DLESS)
-				tok_addback(&vars->cmd.infiles, tokens->next);
-			else if (tokens->type == GREAT || tokens->type == DGREAT)
-				tok_addback(&vars->cmd.outfiles, tokens->next);
-		}
 		if (tokens->type == WORD)
 			vars->cmd.len++;
 		tokens = tokens->next;
