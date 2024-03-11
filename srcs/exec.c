@@ -6,13 +6,19 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 17:10:50 by legrandc         ###   ########.fr       */
+<<<<<<<<<Temporary merge branch 1
+				/*   Updated: 2024/03/11 16:44:25 by legrandc         ###   ########.fr       */
+				== == == ==
+			=
+				/*   Updated: 2024/03/11 16:16:53 by cviegas          ###   ########.fr       */
+			>>>>>>>>> Temporary merge branch 2
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_fds(t_vars *vars)
+	void
+	get_fds(t_vars *vars)
 {
 	if (vars->cmd_i)
 	{

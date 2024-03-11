@@ -6,13 +6,19 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:18 by legrandc         ###   ########.fr       */
+<<<<<<<<<Temporary merge branch 1
+				/*   Updated: 2024/03/11 13:08:44 by legrandc         ###   ########.fr       */
+				== == == ==
+			=
+				/*   Updated: 2024/03/11 16:26:30 by cviegas          ###   ########.fr       */
+			>>>>>>>>> Temporary merge branch 2
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_tokens	*tok_new(char *content, size_t type)
+	t_tokens *
+	tok_new(char *content, size_t type)
 {
 	t_tokens	*tok;
 
@@ -24,21 +30,8 @@ t_tokens	*tok_new(char *content, size_t type)
 	tok->closed = 0;
 	tok->next = NULL;
 	tok->error = false;
-	return (tok);
-}
-
-t_tokens	*tok_new_closed(char *content, size_t type)
-{
-	t_tokens	*tok;
-
-	tok = malloc(sizeof(t_tokens));
-	if (!tok)
-		return (NULL);
-	tok->content = content;
-	tok->type = type;
-	tok->closed = 1;
-	tok->next = NULL;
-	tok->error = false;
+	tok->is_double_quoted = 0;
+	tok->is_single_quoted = 1;
 	return (tok);
 }
 
@@ -81,8 +74,14 @@ int	tok_close(t_vars *vars)
 		if (vars->last_token->type == PIPE)
 			vars->pipe_nb++;
 		vars->last_token->closed = true;
-		vars->last_token->content = ft_substr(vars->line,
-				vars->last_token->start, vars->index - vars->last_token->start);
+		if (!vars->last_token->is_single_quoted)
+			vars->last_token->content = ft_substr(vars->line,
+					vars->last_token->start, vars->index
+					- vars->last_token->start);
+		else
+			vars->last_token->content = ft_substr(vars->line,
+					vars->last_token->start, vars->index
+					- vars->last_token->start);
 		if (!vars->last_token->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
 		if (vars->last_token->error)

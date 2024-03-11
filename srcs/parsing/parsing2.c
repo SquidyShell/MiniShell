@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 14:13:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:17:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,22 @@ int	case_word(t_vars *vars)
 	{
 		if (tok_close(vars) == -1)
 			return (-1);
-		tok_addback(vars, tok_new(NULL, FILE_IN));
+		tok_addback(vars, tok_new_quoted(NULL, FILE_IN, vars->in_quote,
+				vars->in_dquote));
 	}
 	else if (vars->tokens && (vars->last_token->type == GREAT
 			|| vars->last_token->type == DGREAT))
 	{
 		if (tok_close(vars) == -1)
 			return (-1);
-		tok_addback(vars, tok_new(NULL, FILE_OUT));
+		tok_addback(vars, tok_new_quoted(NULL, FILE_OUT, vars->in_quote,
+				vars->in_dquote));
 	}
 	else if (vars->tokens && (is_metachar(*vars->last_token)))
 		if (tok_close(vars) == -1)
 			return (-1);
 	if (!vars->tokens || vars->last_token->closed == true)
-		tok_addback(vars, tok_new(NULL, WORD));
+		tok_addback(vars, tok_new_quoted(NULL, WORD, vars->in_quote,
+				vars->in_dquote));
 	return (0);
 }
