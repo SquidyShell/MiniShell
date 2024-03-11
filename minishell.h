@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 19:33:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:43:41 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,19 @@ typedef enum e_type
 
 /* PARSING */
 int					parsing(t_vars *vars);
+void				init_vars(t_vars *v);
 int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(char *line);
 void				there_is_a_quote(t_vars *v);
 void				there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
+bool				needs_to_be_expanded(t_vars *v);
+int					expand_this_shit(t_vars *v);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
 t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
 						bool d_quote);
-t_tokens			*tok_new_closed(char *content, size_t type);
 void				tok_addback(t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
@@ -105,7 +107,9 @@ void				tok_print(t_tokens *tokens);
 /*		PARSING UTILS */
 bool				is_whitespace(char c);
 bool				is_symbol(char c);
+size_t				len(const char *s);
 int					search_for_lenght(t_vars *vars);
+int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
 void				berr(char *token);

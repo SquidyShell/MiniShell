@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 19:43:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:48:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	main(int ac, char **av, char **env)
 	get_paths(&vars);
 	while (1)
 	{
-		vars.pipe_nb = 0;
-		vars.cmd_i = 0;
-		vars.index = 0;
+		init_vars(&vars);
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)
 			break ;

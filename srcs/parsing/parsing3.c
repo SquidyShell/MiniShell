@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 12:39:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:45:44 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 		(*curr) = (*curr)->next;
 	vars->cmd.builtin = 0;
 	return (0);
+}
+
+int	search_for_lenght(t_vars *vars)
+{
+	if (vars->line[vars->index] == '|')
+		return (case_pipe(vars));
+	else if (vars->line[vars->index] == '<')
+		return (case_less(vars));
+	else if (vars->line[vars->index] == '>')
+		return (case_great(vars));
+	else
+		return (case_word(vars));
+}
+
+int	get_type_and_len(t_vars *vars)
+{
+	return (search_for_lenght(vars));
 }

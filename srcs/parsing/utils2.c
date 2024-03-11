@@ -1,57 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing4.c                                         :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 20:53:54 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:33:07 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	not_in_quote(t_vars *v)
+bool	is_symbol(char c)
 {
-	if (is_whitespace(v->line[v->index]))
-	{
-		if (tok_close(v) == -1)
-			return (-1);
-	}
-	else if (get_type_and_len(v) == -1)
-		return (-1);
-	return (1);
+	if (c == '|' || c == '&' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
 
-void	there_is_a_quote(t_vars *v)
+bool	is_whitespace(char c)
 {
-	if (!v->in_dquote)
-	{
-		if (!v->in_quote)
-		{
-			v->in_quote = 1;
-			if (v->tokens)
-				v->tokens->last->is_single_quoted = 1;
-			case_word(v);
-		}
-		else
-			v->in_quote = 0;
-	}
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
 }
 
-void	there_is_a_dquote(t_vars *v)
+// ft_strlen For more code visibility
+size_t	len(const char *s)
 {
-	if (!v->in_quote)
-	{
-		if (!v->in_dquote)
-		{
-			v->in_dquote = 1;
-			if (v->tokens)
-				v->tokens->last->is_double_quoted = 1;
-			case_word(v);
-		}
-		else
-			v->in_dquote = 0;
-	}
+	return (ft_strlen(s));
 }
