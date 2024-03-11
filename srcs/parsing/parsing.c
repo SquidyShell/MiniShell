@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 16:25:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:18:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ int	parsing(t_vars *v)
 			}
 			else if (v->line[v->index] == '\'')
 				if_quote(v);
+			{
+				v->index++;
+				v->close_index = v->index;
+				while (v->line[v->close_index] != '\'')
+					v->close_index++;
+				tok_addback(v, tok_new_closed(ft_substr(v->line, v->index,
+							v->close_index - v->index), WORD));
+				// printfd(2, ft_substr(v->line, v->index, 2));
+				v->index = v->close_index;
+			}
 			else if (get_type_and_len(v) == -1)
 				return (-1);
 		}
