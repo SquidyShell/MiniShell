@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 19:25:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 19:32:24 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	parsing(t_vars *v)
 	{
 		if (v->line[v->index])
 		{
+			if (v->line[v->index] == '\"')
+				there_is_a_dquote(v);
 			if (v->line[v->index] == '\'')
 				there_is_a_quote(v);
 			if (!v->in_quote)

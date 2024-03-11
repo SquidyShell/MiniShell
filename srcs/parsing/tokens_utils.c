@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 19:22:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 19:38:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,29 @@ void	tok_clear(t_tokens **tokens)
 	*tokens = NULL;
 }
 
-int	tok_close(t_vars *vars)
+int	tok_close(t_vars *v)
 {
-	if (vars->tokens && vars->tokens->last->closed == false)
+	if (v->tokens && v->tokens->last->closed == false)
 	{
-		if (vars->tokens->last->type == PIPE)
-			vars->pipe_nb++;
-		vars->tokens->last->closed = true;
-		if (!vars->tokens->last->is_single_quoted)
-			vars->tokens->last->content = ft_substr(vars->line,
-					vars->tokens->last->start, vars->index
-					- vars->tokens->last->start);
+		if (v->tokens->last->type == PIPE)
+			v->pipe_nb++;
+		v->tokens->last->closed = true;
+		if (!v->tokens->last->is_single_quoted
+			&& !v->tokens->last->is_double_quoted)
+			v->tokens->last->content = ft_substr(v->line,
+					v->tokens->last->start, v->index - v->tokens->last->start);
+		else if (v->tokens->last->is_single_quoted)
+			v->tokens->last->content = ft_substr_skip(v->line,
+					v->tokens->last->start, v->index - v->tokens->last->start,
+					'\'');
 		else
-			vars->tokens->last->content = ft_substr_skip(vars->line,
-					vars->tokens->last->start, vars->index
-					- vars->tokens->last->start, '\'');
-		if (!vars->tokens->last->content)
+			v->tokens->last->content = ft_substr_skip(v->line,
+					v->tokens->last->start, v->index - v->tokens->last->start,
+					'\"');
+		if (!v->tokens->last->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
-		if (vars->tokens->last->error)
-			return (berr(vars->tokens->last->content), -1);
+		if (v->tokens->last->error)
+			return (berr(v->tokens->last->content), -1);
 	}
 	return (0);
 }
