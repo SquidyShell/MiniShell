@@ -1,21 +1,18 @@
 NAME = minishell
+NAME_BONUS = $(NAME)_bonus
 
 HEADER = $(NAME).h
 
-NAME_BONUS = $(NAME)_bonus
-
 SRC_PATH = srcs
+PARS_PATH = $(SRC_PATH)/parsing
+SRC = main.c exec.c utils.c path.c wait.c  ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
+PARS_SRC = parsing.c parsing3.c utils.c tokens_utils.c check_syntax.c parsing2.c parsing4.c
 
-
-
-SRC = main.c
-
-SRC := $(addprefix $(SRC_PATH)/,$(SRC))
-
+SRC := $(addprefix $(SRC_PATH)/, $(SRC))
+SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-
 CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 
 RM = rm -f
@@ -23,27 +20,26 @@ RM = rm -f
 INCLUDES = -I $(LIBFT_PATH) -I.
 
 LIBFT_PATH = includes/quoicoulibft
-
 LIBFT = $(LIBFT_PATH)/libft.a
 
 all : $(NAME)
 
 $(LIBFT) :
-	make -C $(LIBFT_PATH)
+	make --silent -C $(LIBFT_PATH)
 
 $(NAME) : $(LIBFT) ${OBJ} $(HEADER) Makefile
-	$(CC) $(CFLAGS) -o $(NAME) -lreadline $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lreadline
 
 bonus: $(NAME)
 
 clean :
 	@ $(RM) $(NAME) $(OBJ)
-	@make clean -C $(LIBFT_PATH)
+	@make --silent clean -C $(LIBFT_PATH)
 
 fclean :
 	@ $(RM) $(NAME) $(NAME_BONUS)
 	@ $(RM) $(NAME) $(OBJ)
-	@make fclean -C $(LIBFT_PATH)
+	@make --silent fclean -C $(LIBFT_PATH)
 
 re : fclean all
 

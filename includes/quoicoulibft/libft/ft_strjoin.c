@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:58:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/01 12:14:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/10 00:08:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "first_libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -95,6 +96,25 @@ char	*ft_strjoin_4(char const *s1, char const *s2, char const *s3,
 		join[i] = s4[i - ft_strlen(s1) - ft_strlen(s2) - ft_strlen(s3)];
 	join[i] = 0;
 	return (join);
+}
+
+char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	s3_len;
+	char	*ret;
+
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	s3_len = ft_strlen(s3);
+	ret = malloc(s1_len + s2_len + s3_len + 1);
+	if (!ret)
+		return (NULL);
+	ft_strlcpy(ret, s1, s1_len + 1);
+	ft_strlcpy(ret + s1_len, s2, s2_len + 1);
+	ft_strlcpy(ret + s1_len + s2_len, s3, s3_len + 1);
+	return (ret);
 }
 
 // int	main(int ac, char **av)
