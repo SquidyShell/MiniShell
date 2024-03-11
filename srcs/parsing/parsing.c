@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
 /*   Updated: 2024/03/11 13:02:06 by legrandc         ###   ########.fr       */
@@ -45,6 +45,8 @@ int	get_type_and_len(t_vars *vars)
 
 int	parsing(t_vars *vars)
 {
+	if (!is_syntax_correct(vars->line))
+		return (-1);
 	while (vars->line[vars->index])
 	{
 		if (is_whitespace(vars->line[vars->index]))
