@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 09:29:18 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:21:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int	main(int ac, char **av, char **env)
 	get_paths(&vars);
 	while (1)
 	{
+		vars.pipe_nb = 0;
+		vars.cmd_i = 0;
 		vars.index = 0;
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)
 			break ;
 		if (parsing(&vars) != -1 && vars.tokens)
 			exec(&vars);
+		dprintf(2, "%ld\n", vars.pipe_nb);
 		free(vars.line);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;

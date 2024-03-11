@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 13:02:16 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:08:44 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	tok_close(t_vars *vars)
 {
 	if (vars->tokens && vars->last_token->closed == false)
 	{
+		if (vars->last_token->type == PIPE)
+			vars->pipe_nb++;
 		vars->last_token->closed = true;
 		vars->last_token->content = ft_substr(vars->line,
 				vars->last_token->start, vars->index - vars->last_token->start);
