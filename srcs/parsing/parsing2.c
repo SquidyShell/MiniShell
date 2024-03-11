@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 18:15:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:08:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,32 @@ int	case_great(t_vars *vars)
 	return (0);
 }
 
+bool	tok_close_and_addback(t_vars *vars, int type)
+{
+	if (tok_close(vars) == -1)
+		return (0);
+	tok_addback(vars, tok_new_quoted(NULL, type, vars->in_quote,
+			vars->in_dquote));
+	return (1);
+}
+
 int	case_word(t_vars *vars)
 {
-	if (vars->tokens && (vars->tokens->last->type == LESS
-			|| vars->tokens->last->type == DLESS))
+	if (vars->tokens && vars->tokens->last->type == LESS)
 	{
-		if (tok_close(vars) == -1)
+		if (!tok_close_and_addback(vars, FILE_IN))
 			return (-1);
-		tok_addback(vars, tok_new_quoted(NULL, FILE_IN, vars->in_quote,
-				vars->in_dquote));
+	}
+	else if (vars->tokens && vars->tokens->last->type == DLESS)
+	{
+		if (!tok_close_and_addback(vars, HEREDOC_DELIM))
+			return (-1);
 	}
 	else if (vars->tokens && (vars->tokens->last->type == GREAT
 			|| vars->tokens->last->type == DGREAT))
 	{
-		if (tok_close(vars) == -1)
+		if (!tok_close_and_addback(vars, FILE_IN))
 			return (-1);
-		tok_addback(vars, tok_new_quoted(NULL, FILE_OUT, vars->in_quote,
-				vars->in_dquote));
 	}
 	else if (vars->tokens && (is_metachar(*vars->tokens->last)))
 		if (tok_close(vars) == -1)
