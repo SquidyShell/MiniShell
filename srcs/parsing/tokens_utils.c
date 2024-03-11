@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 19:47:24 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 22:30:28 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ t_tokens	*tok_new(char *content, size_t type)
 	return (tok);
 }
 
-void	tok_addback(t_vars *vars, t_tokens *new)
+void	tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new)
 {
 	new->start = vars->index;
-	if (!vars->tokens)
+	if (!*tokens)
 	{
-		vars->tokens = new;
-		vars->tokens->last = new;
+		*tokens = new;
+		(*tokens)->last = new;
 		return ;
 	}
-	vars->tokens->last->next = new;
-	vars->tokens->last = new;
+	(*tokens)->last->next = new;
+	(*tokens)->last = new;
+	new->last = NULL;
 }
 
 void	tok_clear(t_tokens **tokens)
@@ -90,11 +91,18 @@ int	tok_close(t_vars *v)
 
 void	tok_print(t_tokens *tokens)
 {
+	t_tokens	*last;
+
+	if (!tokens)
+		return ;
+	last = tokens->last;
 	while (tokens)
 	{
 		printf("%sToken:%s %s, %sType:%s %zu, %sIs_in_quote?:%s %d\n", BLUE,
 			RESET, tokens->content, GREEN, RESET, tokens->type, PINK, RESET,
 			tokens->is_single_quoted);
+		if (last && tokens == last)
+			return ;
 		tokens = tokens->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 18:03:43 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 22:39:24 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,17 @@ int	exec(t_vars *vars)
 	t_tokens	*curr;
 
 	curr = vars->tokens;
+	vars->last_pid = 0;
 	while (curr)
 	{
-		perr("new");
+		vars->cmd.files = NULL;
+		perr("tokens:");
 		tok_print(curr);
 		get_cmd_infos(&curr, vars);
-		is_builtin(vars);
+		perr("files:");
+		tok_print(vars->cmd.files);
+		if (vars->cmd.len)
+			is_builtin(vars);
 		free(vars->cmd.args);
 		vars->cmd_i++;
 	}

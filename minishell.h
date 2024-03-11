@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 19:33:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 21:49:44 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ typedef struct s_cmd
 {
 	size_t			len;
 	char			**args;
-	t_tokens		*infiles;
-	t_tokens		*outfiles;
+	t_tokens		*files;
 	char			*path;
 	int				builtin;
 }					t_cmd;
@@ -98,7 +97,7 @@ t_tokens			*tok_new(char *content, size_t type);
 t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
 						bool d_quote);
 t_tokens			*tok_new_closed(char *content, size_t type);
-void				tok_addback(t_vars *vars, t_tokens *new);
+void				tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
 
