@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 16:16:53 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:44:25 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	get_fds(t_vars *vars)
 {
-	dup2(vars->fildes[1], STDOUT_FILENO);
-	close(vars->fildes[0]);
-	close(vars->fildes[1]);
+	if (vars->cmd_i)
+	{
+		dup2(vars->last_fd, STDIN_FILENO);
+		close(vars->last_fd);
+	}
+	if (vars->cmd_i != vars->pipe_nb)
+	{
+		dup2(vars->fildes[1], STDOUT_FILENO);
+		close(vars->fildes[0]);
+		close(vars->fildes[1]);
+	}
 }
 
 void	search_and_execve(t_vars *vars)
@@ -49,8 +57,9 @@ void	search_and_execve(t_vars *vars)
 
 static int	pipex(t_vars *vars)
 {
-	if (pipe(vars->fildes) == -1)
-		return (-1);
+	if (vars->cmd_i != vars->pipe_nb)
+		if (pipe(vars->fildes) == -1)
+			return (-1);
 	vars->last_pid = fork();
 	if ((vars->last_pid) == -1)
 		return (-1);
@@ -60,8 +69,11 @@ static int	pipex(t_vars *vars)
 		if (!vars->cmd.builtin)
 			search_and_execve(vars);
 	}
-	close(vars->fildes[0]);
-	close(vars->fildes[1]);
+	if (vars->cmd_i)
+		close(vars->last_fd);
+	vars->last_fd = vars->fildes[0];
+	if (vars->cmd_i != vars->pipe_nb)
+		close(vars->fildes[1]);
 	return (0);
 }
 
@@ -98,6 +110,7 @@ int	exec(t_vars *vars)
 		get_cmd_infos(&curr, vars);
 		is_builtin(vars);
 		free(vars->cmd.args);
+		vars->cmd_i++;
 	}
 	return (wait_commands(vars));
 }
