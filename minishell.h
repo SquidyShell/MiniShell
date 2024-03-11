@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 08:41:41 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:20:25 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ extern int			g_exit_status;
 
 typedef struct s_tokens
 {
+	bool			error;
 	struct s_tokens	*next;
 	size_t			type;
 	char			*content;
@@ -57,7 +58,7 @@ typedef struct s_vars
 	t_cmd			cmd;
 	int				fildes[2];
 	int				last_pid;
-	int				pipe;
+	size_t			pipe_nb;
 }					t_vars;
 
 typedef enum e_type

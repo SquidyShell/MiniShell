@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 09:24:20 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:39:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 	vars->cmd.len = 0;
 	while (tokens && tokens->type != PIPE)
 	{
-		dprintf(2, "%ld\n", tokens->type);
 		if (tokens->type == WORD)
 			vars->cmd.len++;
 		tokens = tokens->next;
@@ -42,6 +41,8 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 			vars->cmd.args[i++] = (*curr)->content;
 		(*curr) = (*curr)->next;
 	}
+	if ((*curr) && (*curr)->type == PIPE)
+		(*curr) = (*curr)->next;
 	vars->cmd.builtin = 0;
 	return (0);
 }
