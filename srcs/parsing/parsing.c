@@ -58,6 +58,7 @@ int	parsing(t_vars *v)
 					return (-1);
 			}
 			else if (v->line[v->index] == '\'')
+				if_quote(v);
 			{
 				v->index++;
 				v->close_index = v->index;

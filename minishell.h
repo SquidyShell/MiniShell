@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 16:17:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 16:25:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef enum e_type
 /* PARSING */
 int					parsing(t_vars *vars);
 bool				is_syntax_correct(char *line);
+void				if_quote(t_vars *v);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
