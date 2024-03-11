@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 19:14:00 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 05:29:11 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av, char **env)
 		line = readline(SQUIDYSHELL);
 		if (!line)
 			break ;
-		parsing(&vars.tokens, line);
+		parsing(&vars, line);
 		tok_print(vars.tokens);
 		exec(&vars);
 		free(line);

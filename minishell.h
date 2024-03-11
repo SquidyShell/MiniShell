@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/10 19:11:39 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 05:32:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_vars
 	char			**env_path;
 	char			**env;
 	t_tokens		*tokens;
+	t_tokens		*last_token;
 	t_cmd			cmd;
 	int				fildes[2];
 	int				last_pid;
@@ -73,12 +74,12 @@ typedef enum e_type
 }					t_type;
 
 /* PARSING */
-void				parsing(t_tokens **tokens, char *line);
+void				parsing(t_vars *vars, char *line);
 bool				is_syntax_correct(char *line);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);
-void				tok_addback(t_tokens **tokens, t_tokens *new);
+void				tok_addback(t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
 
