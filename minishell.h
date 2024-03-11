@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 16:25:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:24:56 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ typedef struct s_vars
 	t_tokens		*last_token;
 	t_cmd			cmd;
 	int				fildes[2];
+	int				last_fd;
 	int				last_pid;
 	size_t			pipe_nb;
+	size_t			cmd_i;
 	bool			in_quote;
 }					t_vars;
 

@@ -78,6 +78,8 @@ int	tok_close(t_vars *vars)
 {
 	if (vars->tokens && vars->last_token->closed == false)
 	{
+		if (vars->last_token->type == PIPE)
+			vars->pipe_nb++;
 		vars->last_token->closed = true;
 		vars->last_token->content = ft_substr(vars->line,
 				vars->last_token->start, vars->index - vars->last_token->start);
