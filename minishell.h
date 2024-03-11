@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 08:41:41 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:27:49 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,14 @@ void				ft_export(char **cmd, t_vars *vars);
 void				ft_unset(char **cmd, t_vars *vars);
 void				ft_env(char **cmd, t_vars *vars);
 void				ft_exit(char **cmd, t_vars *vars);
+
 # define SQUIDYSHELL "\033[1;35mSquidyShell\033[0m$ "
+# define WRITE 1
+# define READ 0
+# define STDIN STDIN_FILENO
+# define STDOUT STDOUT_FILENO
+# define STDERR STDERR_FILENO
+# define SUCCESS EXIT_SUCCESS
+# define FAILURE EXIT_FAILURE
 
 #endif // !MINISHELL_H

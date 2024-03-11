@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 08:45:24 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:35:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	case_pipe(t_vars *vars)
 		return (berr("|"), -1);
 	else
 	{
-		if (tok_close(vars) == -1)
-			return (-1);
+		return (-1);
 		tok_addback(vars, tok_new(NULL, PIPE));
 	}
 	return (0);
