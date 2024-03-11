@@ -25,7 +25,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 all : $(NAME)
 
 $(LIBFT) :
-	make -C $(LIBFT_PATH)
+	make --silent -C $(LIBFT_PATH)
 
 $(NAME) : $(LIBFT) ${OBJ} $(HEADER) Makefile
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) -lreadline
@@ -34,12 +34,12 @@ bonus: $(NAME)
 
 clean :
 	@ $(RM) $(NAME) $(OBJ)
-	@make clean -C $(LIBFT_PATH)
+	@make --silent clean -C $(LIBFT_PATH)
 
 fclean :
 	@ $(RM) $(NAME) $(NAME_BONUS)
 	@ $(RM) $(NAME) $(OBJ)
-	@make fclean -C $(LIBFT_PATH)
+	@make --silent fclean -C $(LIBFT_PATH)
 
 re : fclean all
 

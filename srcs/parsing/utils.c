@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 11:38:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 12:02:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	berr(char *token)
 {
 	printfd(2, "🦑: syntax error near unexpected token `%s%s%s'\n", PINK, token,
 		RESET);
+}
+
+void	eof_err(char *match)
+{
+	printfd(STDERR, "🦑: unexpected EOF while looking for matching `%s%s%s'\n%s",
+		PINK, match, RESET, EOF_ERR);
 }
 
 void	s(void)

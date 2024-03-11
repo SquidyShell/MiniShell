@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 11:27:49 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 12:03:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void				tok_print(t_tokens *tokens);
 
 /*		UTILS */
 void				berr(char *token);
+void				eof_err(char *match);
 void				s(void);
 
 /* COLOR CODES */
@@ -128,5 +129,6 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define STDERR STDERR_FILENO
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
+# define EOF_ERR "🦑: syntax error: unexpected end of file\n"
 
 #endif // !MINISHELL_H
