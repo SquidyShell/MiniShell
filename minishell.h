@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 19:06:04 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/11 18:15:35 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_tokens
 	bool			closed;
 	bool			is_single_quoted;
 	bool			is_double_quoted;
+	struct s_tokens	*last;
 }					t_tokens;
 
 typedef struct s_cmd
@@ -57,15 +58,14 @@ typedef struct s_vars
 	char			**env_path;
 	char			**env;
 	t_tokens		*tokens;
-	t_tokens		*last_token;
 	t_cmd			cmd;
 	int				fildes[2];
 	int				last_fd;
 	int				last_pid;
 	size_t			pipe_nb;
+	bool			in_dquote;
 	size_t			cmd_i;
 	bool			in_quote;
-	bool			in_dquote;
 }					t_vars;
 
 typedef enum e_type
