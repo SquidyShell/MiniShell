@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 08:21:24 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:02:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_tokens	*tok_new(char *content, size_t type)
 	tok->type = type;
 	tok->closed = 0;
 	tok->next = NULL;
+	tok->error = false;
 	return (tok);
 }
 
@@ -67,6 +68,8 @@ int	tok_close(t_vars *vars)
 				vars->last_token->start, vars->index - vars->last_token->start);
 		if (!vars->last_token->content)
 			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
+		if (vars->last_token->error)
+			return (berr(vars->last_token->content), -1);
 	}
 	return (0);
 }

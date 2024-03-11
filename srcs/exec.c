@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 09:22:01 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:10:50 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	get_fds(t_vars *vars)
 {
+	dup2(vars->fildes[1], STDOUT_FILENO);
 	close(vars->fildes[0]);
 	close(vars->fildes[1]);
 }
@@ -92,6 +93,8 @@ int	exec(t_vars *vars)
 	curr = vars->tokens;
 	while (curr)
 	{
+		perr("new");
+		tok_print(curr);
 		get_cmd_infos(&curr, vars);
 		is_builtin(vars);
 		free(vars->cmd.args);
