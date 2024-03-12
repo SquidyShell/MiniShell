@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 10:31:03 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:36:59 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
 int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(char *line);
-void				there_is_a_quote(t_vars *v);
-void				there_is_a_dquote(t_vars *v);
+int					there_is_a_quote(t_vars *v);
+int					there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
 bool				needs_to_be_expanded(t_vars *v);
 int					expand_this_shit(t_vars *v);

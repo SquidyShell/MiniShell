@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 20:48:26 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:42:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	main(int ac, char **av, char **env)
 		if (!vars.line)
 			break ;
 		if (parsing(&vars) != -1 && vars.tokens)
-			exec(&vars);
+			(free(vars.line), exec(&vars));
 		dprintf(2, "%ld\n", vars.pipe_nb);
-		free(vars.line);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;
 	}
