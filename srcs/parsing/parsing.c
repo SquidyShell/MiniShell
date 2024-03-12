@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 13:45:19 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:03:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init_vars(t_vars *v)
 	v->index = 0;
 	v->in_quote = 0;
 	v->in_dquote = 0;
+	v->in_expanded_var = 0;
+	v->end_of_var = 0;
 	v->tokens = NULL;
 }
 

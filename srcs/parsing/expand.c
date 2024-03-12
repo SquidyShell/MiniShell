@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 22:52:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:06:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*new_line_expanded(t_vars *v, char *var_value, size_t var_name_len,
 	if (var_value)
 		while (var_value[j])
 			new_line[i++] = var_value[j++];
+	v->end_of_var = i;
 	j = (int)v->index + var_name_len + 1;
 	while (old_line[j])
 		new_line[i++] = old_line[j++];
@@ -105,5 +106,6 @@ int	expand_this_shit(t_vars *v)
 		return (free(var_to_find), free(var_value), perr("Malloc"), -1);
 	free(var_to_find);
 	free(var_value);
+	v->in_expanded_var = 1;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 13:36:59 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:02:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ typedef struct s_vars
 	int				last_fd;
 	int				last_pid;
 	size_t			pipe_nb;
-	bool			in_dquote;
 	size_t			cmd_i;
-	bool			in_quote;
 	int				infile_fd;
 	int				outfile_fd;
+	bool			in_dquote;
+	bool			in_quote;
+	bool			in_expanded_var;
+	size_t			end_of_var;
 }					t_vars;
 
 typedef enum e_type

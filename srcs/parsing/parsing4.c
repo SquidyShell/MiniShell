@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 13:38:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:13:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	not_in_quote(t_vars *v)
 
 int	there_is_a_quote(t_vars *v)
 {
-	if (!v->in_dquote)
+	if (!v->in_dquote && !v->in_expanded_var)
 	{
 		if (!v->in_quote)
 		{
@@ -44,7 +44,7 @@ int	there_is_a_quote(t_vars *v)
 
 int	there_is_a_dquote(t_vars *v)
 {
-	if (!v->in_quote)
+	if (!v->in_quote && !v->in_expanded_var)
 	{
 		if (!v->in_dquote)
 		{
