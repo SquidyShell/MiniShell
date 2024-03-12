@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 14:41:29 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 16:39:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ char	*whats_the_var(char *line, size_t index)
 	return (ft_substr(line, index + 1, i - index - 1));
 }
 
-char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
-{
-	char	*var_value;
-	size_t	i;
+// char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
+// {
+// 	char	*var_value;
+// 	size_t	i;
 
-	var_value = NULL;
-	i = 0;
-	while (v->env[i])
-	{
-		if (!ft_strncmp(var_to_find, v->env[i], ft_strlen(var_to_find)))
-		{
-			if (v->env[i][ft_strlen(var_to_find)] == '=')
-			{
-				var_value = ft_substr(v->env[i], ft_strlen(var_to_find) + 1,
-						ft_strlen(v->env[i]) - (ft_strlen(var_to_find) + 1));
-				if (!var_value)
-					return (*malloc_crampt = 1, NULL);
-				break ;
-			}
-		}
-		i++;
-	}
-	return (var_value);
-}
+// 	var_value = NULL;
+// 	i = 0;
+// 	while (v->env[i])
+// 	{
+// 		if (!ft_strncmp(var_to_find, v->env[i], ft_strlen(var_to_find)))
+// 		{
+// 			if (v->env[i][ft_strlen(var_to_find)] == '=')
+// 			{
+// 				var_value = ft_substr(v->env[i], ft_strlen(var_to_find) + 1,
+// 						ft_strlen(v->env[i]) - (ft_strlen(var_to_find) + 1));
+// 				if (!var_value)
+// 					return (*malloc_crampt = 1, NULL);
+// 				break ;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	return (var_value);
+// }
 
 char	*new_line_expanded(t_vars *v, char *var_value, size_t var_name_len,
 		char *old_line)
@@ -106,13 +106,10 @@ int	expand_this_shit(t_vars *v)
 		if (!var_to_find)
 			return (perr("Malloc"), -1);
 		malloc_crampt = 0;
-		var_value = search_var_in_env(v, var_to_find, &malloc_crampt);
-		if (malloc_crampt)
-			return (free(var_to_find), perr("Malloc"), -1);
+		var_value = getenv(var_to_find);
 		if (replace_var_name_by_value(v, var_value, len(var_to_find)) == -1)
-			return (free(var_to_find), free(var_value), perr("Malloc"), -1);
+			return (free(var_to_find), perr("Malloc"), -1);
 		free(var_to_find);
-		free(var_value);
 		v->in_expanded_var = 1;
 	}
 	return (1);

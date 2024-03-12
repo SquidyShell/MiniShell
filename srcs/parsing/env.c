@@ -1,48 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 17:04:22 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
+/*   Updated: 2024/03/12 17:01:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_matrix(char **t)
+t_list	*create_env_list(char **env)
 {
+	t_list	*env_list;
+	t_list	*new;
 	size_t	i;
 
+	env_list = NULL;
 	i = 0;
-	while (t[i])
-		free(t[i++]);
-	free(t);
-}
-
-void	get_paths(t_vars *vars)
-{
-	char	**var;
-	char	**env;
-
-	vars->cmd.path = NULL;
-	vars->env_path = NULL;
-	env = vars->env;
-	if (!env[0])
-		return ;
-	while (env)
+	if (!env || !env[i])
+		return (NULL);
+	while (env[i])
 	{
-		var = ft_split(*env, '=');
-		if (var[0] && var[1] && !ft_strcmp("PATH", var[0]))
+		new = ft_lstnew(ft_strdup(env[i]));
+		if (!new)
 		{
-			vars->env_path = ft_split(var[1], ':');
-			free_matrix(var);
-			break ;
+			ft_lstclear(&env_list, free);
+			return (NULL);
 		}
-		env++;
-		free_matrix(var);
+		ft_lstadd_back(&env_list, new);
+		i++;
 	}
-	g_exit_status = 127;
+	return (env_list);
 }

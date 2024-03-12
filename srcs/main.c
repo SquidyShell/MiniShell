@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 13:42:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 17:24:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char **av, char **env)
 	vars.env = env;
 	vars.tokens = NULL;
 	vars.line = NULL;
+	vars.env_list = create_env_list(env);
 	get_paths(&vars);
 	while (1)
 	{
