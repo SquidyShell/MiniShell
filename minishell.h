@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 21:37:59 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:46:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct s_string
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				init_minishell(t_vars *vars, char **env);
 void				append_to_history(t_vars *vars);
 char				*gnl_no_nl(int fd);
 int					save_line(t_vars *vars);

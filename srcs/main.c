@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 21:38:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:45:51 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ int	main(int ac, char **av, char **env)
 	t_vars	vars;
 
 	((void)ac, (void)av);
-	vars.env = env;
-	vars.history = NULL;
-	vars.tokens = NULL;
-	vars.line = NULL;
-	vars.env_list = create_env_list(env);
-	get_paths(&vars);
-	get_history();
+	init_minishell(&vars, env);
 	while (1)
 	{
+		get_history();
+		get_paths(&vars);
 		init_vars(&vars);
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)
