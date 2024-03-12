@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 14:02:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:43:34 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ int					there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
 bool				needs_to_be_expanded(t_vars *v);
 int					expand_this_shit(t_vars *v);
+int					var_is_exit_status(t_vars *v);
+int					replace_var_name_by_value(t_vars *v, char *var_value,
+						size_t var_name_len);
 
 /*		TOKENS UTILS */
 t_tokens			*tok_new(char *content, size_t type);

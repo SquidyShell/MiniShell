@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 14:06:38 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:41:29 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,25 @@ int	expand_this_shit(t_vars *v)
 	char	*var_value;
 	bool	malloc_crampt;
 
-	malloc_crampt = 0;
-	var_to_find = whats_the_var(v->line, v->index);
-	if (!var_to_find)
-		return (perr("Malloc"), -1);
-	var_value = search_var_in_env(v, var_to_find, &malloc_crampt);
-	if (malloc_crampt)
-		return (free(var_to_find), perr("Malloc"), -1);
-	if (!replace_var_name_by_value(v, var_value, len(var_to_find)))
-		return (free(var_to_find), free(var_value), perr("Malloc"), -1);
-	free(var_to_find);
-	free(var_value);
-	v->in_expanded_var = 1;
+	if (v->line[v->index + 1] == '?')
+	{
+		if (var_is_exit_status(v) == -1)
+			return (-1);
+	}
+	else
+	{
+		var_to_find = whats_the_var(v->line, v->index);
+		if (!var_to_find)
+			return (perr("Malloc"), -1);
+		malloc_crampt = 0;
+		var_value = search_var_in_env(v, var_to_find, &malloc_crampt);
+		if (malloc_crampt)
+			return (free(var_to_find), perr("Malloc"), -1);
+		if (replace_var_name_by_value(v, var_value, len(var_to_find)) == -1)
+			return (free(var_to_find), free(var_value), perr("Malloc"), -1);
+		free(var_to_find);
+		free(var_value);
+		v->in_expanded_var = 1;
+	}
 	return (1);
 }
