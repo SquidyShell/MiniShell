@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 20:36:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:38:06 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av, char **env)
 	vars.history = NULL;
 	vars.tokens = NULL;
 	vars.line = NULL;
+	vars.env_list = create_env_list(env);
 	get_paths(&vars);
 	get_history();
 	while (1)
@@ -40,4 +41,5 @@ int	main(int ac, char **av, char **env)
 	}
 	append_to_history(&vars);
 	free_matrix(vars.env_path);
+	ft_lstclear(&vars.env_list, free);
 }
