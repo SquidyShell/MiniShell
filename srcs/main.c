@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 13:42:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 20:36:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,24 @@ int	main(int ac, char **av, char **env)
 
 	((void)ac, (void)av);
 	vars.env = env;
+	vars.history = NULL;
 	vars.tokens = NULL;
 	vars.line = NULL;
 	get_paths(&vars);
+	get_history();
 	while (1)
 	{
 		init_vars(&vars);
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)
 			break ;
+		save_line(&vars);
 		if (parsing(&vars) != -1 && vars.tokens)
-			(free(vars.line), exec(&vars));
+			exec(&vars);
 		dprintf(2, "%ld\n", vars.pipe_nb);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;
 	}
+	append_to_history(&vars);
 	free_matrix(vars.env_path);
 }

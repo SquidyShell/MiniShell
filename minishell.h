@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 14:43:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:35:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	t_list			*history;
+	t_list			*last_command;
 	char			*line;
 	size_t			index;
 	size_t			close_index;
@@ -123,6 +125,18 @@ void				berr(char *token);
 void				eof_err(char *match);
 void				s(void);
 
+/* GNL*/
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4000
+# endif
+
+typedef struct s_string
+{
+	char			*content;
+	size_t			len;
+	size_t			max_size;
+}					t_string;
+
 /* COLOR CODES */
 # define BLUE "\033[0;34m"
 # define PINK "\033[0;35m"
@@ -130,6 +144,10 @@ void				s(void);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				append_to_history(t_vars *vars);
+char				*gnl_no_nl(int fd);
+int					save_line(t_vars *vars);
+void				get_history(void);
 int					dup2_and_close(int fd1, int fd2);
 int					redirect(t_vars *vars);
 int					case_pipe(t_vars *vars);
