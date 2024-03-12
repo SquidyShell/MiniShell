@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 21:57:02 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 07:30:17 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,18 @@ bool	tok_close_and_addback(t_tokens **tokens, t_vars *vars, int type)
 
 int	case_word(t_vars *vars)
 {
-	if (vars->tokens && vars->tokens->last->type == LESS)
-	{
-		if (!tok_close_and_addback(&vars->tokens, vars, FILE_IN))
-			return (-1);
-	}
-	else if (vars->tokens && vars->tokens->last->type == DLESS)
-	{
-		if (!tok_close_and_addback(&vars->tokens, vars, HEREDOC_DELIM))
-			return (-1);
-	}
-	else if (vars->tokens && (vars->tokens->last->type == GREAT
-			|| vars->tokens->last->type == DGREAT))
-	{
-		if (!tok_close_and_addback(&vars->tokens, vars, FILE_IN))
-			return (-1);
-	}
+	if (vars->tokens && vars->tokens->last->type == LESS
+		&& !tok_close_and_addback(&vars->tokens, vars, FILE_IN))
+		return (-1);
+	else if (vars->tokens && vars->tokens->last->type == DLESS
+		&& !tok_close_and_addback(&vars->tokens, vars, HEREDOC_DELIM))
+		return (-1);
+	else if (vars->tokens && vars->tokens->last->type == GREAT
+		&& !tok_close_and_addback(&vars->tokens, vars, FILE_OUT))
+		return (-1);
+	else if (vars->tokens && vars->tokens->last->type == DGREAT
+		&& !tok_close_and_addback(&vars->tokens, vars, DFILE_OUT))
+		return (-1);
 	else if (vars->tokens && (is_metachar(*vars->tokens->last)))
 		if (tok_close(vars) == -1)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 22:39:24 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:32:52 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 void	get_fds(t_vars *vars)
 {
 	if (vars->cmd_i)
-	{
-		dup2(vars->last_fd, STDIN_FILENO);
-		close(vars->last_fd);
-	}
+		dup2_and_close(vars->last_fd, STDOUT_FILENO);
 	if (vars->cmd_i != vars->pipe_nb)
 	{
-		dup2(vars->fildes[1], STDOUT_FILENO);
+		dup2_and_close(vars->fildes[1], STDOUT_FILENO);
 		close(vars->fildes[0]);
-		close(vars->fildes[1]);
 	}
+	redirect(vars);
 }
 
 void	search_and_execve(t_vars *vars)
@@ -102,12 +99,16 @@ int	exec(t_vars *vars)
 	vars->last_pid = 0;
 	while (curr)
 	{
-		vars->cmd.files = NULL;
+		vars->infile_fd = -1;
+		vars->outfile_fd = -1;
+		vars->cmd.token = curr;
 		perr("tokens:");
 		tok_print(curr);
-		get_cmd_infos(&curr, vars);
-		perr("files:");
-		tok_print(vars->cmd.files);
+		if (get_cmd_infos(&curr, vars) == -1)
+		{
+			perror("rip");
+			exit(-1);
+		}
 		if (vars->cmd.len)
 			is_builtin(vars);
 		free(vars->cmd.args);

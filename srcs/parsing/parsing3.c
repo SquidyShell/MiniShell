@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/11 23:58:27 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:31:43 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 	{
 		if (tokens->type == WORD)
 			vars->cmd.len++;
-		else if (tokens->type >= LESS && tokens->type <= DGREAT)
-			tok_addback(&vars->cmd.files, vars, tokens->next);
 		tokens = tokens->next;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 00:00:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:31:03 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_tokens
 
 typedef struct s_cmd
 {
+	t_tokens		*token;
 	size_t			len;
 	char			**args;
-	t_tokens		*files;
 	char			*path;
 	int				builtin;
 }					t_cmd;
@@ -65,6 +65,8 @@ typedef struct s_vars
 	bool			in_dquote;
 	size_t			cmd_i;
 	bool			in_quote;
+	int				infile_fd;
+	int				outfile_fd;
 }					t_vars;
 
 typedef enum e_type
@@ -80,6 +82,7 @@ typedef enum e_type
 	FILE_IN,
 	FILE_OUT,
 	HEREDOC_DELIM,
+	DFILE_OUT,
 	ENV_VAR,
 	EXIT_STATUS,
 }					t_type;
@@ -122,6 +125,8 @@ void				s(void);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					dup2_and_close(int fd1, int fd2);
+int					redirect(t_vars *vars);
 int					case_pipe(t_vars *vars);
 int					case_less(t_vars *vars);
 int					case_great(t_vars *vars);
