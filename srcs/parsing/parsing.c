@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 14:21:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:41:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ int	parsing(t_vars *v)
 		return (-1);
 	if (v->tokens && is_metachar(*v->tokens->last))
 		return (berr("newline"), -1);
-	// tok_print(v->tokens);
 	return (1);
 }

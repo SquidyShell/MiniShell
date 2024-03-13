@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 17:45:54 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:52:44 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 
 	((void)ac, (void)av);
 	init_minishell(&vars, env);
-	get_history();
 	while (1)
 	{
 		get_paths(&vars);
