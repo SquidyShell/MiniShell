@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printfd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:16:18 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 18:50:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 14:27:02 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void	v_printfd(int fd, const char *s, ...)
 /* Prints a bold red string ended with a return on the standard error */
 void	perr(const char *s)
 {
-	ft_printfd(STDERR_FILENO, "%s%s%s%s\n", BOLD, RED, s, RESET);
+	printfd(STDERR_FILENO, "%s%s%s%s\n", BOLD, RED, s, RESET);
 }

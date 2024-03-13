@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 07:44:48 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:59:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	pipex(t_vars *vars)
 {
 	if (vars->cmd_i != vars->pipe_nb)
 	{
-		perr("piped");
 		if (pipe(vars->fildes) == -1)
 			return (-1);
 	}
