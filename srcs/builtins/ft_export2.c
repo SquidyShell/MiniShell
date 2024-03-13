@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:05:13 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 17:38:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:55:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,15 @@ void	print_env_export(char **env)
 		temp_line = smallest_above(env, temp_line);
 		i++;
 	}
+}
+
+bool	there_is_an_equal(char *line)
+{
+	while (*line)
+	{
+		if (*line == '=')
+			return (1);
+		line++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 22:33:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:54:07 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,19 @@ bool	is_whitespace(char c)
 size_t	len(const char *s)
 {
 	return (ft_strlen(s));
+}
+
+int	protected_addback(t_list **lst, char *str)
+{
+	char	*new_str;
+	t_list	*new_nod;
+
+	new_str = ft_strdup(str);
+	if (!new_str)
+		return (-1);
+	new_nod = ft_lstnew(new_str);
+	if (!new_nod)
+		return (free(new_str), -1);
+	ft_lstadd_back(lst, new_nod);
+	return (1);
 }

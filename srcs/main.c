@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 17:52:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:08:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av, char **env)
 
 	((void)ac, (void)av);
 	init_minishell(&vars, env);
+	printfd(2, "baba %s", "bobo");
 	while (1)
 	{
 		get_paths(&vars);

@@ -6,13 +6,13 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:43:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 17:55:51 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_correct_name(char *cmd)
+bool	is_correct_arg(char *cmd)
 {
 	size_t	i;
 
@@ -28,24 +28,6 @@ bool	is_correct_name(char *cmd)
 	return (1);
 }
 
-bool	is_correct_arg(char *cmd)
-{
-	if (!is_correct_name(cmd))
-		return (0);
-	return (1);
-}
-
-bool	there_is_an_equal(char *line)
-{
-	while (*line)
-	{
-		if (*line == '=')
-			return (1);
-		line++;
-	}
-	return (0);
-}
-
 bool	var_is_already_in_env(char *line, t_list *env)
 {
 	char	*content;
@@ -59,7 +41,7 @@ bool	var_is_already_in_env(char *line, t_list *env)
 		content = (char *)env->content;
 		if (!ft_strncmp(line, content, equal_index)
 			&& (content[equal_index] == '=' || !content[equal_index]))
-			return (s(), 1);
+			return (1);
 		env = env->next;
 	}
 	return (0);
@@ -89,21 +71,6 @@ int	replace_the_var(t_list **env, char *line)
 		}
 		current = current->next;
 	}
-	return (1);
-}
-
-int	protected_addback(t_list **lst, char *str)
-{
-	char	*new_str;
-	t_list	*new_nod;
-
-	new_str = ft_strdup(str);
-	if (!new_str)
-		return (-1);
-	new_nod = ft_lstnew(new_str);
-	if (!new_nod)
-		return (free(new_str), -1);
-	ft_lstadd_back(lst, new_nod);
 	return (1);
 }
 
