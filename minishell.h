@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:57:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:23:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int					search_for_lenght(t_vars *vars);
 int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
+void				clean_vars(t_vars *vars);
 void				berr(char *token);
 void				eof_err(char *match);
 void				s(void);

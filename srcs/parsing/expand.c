@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 18:33:46 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:55:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,26 @@ char	*whats_the_var(char *line, size_t index)
 char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
 {
 	char	*var_value;
-	size_t	i;
+	t_list	*current;
+	char	*env_line;
 
 	var_value = NULL;
-	i = 0;
-	while (v->env[i])
+	current = v->env_list;
+	while (current)
 	{
-		if (!ft_strncmp(var_to_find, v->env[i], ft_strlen(var_to_find)))
+		env_line = current->content;
+		if (!ft_strncmp(var_to_find, env_line, ft_strlen(var_to_find)))
 		{
-			if (v->env[i][ft_strlen(var_to_find)] == '=')
+			if (env_line[ft_strlen(var_to_find)] == '=')
 			{
-				var_value = ft_substr(v->env[i], ft_strlen(var_to_find) + 1,
-						ft_strlen(v->env[i]) - (ft_strlen(var_to_find) + 1));
+				var_value = ft_substr(env_line, ft_strlen(var_to_find) + 1,
+						ft_strlen(env_line) - (ft_strlen(var_to_find) + 1));
 				if (!var_value)
 					return (*malloc_crampt = 1, NULL);
 				break ;
 			}
 		}
-		i++;
+		current = current->next;
 	}
 	return (var_value);
 }

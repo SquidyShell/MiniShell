@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:04:59 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:24:02 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	exec_child(t_vars *vars)
 		vars->function(vars->cmd.args, vars);
 	else
 		search_and_execve(vars);
+	clean_vars(vars);
 	exit(EXIT_SUCCESS);
 }
 

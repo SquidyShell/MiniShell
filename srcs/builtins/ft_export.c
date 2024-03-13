@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:55:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:47:16 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_export(char **cmd, t_vars *vars)
 	size_t	i;
 
 	if (!cmd[1])
-		print_env(vars->env_list);
+		print_env_export_list(vars->env_list);
 	else
 	{
 		i = 0;

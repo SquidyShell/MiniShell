@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 16:41:13 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:15:47 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ int	parse_the_actual_char(t_vars *v)
 int	parsing(t_vars *v)
 {
 	if (!is_syntax_correct(v->line))
-		return (-1);
+		return (free(v->line), -1);
 	while (v->line[v->index])
 	{
 		if (parse_the_actual_char(v) == -1)
-			return (-1);
+			return (free(v->line), -1);
 		v->index++;
 	}
 	if (tok_close(v) == -1)
-		return (-1);
+		return (free(v->line), -1);
 	if (v->tokens && is_metachar(*v->tokens->last))
-		return (berr("newline"), -1);
-	return (1);
+		return (berr("newline"), free(v->line), -1);
+	return (free(v->line), 1);
 }

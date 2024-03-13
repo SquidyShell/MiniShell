@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:31:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 15:42:52 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:49:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_env_export_list(t_list *env)
 	temp = find_min_list(env);
 	while (current)
 	{
-		if (temp[0] != '_' && temp[1] != '=')
+		if (temp[0] != '_' || temp[1] != '=')
 			ft_printf("declare -x %s\n", temp);
 		temp = smallest_above_list(env, temp);
 		current = current->next;
