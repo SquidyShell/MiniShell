@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export_tlist.c                                  :+:      :+:    :+:   */
+/*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 12:31:25 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 12:31:49 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/13 15:05:13 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/13 17:38:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(char **env)
+void	print_env(t_list *env)
 {
-	size_t	i;
+	t_list	*current;
 
 	if (!env)
 		return ;
-	i = 0;
-	while (env[i])
-		ft_printf("%s\n", env[i++]);
+	current = env;
+	while (current)
+	{
+		if (current->content)
+			printf("%s\n", (char *)current->content);
+		current = current->next;
+	}
 }
 
-char	*find_min(char **env)
+static char	*find_min(char **env)
 {
 	size_t	i;
 	char	*temp;
@@ -41,7 +45,7 @@ char	*find_min(char **env)
 	return (temp);
 }
 
-char	*smallest_above(char **env, char *previous)
+static char	*smallest_above(char **env, char *previous)
 {
 	size_t	i;
 	char	*temp;

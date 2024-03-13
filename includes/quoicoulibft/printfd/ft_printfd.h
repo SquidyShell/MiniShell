@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 21:28:28 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 16:22:59 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define RED "\033[31m"
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
+
+# define BUFF_SIZE 4096
 
 void	printfd(int fd, const char *s, ...);
 int		ft_printf(const char *s, ...);
