@@ -7,8 +7,8 @@ SRC_PATH = srcs
 PARS_PATH = $(SRC_PATH)/parsing
 SRC = main.c utils.c path.c history.c gnl.c init.c
 PARS_SRC = parsing.c parsing3.c utils.c tokens_utils.c check_syntax.c parsing2.c parsing4.c tokens_utils2.c utils2.c expand.c expand2.c env.c
-BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
-EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c
+BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c builtins_utils.c
+EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c path.c
 
 SRC := $(addprefix $(SRC_PATH)/, $(SRC))
 SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))

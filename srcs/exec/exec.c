@@ -6,62 +6,37 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 10:32:52 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 07:44:48 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_fds(t_vars *vars)
+static int	exec_child(t_vars *vars)
 {
-	if (vars->cmd_i)
-		dup2_and_close(vars->last_fd, STDOUT_FILENO);
-	if (vars->cmd_i != vars->pipe_nb)
-	{
-		dup2_and_close(vars->fildes[1], STDOUT_FILENO);
-		close(vars->fildes[0]);
-	}
-	redirect(vars);
-}
-
-void	search_and_execve(t_vars *vars)
-{
-	char	**args;
-
-	args = vars->cmd.args;
-	if (!args || get_path(args[0], vars) == -1)
+	get_fds(vars);
+	if (redirect(vars) == -1)
 		exit(EXIT_FAILURE);
-	if (vars->cmd.path == NULL)
-		printfd(STDERR_FILENO, "%s: command not found\n", args[0]);
-	else if (access(vars->cmd.path, F_OK) == -1 && errno == ENOENT)
-		perror(vars->cmd.path);
+	if (is_builtin(vars))
+		vars->function(vars->cmd.args, vars);
 	else
-	{
-		execve(vars->cmd.path, args, vars->env);
-		perror(vars->cmd.path);
-		g_exit_status = 126;
-	}
-	free(vars->cmd.path);
-	free_matrix(vars->env_path);
-	tok_clear(&vars->tokens);
-	free(args);
-	exit(g_exit_status);
+		search_and_execve(vars);
+	exit(EXIT_SUCCESS);
 }
 
 static int	pipex(t_vars *vars)
 {
 	if (vars->cmd_i != vars->pipe_nb)
+	{
+		perr("piped");
 		if (pipe(vars->fildes) == -1)
 			return (-1);
+	}
 	vars->last_pid = fork();
 	if ((vars->last_pid) == -1)
 		return (-1);
 	if ((vars->last_pid) == 0)
-	{
-		get_fds(vars);
-		if (!vars->cmd.builtin)
-			search_and_execve(vars);
-	}
+		exec_child(vars);
 	if (vars->cmd_i)
 		close(vars->last_fd);
 	vars->last_fd = vars->fildes[0];
@@ -70,25 +45,18 @@ static int	pipex(t_vars *vars)
 	return (0);
 }
 
-int	is_builtin(t_vars *vars)
+void	case_no_pipe(t_vars *vars)
 {
-	if (!ft_strcmp(vars->cmd.args[0], "echo"))
-		ft_echo(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "cd"))
-		ft_cd(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "pwd"))
-		ft_pwd(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "export"))
-		ft_export(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "unset"))
-		ft_unset(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "env"))
-		ft_env(vars->cmd.args, vars);
-	else if (!ft_strcmp(vars->cmd.args[0], "exit"))
-		ft_exit(vars->cmd.args, vars);
+	if (vars->cmd.len && is_builtin(vars))
+	{
+		vars->old_stdout = dup(STDOUT_FILENO);
+		if (redirect(vars) == -1)
+			return ;
+		vars->function(vars->cmd.args, vars);
+		dup2_and_close(vars->old_stdout, STDOUT_FILENO);
+	}
 	else
-		return (pipex(vars), 0);
-	return (1);
+		pipex(vars);
 }
 
 int	exec(t_vars *vars)
@@ -102,15 +70,12 @@ int	exec(t_vars *vars)
 		vars->infile_fd = -1;
 		vars->outfile_fd = -1;
 		vars->cmd.token = curr;
-		perr("tokens:");
-		tok_print(curr);
 		if (get_cmd_infos(&curr, vars) == -1)
-		{
-			perror("rip");
-			exit(-1);
-		}
-		if (vars->cmd.len)
-			is_builtin(vars);
+			return (-1);
+		if (vars->cmd.len && vars->pipe_nb)
+			pipex(vars);
+		else
+			case_no_pipe(vars);
 		free(vars->cmd.args);
 		vars->cmd_i++;
 	}

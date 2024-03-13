@@ -6,11 +6,22 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 10:29:43 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 07:43:35 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	get_fds(t_vars *vars)
+{
+	if (vars->cmd_i)
+		dup2_and_close(vars->last_fd, STDOUT_FILENO);
+	if (vars->cmd_i != vars->pipe_nb)
+	{
+		dup2_and_close(vars->fildes[1], STDOUT_FILENO);
+		close(vars->fildes[0]);
+	}
+}
 
 int	redirect(t_vars *vars)
 {

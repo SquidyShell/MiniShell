@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 21:46:08 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 07:46:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_vars
 	bool			in_quote;
 	bool			in_expanded_var;
 	size_t			end_of_var;
+	void			(*function)(char **, struct s_vars *);
+	int				old_stdout;
 }					t_vars;
 
 typedef enum e_type
@@ -146,6 +148,9 @@ typedef struct s_string
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				get_fds(t_vars *vars);
+void				search_and_execve(t_vars *vars);
+int					is_builtin(t_vars *vars);
 void				init_minishell(t_vars *vars, char **env);
 void				append_to_history(t_vars *vars);
 char				*gnl_no_nl(int fd);
