@@ -6,18 +6,20 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 07:46:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:05:10 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define _XOPEN_SOURCE 600
 # include "includes/quoicoulibft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -148,6 +150,8 @@ typedef struct s_string
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				set_signals_child(t_vars *vars);
+void				set_signals(t_vars *vars);
 void				get_fds(t_vars *vars);
 void				search_and_execve(t_vars *vars);
 int					is_builtin(t_vars *vars);
