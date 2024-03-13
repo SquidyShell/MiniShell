@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:47:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 18:27:12 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:25:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static int	case_percent(const char *s, t_v2i ij, va_list ap, char buffer[])
 	else if (s[ij[0]] == 's')
 	{
 		temp = va_arg(ap, char *);
-		return (ft_strlcpy(buffer + ij[1], temp, ft_strlen(temp) + 1));
+		if (!temp[0])
+			return (0);
+		else
+			return (ft_strlcpy(buffer + ij[1], temp, ft_strlen(temp) + 1));
 	}
 	return (0);
 }
@@ -45,7 +48,10 @@ static int	count_percent(const char *s, t_v2i ij, va_list ap)
 	else if (s[ij[0]] == 's')
 	{
 		temp = va_arg(ap, char *);
-		return (ft_strlen(temp) + 1);
+		if (!temp[0])
+			return (0);
+		else
+			return (ft_strlen(temp) + 1);
 	}
 	return (0);
 }

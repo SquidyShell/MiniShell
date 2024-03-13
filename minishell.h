@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 19:23:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:45:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_vars
 {
 	t_list			*history;
 	t_list			*last_command;
+	bool			command_was_built_in;
+	int				exit_status;
 	t_list			*env_list;
 	char			*line;
 	size_t			index;
@@ -100,7 +102,7 @@ t_list				*create_env_list(char **env);
 int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
 int					get_type_and_len(t_vars *vars);
-bool				is_syntax_correct(char *line);
+bool				is_syntax_correct(t_vars *v);
 int					there_is_a_quote(t_vars *v);
 int					there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
@@ -127,8 +129,8 @@ int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
 void				clean_vars(t_vars *vars);
-void				berr(char *token);
-void				eof_err(char *match);
+void				berr(char *token, t_vars *v);
+void				eof_err(char *match, t_vars *v);
 void				s(void);
 int					protected_addback(t_list **lst, char *str);
 

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 11:00:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:34:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ int	wait_commands(t_vars *vars)
 				ret = 128 + WTERMSIG(wstatus);
 		}
 	}
-	return (ret);
+	if (vars->command_was_built_in)
+		return (vars->exit_status);
+	else
+		return (ret);
 }

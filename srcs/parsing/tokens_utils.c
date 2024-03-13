@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 08:41:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:40:41 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	tok_close(t_vars *v)
 					v->tokens->last->start, v->index - v->tokens->last->start,
 					'\"');
 		if (!v->tokens->last->content)
-			return (ft_printfd(STDERR_FILENO, "Malloc error\n"), -1);
+			return (perr("Malloc"), -1);
 		if (v->tokens->last->error)
-			return (berr(v->tokens->last->content), -1);
+			return (berr(v->tokens->last->content, v), -1);
 	}
 	return (0);
 }

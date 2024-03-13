@@ -6,13 +6,13 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 13:44:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:44:41 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-bool	check_quotes(char *line)
+bool	check_quotes(char *line, t_vars *v)
 {
 	bool	in_dquote;
 	bool	in_quote;
@@ -32,15 +32,15 @@ bool	check_quotes(char *line)
 		line++;
 	}
 	if (in_dquote)
-		return (eof_err("\""), 0);
+		return (eof_err("\"", v), 0);
 	if (in_quote)
-		return (eof_err("'"), 0);
+		return (eof_err("'", v), 0);
 	return (1);
 }
 
-bool	is_syntax_correct(char *line)
+bool	is_syntax_correct(t_vars *v)
 {
-	if (!check_quotes(line))
+	if (!check_quotes(v->line, v))
 		return (0);
 	return (1);
 }

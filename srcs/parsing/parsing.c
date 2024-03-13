@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 19:15:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:45:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_vars(t_vars *v)
 	v->in_dquote = 0;
 	v->in_expanded_var = 0;
 	v->end_of_var = 0;
+	v->command_was_built_in = 0;
 	v->tokens = NULL;
 }
 
@@ -46,7 +47,7 @@ int	parse_the_actual_char(t_vars *v)
 
 int	parsing(t_vars *v)
 {
-	if (!is_syntax_correct(v->line))
+	if (!is_syntax_correct(v))
 		return (free(v->line), -1);
 	while (v->line[v->index])
 	{
@@ -57,6 +58,6 @@ int	parsing(t_vars *v)
 	if (tok_close(v) == -1)
 		return (free(v->line), -1);
 	if (v->tokens && is_metachar(*v->tokens->last))
-		return (berr("newline"), free(v->line), -1);
+		return (berr("newline", v), free(v->line), -1);
 	return (free(v->line), 1);
 }

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:52:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:30:55 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->env_list = create_env_list(env);
 	get_history();
 	set_signals(vars);
+	vars->exit_status = 0;
 }

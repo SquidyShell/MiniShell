@@ -14,7 +14,7 @@
 # define FIRST_LIBFT_H
 # include <unistd.h>
 
-typedef int t_v2i	__attribute__((vector_size(8)));
+typedef int				t_v2i __attribute__((vector_size (8)));
 
 // PREMIERE PARTIES
 // easy

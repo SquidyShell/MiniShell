@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 20:20:16 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:10:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	clean_vars(t_vars *vars)
 {
-	s();
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear_no_free(&vars->last_command);
 	if (vars->cmd.path)
