@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_export_tlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 14:48:49 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/13 12:31:25 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/13 12:31:49 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,5 @@ void	print_env_export(char **env)
 			ft_printf("declare -x %s\n", temp_line);
 		temp_line = smallest_above(env, temp_line);
 		i++;
-	}
-}
-
-void	ft_export(char **cmd, t_vars *vars)
-{
-	if (!cmd[1])
-		print_env_export(vars->env);
-	else
-	{
-		while (++cmd)
-		{
-			if ()
-		}
 	}
 }

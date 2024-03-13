@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 17:04:22 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 13:28:20 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_matrix(char **t)
 {
 	size_t	i;
 
+	if (!t)
+		return ;
 	i = 0;
 	while (t[i])
 		free(t[i++]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 07:46:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:17:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,13 @@ typedef struct s_string
 	size_t			len;
 	size_t			max_size;
 }					t_string;
+
+typedef struct s_dyn_env
+{
+	char			**env;
+	size_t			len;
+	size_t			max_size;
+}					t_dyn_env;
 
 /* COLOR CODES */
 # define BLUE "\033[0;34m"
