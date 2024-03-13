@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 21:45:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 23:12:15 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef enum e_type
 }					t_type;
 
 /* PARSING */
-t_list				*create_env_list(char **env);
+t_list				*create_env_list(char **env, bool *malloc_crampt);
 int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
 int					get_type_and_len(t_vars *vars);
