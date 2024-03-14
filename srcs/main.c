@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 21:13:11 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 23:47:21 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ int	main(int ac, char **av, char **env)
 	ft_lstclear(&vars.env_list, free);
 	free_matrix(vars.env_path);
 	free_matrix(vars.env);
+	ft_exit((char *[]){"exit", NULL}, &vars);
 }
