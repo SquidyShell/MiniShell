@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 12:59:15 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:54:38 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,18 @@ char	**ft_strdup_matrix(char **matrix)
 
 void	init_minishell(t_vars *vars, char **env)
 {
+	bool	does_malloc_crampt;
+
 	vars->env = ft_strdup_matrix(env);
 	if (!vars->env)
 		exit(FAILURE);
-	vars->env_list = create_env_list(env);
-	if (!vars->env_list)
+	vars->env_list = create_env_list(env, &does_malloc_crampt);
+	does_malloc_crampt = 0;
+	if (does_malloc_crampt)
 		(free_matrix(vars->env), exit(FAILURE));
 	vars->history = NULL;
 	vars->tokens = NULL;
 	vars->line = NULL;
-	vars->env_list = create_env_list(env);
 	get_history();
+	vars->exit_status = 0;
 }

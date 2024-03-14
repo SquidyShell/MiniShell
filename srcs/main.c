@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 12:59:31 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:56:31 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		save_line(&vars);
 		if (parsing(&vars) != -1 && vars.tokens)
-			exec(&vars);
+			vars.exit_status = exec(&vars);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;
 	}

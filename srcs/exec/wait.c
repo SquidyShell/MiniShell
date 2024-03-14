@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 13:50:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:58:46 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ int	wait_commands(t_vars *vars)
 		if (pid == vars->last_pid)
 			ret = signal;
 	}
-	return (ret);
+	if (vars->command_was_built_in)
+		return (vars->exit_status);
+	else
+		return (ret);
 }

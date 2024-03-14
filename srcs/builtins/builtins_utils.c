@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:44:16 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 13:02:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 21:09:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	is_builtin(t_vars *vars)
 		vars->function = ft_exit;
 	else
 		return (0);
+	vars->command_was_built_in = 1;
 	return (1);
 }

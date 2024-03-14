@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 05:17:29 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/12 22:20:50 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/13 20:18:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,9 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*current;
-	t_list	*next;
-
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	current = *lst;
-	next = *lst;
-	while (next)
-	{
-		current = next;
-		next = current->next;
-	}
-	current->next = new;
+	if (!*lst)
+		return ((void)(*lst = new));
+	ft_lstlast(*lst)->next = new;
 }
 
 void	print_t_list(t_list *lst)

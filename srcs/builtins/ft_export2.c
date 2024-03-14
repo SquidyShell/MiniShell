@@ -6,26 +6,11 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:05:13 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 17:55:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 00:49:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_env(t_list *env)
-{
-	t_list	*current;
-
-	if (!env)
-		return ;
-	current = env;
-	while (current)
-	{
-		if (current->content)
-			printf("%s\n", (char *)current->content);
-		current = current->next;
-	}
-}
 
 static char	*find_min(char **env)
 {
