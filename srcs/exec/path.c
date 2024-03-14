@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 21:10:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 21:20:29 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	clean_vars(t_vars *vars)
 {
 	ft_lstclear(&vars->env_list, free);
-	ft_lstclear_no_free(&vars->last_command);
+	ft_lstclear(&vars->history, free);
 	if (vars->cmd.path)
 		free(vars->cmd.path);
 	if (vars->tokens)

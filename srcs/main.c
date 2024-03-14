@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 13:56:31 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:13:11 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int ac, char **av, char **env)
 
 	((void)ac, (void)av);
 	init_minishell(&vars, env);
+	get_paths(&vars);
 	while (1)
 	{
 		set_signals(&vars);
-		get_paths(&vars);
 		init_vars(&vars);
 		vars.line = readline(SQUIDYSHELL);
 		if (!vars.line)

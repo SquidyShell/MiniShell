@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 13:28:20 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 21:14:06 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,22 @@ void	free_matrix(char **t)
 void	get_paths(t_vars *vars)
 {
 	char	**var;
-	char	**env;
+	t_list	*env;
 
 	vars->cmd.path = NULL;
+	free(vars->env_path);
 	vars->env_path = NULL;
-	env = vars->env;
-	if (!env[0])
-		return ;
-	while (env)
+	env = vars->env_list;
+	while (env && env->content)
 	{
-		var = ft_split(*env, '=');
+		var = ft_split(env->content, '=');
 		if (var[0] && var[1] && !ft_strcmp("PATH", var[0]))
 		{
 			vars->env_path = ft_split(var[1], ':');
 			free_matrix(var);
 			break ;
 		}
-		env++;
+		env = env->next;
 		free_matrix(var);
 	}
 	g_exit_status = 127;

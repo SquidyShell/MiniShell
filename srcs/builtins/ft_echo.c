@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:27:41 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 16:08:16 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 20:39:36 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ void	ft_echo(char **cmd, t_vars *vars)
 	print_endl = 1;
 	i = 0;
 	while (cmd[++i])
+	{
 		if (is_option(cmd[i]))
 			print_endl = 0;
 		else
 			break ;
+	}
 	while (cmd[i])
 	{
 		printfd(STDOUT, "%s", cmd[i]);

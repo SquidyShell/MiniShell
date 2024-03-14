@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 14:32:01 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 19:38:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	append_to_history(t_vars *vars)
 	while (vars->history)
 	{
 		next = vars->history->next;
-		printfd(fd, "%s\n", vars->history->content);
 		free(vars->history);
 		vars->history = next;
 	}

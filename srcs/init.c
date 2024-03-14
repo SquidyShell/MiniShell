@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 13:56:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:13:46 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->history = NULL;
 	vars->tokens = NULL;
 	vars->line = NULL;
+	vars->env_path = NULL;
 	get_history();
 	vars->exit_status = 0;
 }
