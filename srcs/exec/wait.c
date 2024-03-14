@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 11:00:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:50:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,25 @@
 int	wait_commands(t_vars *vars)
 {
 	int	ret;
+	int	signal;
+	int	pid;
 	int	wstatus;
 
-	while (errno != ECHILD)
+	while (1)
 	{
-		if (wait(&wstatus) == vars->last_pid)
-		{
-			if (WIFEXITED(wstatus))
-				ret = WEXITSTATUS(wstatus);
-			else
-				ret = 128 + WTERMSIG(wstatus);
-		}
+		pid = wait(&wstatus);
+		if (pid == -1)
+			break ;
+		if (WIFEXITED(wstatus))
+			signal = WEXITSTATUS(wstatus);
+		else
+			signal = 128 + WTERMSIG(wstatus);
+		if (signal == 130)
+			printfd(2, "\n");
+		if (signal == 131)
+			printfd(2, "Quit (core dumped)\n");
+		if (pid == vars->last_pid)
+			ret = signal;
 	}
 	return (ret);
 }

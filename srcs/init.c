@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:52:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 12:59:15 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,4 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->line = NULL;
 	vars->env_list = create_env_list(env);
 	get_history();
-	set_signals(vars);
 }

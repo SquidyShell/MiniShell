@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:57:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 13:23:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define _XOPEN_SOURCE 600
+// # define _XOPEN_SOURCE 600
 # include "includes/quoicoulibft/libft.h"
 # include <errno.h>
 # include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 17:04:59 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:51:43 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	exec_child(t_vars *vars)
 {
-	set_signals_child(vars);
 	get_fds(vars);
 	if (redirect(vars) == -1)
 		exit(EXIT_FAILURE);
@@ -67,6 +66,7 @@ int	exec(t_vars *vars)
 	vars->last_pid = 0;
 	while (curr)
 	{
+		set_signals_child(vars);
 		vars->infile_fd = -1;
 		vars->outfile_fd = -1;
 		vars->cmd.token = curr;
