@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 23:12:15 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 01:45:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_vars
 	t_list			*last_command;
 	bool			command_was_built_in;
 	int				exit_status;
+	int				last_command_exit_status;
 	t_list			*env_list;
 	char			*line;
 	size_t			index;
