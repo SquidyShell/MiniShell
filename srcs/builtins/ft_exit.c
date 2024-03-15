@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 12:18:52 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:02:24 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ bool	ft_atoll_bool(const char *nptr, long long *ptr)
 		nptr++;
 	else if (*nptr == '-' && ++nptr)
 		sign = -1;
+	if (!(*nptr))
+		return (0);
 	while (*nptr)
 	{
 		if (!ft_isdigit(*nptr))
-			return (*ptr = ret * sign, 1);
+			return (0);
 		if (sign == 1 && ret > (LLONG_MAX - (*nptr - '0')) / 10)
 			return (0);
 		if (sign == -1 && ret * sign < (LLONG_MIN + (*nptr - '0')) / 10)
-			return (dprintf(STDERR, "%lld\n", ret * sign), 0);
-		ret = ret * 10 + *nptr - '0';
-		nptr++;
+			return (0);
+		ret = ret * 10 + *nptr++ - '0';
 	}
 	*ptr = ret * sign;
 	return (1);
