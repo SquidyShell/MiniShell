@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 23:47:21 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:11:43 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	main(int ac, char **av, char **env)
 	ft_lstclear(&vars.env_list, free);
 	free_matrix(vars.env_path);
 	free_matrix(vars.env);
-	ft_exit((char *[]){"exit", NULL}, &vars);
+	return (vars.exit_status);
 }

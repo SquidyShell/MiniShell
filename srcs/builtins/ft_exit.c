@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 11:04:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 12:13:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ bool	ft_atoll_bool(const char *nptr, long long *ptr)
 		nptr++;
 	else if (*nptr == '-' && ++nptr)
 		sign = -1;
-	if (!ft_isdigit(*nptr))
-		return (*ptr = ret * sign, 0);
 	while (*nptr)
 	{
 		if (!ft_isdigit(*nptr))
-			return (1);
+			return (*ptr = ret * sign, 1);
 		if (sign == 1 && ret > (LLONG_MAX - (*nptr - '0')) / 10)
 			return (0);
-		if (sign == -1 && ret > (LLONG_MIN + (*nptr - '0')) / 10)
-			return (0);
+		if (sign == -1 && ret * sign < (LLONG_MIN + (*nptr - '0')) / 10)
+			return (dprintf(STDERR, "%lld\n", ret * sign), 0);
 		ret = ret * 10 + *nptr - '0';
 		nptr++;
 	}
@@ -51,29 +49,23 @@ void	ft_exit(char **cmd, t_vars *vars)
 {
 	long long	exit_code;
 
+	append_to_history(vars);
 	exit_code = 0;
-	// close(vars->old_stdout);
-	printf("Debug: cmd[1] = %s\n", cmd[0]);
-	clean_vars(vars);
-	ft_atoll_bool(cmd[1], &exit_code);
-	printfd(STDERR, "Debug: cmd[1] = %s\n", cmd[1]);
-	printfd(STDOUT, "exit\n");
+	close(vars->old_stdout);
 	if (cmd[1])
 	{
+		ft_atoll_bool(cmd[1], &exit_code);
 		if (cmd[2])
-			return (free(cmd), printfd(STDERR,
+			return (clean_vars(vars), free(cmd), printfd(STDERR,
 					"🦑: exit: too many arguments\n"));
 		else
 		{
 			if (ft_atoll_bool(cmd[1], &exit_code))
-				(free(cmd), exit(exit_code % 256));
+				(clean_vars(vars), free(cmd), exit(exit_code % 256));
 			else
-			{
-				printfd(STDERR, "Debug: cmd[1] = %s\n", cmd[1]);
 				printfd(STDERR, "🦑: exit: %s%s%s: numeric argument required\n",
 					PINK, cmd[1], RESET);
-			}
 		}
 	}
-	(free(cmd), exit(vars->exit_status));
+	(clean_vars(vars), free(cmd), exit(vars->exit_status));
 }

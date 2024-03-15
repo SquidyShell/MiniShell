@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 20:40:03 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:26:35 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ static void	case_home(t_vars *vars)
 void	ft_cd(char **cmd, t_vars *vars)
 {
 	size_t	i;
-	char	*path;
 
-	path = NULL;
 	i = 0;
 	while (cmd[i])
 		i++;
