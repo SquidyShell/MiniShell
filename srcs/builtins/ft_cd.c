@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:09:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,15 @@ static void	case_oldpwd(t_vars *vars)
 			(e.g. "cd .." when the parent was removed)*/
 void	ft_cd(char **cmd, t_vars *vars)
 {
+	if (!cmd[1])
+		return (case_home(vars));
 	if (cmd[2])
 	{
 		perr("cd: too many arguments");
 		g_exit_status = 1;
 		return ;
 	}
-	if (!cmd[1])
-		return (case_home(vars));
-	else if (ft_strcmp(cmd[1], "-") == 0)
+	if (ft_strcmp(cmd[1], "-") == 0)
 		return (case_oldpwd(vars));
 	else if (*cmd[1] && chdir(cmd[1]) == -1)
 		(printfd(2, "cd: %s: %s\n", cmd[1], strerror(errno)),
