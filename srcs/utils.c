@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 11:20:28 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:51:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_matrix(char **t)
 	while (t[i])
 		free(t[i++]);
 	free(t);
+	t = NULL;
 }
 
 void	get_paths(t_vars *vars)

@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 21:20:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:26:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	p_free(void *p)
+{
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
+}
 
 void	clean_vars(t_vars *vars)
 {
