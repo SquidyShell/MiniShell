@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 14:24:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 17:10:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*new_line_expanded(t_vars *v, char *var_value, size_t var_name_len,
 				+ len(var_value) + 1));
 	if (!new_line)
 		return (NULL);
+	new_line[0] = 0;
 	i = -1;
 	while (++i < (int)v->index)
 		new_line[i] = old_line[i];
@@ -80,11 +81,12 @@ int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
 {
 	char	*line_temp;
 
-	v->line_was_expanded = true;
 	line_temp = ft_strdup(v->line);
 	if (!line_temp)
 		return (-1);
-	v->line = NULL;
+	if (v->line_was_expanded)
+		p_free(v->line);
+	v->line_was_expanded = true;
 	v->line = new_line_expanded(v, var_value, var_name_len, line_temp);
 	if (!v->line)
 		return (-1);
@@ -98,6 +100,7 @@ int	expand_this_shit(t_vars *v)
 	char	*var_value;
 	bool	malloc_crampt;
 
+	v->in_expanded_var = 1;
 	if (v->line[v->index + 1] == '?')
 	{
 		if (var_is_exit_status(v) == -1)
@@ -115,7 +118,7 @@ int	expand_this_shit(t_vars *v)
 			return (free(var_value), free(var_to_find), perr("Malloc"), -1);
 		free(var_value);
 		free(var_to_find);
-		v->in_expanded_var = 1;
+		v->index -= 1;
 	}
-	return (1);
+	return (0);
 }
