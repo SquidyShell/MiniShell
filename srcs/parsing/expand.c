@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 20:48:20 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:35:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	expand_this_shit(t_vars *v)
 			return (free(var_value), free(var_to_find), perr("Malloc"), -1);
 		free(var_value);
 		free(var_to_find);
-		v->index -= 1;
 	}
+	v->index -= 1;
 	return (0);
 }

@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/12 07:30:17 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:38:00 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	case_and(t_vars *vars)
+{
+	bool	last_meta;
+
+	last_meta = false;
+	vars->tokens->last->type = OR_IF;
+	if (!vars->tokens || is_metachar(*vars->tokens->last))
+		last_meta = true;
+	if (!tok_close_and_addback(&vars->tokens, vars, AND_IF))
+		return (-1);
+	vars->tokens->last->error = last_meta;
+	return (0);
+}
 
 int	case_pipe(t_vars *vars)
 {
@@ -70,15 +84,6 @@ int	case_great(t_vars *vars)
 		vars->tokens->last->error = last_meta;
 	}
 	return (0);
-}
-
-bool	tok_close_and_addback(t_tokens **tokens, t_vars *vars, int type)
-{
-	if (tok_close(vars) == -1)
-		return (0);
-	tok_addback(tokens, vars, tok_new_quoted(NULL, type, vars->in_quote,
-			vars->in_dquote));
-	return (1);
 }
 
 int	case_word(t_vars *vars)

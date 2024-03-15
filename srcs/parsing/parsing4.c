@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/12 14:22:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:30:31 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	not_in_quote(t_vars *v)
 		if (tok_close(v) == -1)
 			return (-1);
 	}
-	else if (get_type_and_len(v) == -1)
+	else if (what_token_type_is_it(v) == -1)
 		return (-1);
 	return (1);
 }

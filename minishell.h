@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 16:28:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:36:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef enum e_type
 t_list				*create_env_list(char **env, bool *malloc_crampt);
 int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
-int					get_type_and_len(t_vars *vars);
+int					what_token_type_is_it(t_vars *vars);
 bool				is_syntax_correct(t_vars *v);
 int					there_is_a_quote(t_vars *v);
 int					there_is_a_dquote(t_vars *v);
@@ -122,12 +122,13 @@ t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
 void				tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
+bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
+						int type);
 
 /*		PARSING UTILS */
 bool				is_whitespace(char c);
 bool				is_symbol(char c);
 size_t				len(const char *s);
-int					search_for_lenght(t_vars *vars);
 int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
@@ -184,6 +185,7 @@ int					save_line(t_vars *vars);
 void				get_history(t_vars *vars);
 int					dup2_and_close(int fd1, int fd2);
 int					redirect(t_vars *vars);
+int					case_and(t_vars *vars);
 int					case_pipe(t_vars *vars);
 int					case_less(t_vars *vars);
 int					case_great(t_vars *vars);
@@ -221,7 +223,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR "error retrieving\
+# define GETCWD_ERROR \
+	"error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 
