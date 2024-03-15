@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 20:08:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 20:24:51 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int ac, char **av, char **env)
 				vars.exit_status = exec(&vars);
 		}
 		tok_clear(&vars.tokens);
-		vars.tokens = NULL;
 	}
 	ft_exit((char *[2]){"exit", NULL}, &vars);
 }
