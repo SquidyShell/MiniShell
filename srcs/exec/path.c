@@ -6,18 +6,26 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 21:10:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:10:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	p_free(void *p)
+{
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
+}
+
 void	clean_vars(t_vars *vars)
 {
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear_no_free(&vars->last_command);
-	if (vars->cmd.path)
-		free(vars->cmd.path);
+	// p_free(vars->cmd.path);
 	if (vars->tokens)
 		tok_clear(&vars->tokens);
 	free_matrix(vars->env_path);
