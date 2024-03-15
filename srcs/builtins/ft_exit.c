@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 14:03:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:09:39 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,21 @@ void	ft_exit(char **cmd, t_vars *vars)
 
 	append_to_history(vars);
 	exit_code = 0;
-	close(vars->old_stdout);
 	printfd(STDOUT, "exit\n");
 	if (cmd[1])
 	{
 		ft_atoll_bool(cmd[1], &exit_code);
 		if (cmd[2])
-			return (clean_vars(vars), free(cmd), printfd(STDERR,
+			return (clean_vars(vars), printfd(STDERR,
 					"🦑: exit: too many arguments\n"));
 		else
 		{
 			if (ft_atoll_bool(cmd[1], &exit_code))
-				(clean_vars(vars), free(cmd), exit(exit_code % 256));
+				(clean_vars(vars), exit(exit_code % 256));
 			else
 				printfd(STDERR, "🦑: exit: %s%s%s: numeric argument required\n",
 					PINK, cmd[1], RESET);
 		}
 	}
-	(clean_vars(vars), free(cmd), exit(vars->exit_status));
+	(clean_vars(vars), exit(vars->exit_status));
 }
