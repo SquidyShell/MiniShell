@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 15:10:46 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 23:30:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	exec(t_vars *vars)
 			pipex(vars);
 		else
 			case_no_pipe(vars);
-		free(vars->cmd.args);
+		p_free(vars->cmd.args);
 		vars->cmd_i++;
 	}
 	return (wait_commands(vars));

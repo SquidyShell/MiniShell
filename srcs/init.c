@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 20:14:47 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 23:37:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->env = ft_strdup_matrix(env);
 	if (!vars->env)
 		exit(FAILURE);
-	vars->env_list = create_env_list(env, &does_malloc_crampt);
 	does_malloc_crampt = 0;
+	vars->env_list = create_env_list(env, &does_malloc_crampt);
 	if (does_malloc_crampt)
 		(free_matrix(vars->env), exit(FAILURE));
 	vars->history = NULL;
 	vars->tokens = NULL;
 	vars->line = NULL;
 	vars->env_path = NULL;
+	vars->old_stdout = 0;
 	set_pwd(vars);
 	get_history(vars);
 	g_exit_status = 0;

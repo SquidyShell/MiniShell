@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 19:41:21 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 23:37:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_vars(t_vars *v)
 	v->end_of_var = 0;
 	v->command_was_built_in = 0;
 	v->tokens = NULL;
+	v->cmd.args = NULL;
 }
 
 int	parse_the_actual_char(t_vars *v)

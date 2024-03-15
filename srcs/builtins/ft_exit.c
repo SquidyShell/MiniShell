@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 22:14:54 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 22:47:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	ft_exit(char **cmd, t_vars *vars)
 			if (is_numeric)
 				(clean_vars(vars), exit(exit_code % 256));
 			else
-				printfd(STDERR, "🦑: exit: %s%s%s: numeric argument required\n",
-					PINK, cmd[1], RESET);
+				(printfd(STDERR, "🦑: exit: %s%s%s: numeric argument required\n",
+						PINK, cmd[1], RESET), clean_vars(vars), exit(2));
 		}
 	}
 	(clean_vars(vars), exit(g_exit_status));
