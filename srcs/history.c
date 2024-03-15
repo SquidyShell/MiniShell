@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 14:11:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 18:33:22 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	save_line(t_vars *vars)
 {
 	t_list	*new;
 
+	if (!*vars->line)
+		return (0);
 	add_history(vars->line);
 	new = ft_lstnew(vars->line);
 	if (!new)
