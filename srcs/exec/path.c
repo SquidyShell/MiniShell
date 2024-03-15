@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/14 22:10:13 by cviegas          ###   ########.fr       */
+=======
+/*   Updated: 2024/03/14 21:20:29 by legrandc         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +28,14 @@ void	p_free(void *p)
 void	clean_vars(t_vars *vars)
 {
 	ft_lstclear(&vars->env_list, free);
+<<<<<<< HEAD
 	ft_lstclear_no_free(&vars->last_command);
 	// p_free(vars->cmd.path);
+=======
+	ft_lstclear(&vars->history, free);
+	if (vars->cmd.path)
+		free(vars->cmd.path);
+>>>>>>> refs/remotes/origin/master
 	if (vars->tokens)
 		tok_clear(&vars->tokens);
 	free_matrix(vars->env_path);

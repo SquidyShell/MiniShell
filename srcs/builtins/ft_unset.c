@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:42 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 00:30:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 20:47:59 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	ft_unset(char **cmd, t_vars *vars)
 	i = 1;
 	while (cmd[i])
 		delete_var_if_exists(&vars->env_list, cmd[i++]);
+	get_paths(vars);
 }

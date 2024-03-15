@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 20:55:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 17:48:00 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
 
 	var_value = NULL;
 	current = v->env_list;
+	*malloc_crampt = 0;
 	while (current)
 	{
 		env_line = current->content;
@@ -107,7 +108,6 @@ int	expand_this_shit(t_vars *v)
 		var_to_find = whats_the_var(v->line, v->index);
 		if (!var_to_find)
 			return (perr("Malloc"), -1);
-		malloc_crampt = 0;
 		var_value = search_var_in_env(v, var_to_find, &malloc_crampt);
 		if (malloc_crampt)
 			return (free(var_to_find), perr("Malloc"), -1);

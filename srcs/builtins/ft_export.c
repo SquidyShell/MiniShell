@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 21:28:00 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/14 20:48:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ void	ft_export(char **cmd, t_vars *vars)
 		else if (maybe_add_to_env(cmd[i], vars) == -1)
 			return ;
 	}
+	get_paths(vars);
 }

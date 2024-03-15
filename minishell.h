@@ -6,7 +6,11 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/14 20:22:58 by cviegas          ###   ########.fr       */
+=======
+/*   Updated: 2024/03/14 20:39:06 by legrandc         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +166,12 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					replace_the_var(t_list **env, char *line);
+char				*search_var_in_env(t_vars *v, char *var_to_find,
+						bool *malloc_crampt);
+char				*search_var_in_env(t_vars *v, char *var_to_find,
+						bool *malloc_crampt);
+bool				var_is_already_in_env(char *line, t_list *env);
 void				set_signals_child(t_vars *vars);
 void				set_signals(t_vars *vars);
 void				get_fds(t_vars *vars);
