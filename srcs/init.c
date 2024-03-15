@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 13:30:30 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:59:59 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ char	**ft_strdup_matrix(char **matrix)
 	return (new);
 }
 
+static void	set_pwd(t_vars *vars)
+{
+	char	*dir;
+	char	*pwd;
+
+	dir = ft_getcwd();
+	if (!dir)
+	{
+		vars->exit_status = 1;
+		printfd(2, "squidyshell-init: " GETCWD_ERROR " %s\n", strerror(errno));
+	}
+	else
+	{
+		pwd = ft_strjoin("PWD=", dir);
+		if (!pwd || maybe_add_to_env(pwd, vars) == -1)
+			perr("squidyshell-init: Malloc error, PWD will not be set");
+		free(dir);
+		free(pwd);
+	}
+}
+
 void	init_minishell(t_vars *vars, char **env)
 {
 	bool	does_malloc_crampt;
@@ -50,6 +71,7 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->tokens = NULL;
 	vars->line = NULL;
 	vars->env_path = NULL;
+	set_pwd(vars);
 	get_history(vars);
 	vars->exit_status = 0;
 }
