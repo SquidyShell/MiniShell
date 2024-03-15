@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:44:16 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 09:00:08 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:21:10 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	is_builtin(t_vars *vars)
 		vars->function = ft_exit;
 	else
 		return (0);
+	vars->exit_status = 0;
 	vars->command_was_built_in = 1;
 	return (1);
 }

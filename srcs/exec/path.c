@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 15:08:25 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 16:52:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	p_free(void *p)
 {
-	free(p);
-	p = NULL;
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
 }
 
 void	clean_vars(t_vars *vars)
