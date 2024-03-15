@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 12:11:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 13:51:21 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ int	main(int ac, char **av, char **env)
 			vars.exit_status = exec(&vars);
 		tok_clear(&vars.tokens);
 		vars.tokens = NULL;
+		if (vars.line_was_expanded)
+			free(vars.line);
 	}
 	append_to_history(&vars);
 	ft_lstclear(&vars.env_list, free);
 	free_matrix(vars.env_path);
 	free_matrix(vars.env);
-	return (vars.exit_status);
+	ft_exit((char *[3]){"exit", NULL, NULL}, &vars);
 }

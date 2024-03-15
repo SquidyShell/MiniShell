@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:44:16 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 21:09:33 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 09:00:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,26 @@ int	is_builtin(t_vars *vars)
 		return (0);
 	vars->command_was_built_in = 1;
 	return (1);
+}
+
+char	*ft_getcwd(void)
+{
+	char	*ret;
+	char	*buff;
+	size_t	size;
+
+	ret = NULL;
+	buff = NULL;
+	size = 100;
+	while (1)
+	{
+		ret = getcwd(buff, size);
+		free(buff);
+		size *= 2;
+		if (errno == ERANGE)
+			continue ;
+		else
+			break ;
+	}
+	return (ret);
 }

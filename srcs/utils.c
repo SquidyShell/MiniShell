@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 11:16:40 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 13:51:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_paths(t_vars *vars)
 	t_list	*env;
 
 	vars->cmd.path = NULL;
-	free(vars->env_path);
+	free_matrix(vars->env_path);
 	vars->env_path = NULL;
 	env = vars->env_list;
 	while (env && env->content)
