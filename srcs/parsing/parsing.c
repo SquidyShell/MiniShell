@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 11:44:58 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:38:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,14 @@ int	parse_the_actual_char(t_vars *v)
 {
 	if (v->line[v->index])
 	{
-		if (needs_to_be_expanded(v))
-			if (expand_this_shit(v) == -1)
-				return (-1);
-		if (v->line[v->index] == '\"')
-			if (there_is_a_dquote(v) == -1)
-				return (-1);
-		if (v->line[v->index] == '\'')
-			if (there_is_a_quote(v) == -1)
-				return (-1);
-		if (!v->in_quote)
-			if (not_in_quote(v) == -1)
-				return (-1);
+		if (needs_to_be_expanded(v) && expand_this_shit(v) == -1)
+			return (-1);
+		else if (v->line[v->index] == '\"' && there_is_a_dquote(v) == -1)
+			return (-1);
+		else if (v->line[v->index] == '\'' && there_is_a_quote(v) == -1)
+			return (-1);
+		else if (!v->in_quote && not_in_quote(v) == -1)
+			return (-1);
 	}
 	return (1);
 }
