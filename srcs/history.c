@@ -6,18 +6,35 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 23:42:18 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:42:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_history(void)
+static char	*get_history_name(t_vars *vars)
+{
+	bool	malloc_crampted;
+	char	*ret;
+
+	ret = search_var_in_env(vars, "HOME", &malloc_crampted);
+	if (malloc_crampted)
+		perr("Malloc error");
+	return (ret);
+}
+
+void	get_history(t_vars *vars)
 {
 	char	*s;
 	int		fd;
+	char	*history;
+	char	*path_to_history;
 
-	fd = open(".squidyshell_history", O_RDONLY);
+	history = get_history_name(vars);
+	path_to_history = ft_strjoin(history, "/" HISTORY_NAME);
+	fd = open(path_to_history, O_RDONLY);
+	free(path_to_history);
+	free(history);
 	if (fd == -1)
 		return ;
 	while (1)
@@ -51,10 +68,16 @@ void	append_to_history(t_vars *vars)
 {
 	int		fd;
 	t_list	*next;
+	char	*history;
+	char	*path_to_history;
 
-	fd = open(".squidyshell_history", O_WRONLY | O_APPEND | O_CREAT);
+	history = get_history_name(vars);
+	path_to_history = ft_strjoin(history, "/" HISTORY_NAME);
+	fd = open(path_to_history, O_WRONLY | O_APPEND | O_CREAT, 0600);
+	free(path_to_history);
+	free(history);
 	if (fd == -1)
-		return ;
+		return ((void)perr("could not append to history"));
 	while (vars->history)
 	{
 		next = vars->history->next;

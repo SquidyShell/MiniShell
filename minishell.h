@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 20:39:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:43:15 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	bool			line_was_expanded;
 	t_list			*history;
 	t_list			*last_command;
 	bool			command_was_built_in;
@@ -161,6 +162,8 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					maybe_add_to_env(char *line, t_vars *v);
+char				*ft_getcwd(void);
 int					replace_the_var(t_list **env, char *line);
 char				*search_var_in_env(t_vars *v, char *var_to_find,
 						bool *malloc_crampt);
@@ -176,7 +179,7 @@ void				init_minishell(t_vars *vars, char **env);
 void				append_to_history(t_vars *vars);
 char				*gnl_no_nl(int fd);
 int					save_line(t_vars *vars);
-void				get_history(void);
+void				get_history(t_vars *vars);
 int					dup2_and_close(int fd1, int fd2);
 int					redirect(t_vars *vars);
 int					case_pipe(t_vars *vars);
@@ -216,5 +219,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
+# define GETCWD_ERROR "error retrieving\
+ current directory: getcwd: cannot access parent directories:"
+# define HISTORY_NAME ".squidyshell_history"
 
 #endif // !MINISHELL_H

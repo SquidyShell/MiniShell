@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 21:26:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:44:58 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ int	parse_the_actual_char(t_vars *v)
 
 int	parsing(t_vars *v)
 {
+	v->line_was_expanded = 0;
 	if (!is_syntax_correct(v))
-		return (free(v->line), -1);
+		return (-1);
 	while (v->line[v->index])
 	{
 		if (parse_the_actual_char(v) == -1)
-			return (free(v->line), -1);
+			return (-1);
 		v->index++;
 	}
 	if (tok_close(v) == -1)
-		return (free(v->line), -1);
+		return (-1);
 	if (v->tokens && is_metachar(*v->tokens->last))
-		return (berr("newline", v), free(v->line), -1);
+		return (berr("newline", v), -1);
 	return (1);
 }

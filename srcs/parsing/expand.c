@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/14 17:48:00 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:02:13 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
 {
 	char	*line_temp;
 
+	v->line_was_expanded = true;
 	line_temp = ft_strdup(v->line);
 	if (!line_temp)
 		return (-1);
-	free(v->line);
 	v->line = NULL;
 	v->line = new_line_expanded(v, var_value, var_name_len, line_temp);
 	if (!v->line)
