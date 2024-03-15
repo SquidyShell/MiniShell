@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 17:54:57 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static void	case_home(t_vars *vars)
 
 	path = search_var_in_env(vars, "HOME", &malloc_crampt);
 	if (malloc_crampt)
-		return (vars->exit_status = 1, perr("command failed: malloc error"));
+		return (g_exit_status = 1, perr("command failed: malloc error"));
 	if (path == NULL)
-		return (vars->exit_status = 1, perr("cd: HOME not set"));
+		return (g_exit_status = 1, perr("cd: HOME not set"));
 	else if (chdir(path) == -1)
 	{
-		vars->exit_status = 1;
+		g_exit_status = 1;
 		printfd(2, "cd: %s: %s\n", path, strerror(errno));
 	}
 	else
@@ -74,12 +74,12 @@ static void	case_oldpwd(t_vars *vars)
 
 	path = search_var_in_env(vars, "OLDPWD", &malloc_crampt);
 	if (malloc_crampt)
-		return (vars->exit_status = 1, perr("command failed: malloc error"));
+		return (g_exit_status = 1, perr("command failed: malloc error"));
 	if (path == NULL)
-		return (vars->exit_status = 1, perr("cd: OLDPWD not set"));
+		return (g_exit_status = 1, perr("cd: OLDPWD not set"));
 	else if (chdir(path) == -1)
 	{
-		vars->exit_status = 1;
+		g_exit_status = 1;
 		printfd(2, "cd: %s: %s\n", path, strerror(errno));
 	}
 	else
@@ -96,7 +96,7 @@ void	ft_cd(char **cmd, t_vars *vars)
 	if (cmd[2])
 	{
 		perr("cd: too many arguments");
-		vars->exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	if (!cmd[1])
@@ -105,7 +105,7 @@ void	ft_cd(char **cmd, t_vars *vars)
 		return (case_oldpwd(vars));
 	else if (*cmd[1] && chdir(cmd[1]) == -1)
 		(printfd(2, "cd: %s: %s\n", cmd[1], strerror(errno)),
-			vars->exit_status = 1);
+			g_exit_status = 1);
 	else
 		replace_pwd(vars);
 }

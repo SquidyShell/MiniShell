@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 17:59:59 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 20:14:47 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	set_pwd(t_vars *vars)
 	dir = ft_getcwd();
 	if (!dir)
 	{
-		vars->exit_status = 1;
+		g_exit_status = 1;
 		printfd(2, "squidyshell-init: " GETCWD_ERROR " %s\n", strerror(errno));
 	}
 	else
@@ -73,5 +73,5 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->env_path = NULL;
 	set_pwd(vars);
 	get_history(vars);
-	vars->exit_status = 0;
+	g_exit_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:27:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 17:52:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:09:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	ft_pwd(char **cmd, t_vars *vars)
 	char	*dir;
 
 	(void)cmd;
+	(void)vars;
 	dir = ft_getcwd();
 	if (!dir)
 	{
-		vars->exit_status = 1;
+		g_exit_status = 1;
 		(void)printfd(2, "pwd: " GETCWD_ERROR " %s\n", strerror(errno));
 	}
 	else

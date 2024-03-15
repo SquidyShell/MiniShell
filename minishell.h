@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 16:28:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 20:13:25 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_vars
 	t_list			*history;
 	t_list			*last_command;
 	bool			command_was_built_in;
-	int				exit_status;
 	int				last_command_exit_status;
 	t_list			*env_list;
 	char			*line;

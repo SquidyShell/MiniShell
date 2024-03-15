@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 10:32:51 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_export(char **cmd, t_vars *vars)
 	size_t	i;
 
 	if (!cmd[1])
-		return ((void)(vars->exit_status = 0),
+		return ((void)(g_exit_status = 0),
 			print_env_export_list(vars->env_list));
 	i = 0;
 	while (cmd[++i])
@@ -100,7 +100,7 @@ void	ft_export(char **cmd, t_vars *vars)
 		{
 			printfd(2, "🦑: export: `%s%s%s': not a valid identifier\n", PINK,
 				cmd[i], RESET);
-			vars->exit_status = 1;
+			g_exit_status = 1;
 		}
 		else if (maybe_add_to_env(cmd[i], vars) == -1)
 			return ;
