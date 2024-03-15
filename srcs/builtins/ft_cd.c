@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 13:53:21 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:54:46 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_cd(char **cmd, t_vars *vars)
 		return (case_home(vars));
 	else if (ft_strcmp(cmd[1], "-") == 0)
 		return (case_oldpwd(vars));
-	else if (chdir(cmd[1]) == -1)
+	else if (*cmd[1] && chdir(cmd[1]) == -1)
 		(printfd(2, "cd: %s: %s\n", cmd[1], strerror(errno)),
 			vars->exit_status = 1);
 	else

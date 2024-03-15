@@ -6,14 +6,26 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:27:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/10 18:31:28 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:51:54 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*Behavior of bash posix 5.1.16 where the command fails when getcwd fails,
+in oppistion to bash where it would just print the PWD variable from before*/
+
 void	ft_pwd(char **cmd, t_vars *vars)
 {
+	char	*dir;
+
 	(void)cmd;
-	(void)vars;
+	dir = ft_getcwd();
+	if (!dir)
+	{
+		vars->exit_status = 1;
+		(void)printfd(2, "pwd: " GETCWD_ERROR " %s\n", strerror(errno));
+	}
+	else
+		printf("%s\n", dir);
 }
