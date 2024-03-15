@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 12:13:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 12:18:52 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_exit(char **cmd, t_vars *vars)
 	append_to_history(vars);
 	exit_code = 0;
 	close(vars->old_stdout);
+	printfd(STDOUT, "exit\n");
 	if (cmd[1])
 	{
 		ft_atoll_bool(cmd[1], &exit_code);
