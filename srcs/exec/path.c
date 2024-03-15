@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 20:35:02 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 22:04:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	clean_vars(t_vars *vars)
 		tok_clear(&vars->tokens);
 	free_matrix(vars->env_path);
 	free_matrix(vars->env);
+	p_free(vars->cmd.args);
 }
 
 void	search_and_execve(t_vars *vars)

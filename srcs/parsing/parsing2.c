@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:38:00 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:57:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ int	case_and(t_vars *vars)
 	bool	last_meta;
 
 	last_meta = false;
-	vars->tokens->last->type = OR_IF;
-	if (!vars->tokens || is_metachar(*vars->tokens->last))
+	if (vars->tokens && is_metachar(*vars->tokens->last))
 		last_meta = true;
 	if (!tok_close_and_addback(&vars->tokens, vars, AND_IF))
 		return (-1);
-	vars->tokens->last->error = last_meta;
+	if (vars->tokens)
+	{
+		vars->tokens->last->type = AND_IF;
+		vars->tokens->last->error = last_meta;
+	}
+	vars->index++;
 	return (0);
 }
 
