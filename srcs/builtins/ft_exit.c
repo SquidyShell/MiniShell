@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 14:09:39 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	ft_exit(char **cmd, t_vars *vars)
 					PINK, cmd[1], RESET);
 		}
 	}
-	(clean_vars(vars), exit(vars->exit_status));
+	(clean_vars(vars), exit(g_exit_status));
 }

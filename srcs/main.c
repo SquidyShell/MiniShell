@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 20:24:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:24:22 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av, char **env)
 	get_paths(&vars);
 	while (1)
 	{
+		g_exit_status = 0;
 		set_signals(&vars);
 		init_vars(&vars);
 		vars.line = readline(SQUIDYSHELL);
@@ -34,7 +35,7 @@ int	main(int ac, char **av, char **env)
 			if (vars.line_was_expanded)
 				free(vars.line);
 			if (vars.tokens)
-				vars.exit_status = exec(&vars);
+				g_exit_status = exec(&vars);
 		}
 		tok_clear(&vars.tokens);
 	}

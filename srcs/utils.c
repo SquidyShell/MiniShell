@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 13:51:27 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:20:31 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ void	get_paths(t_vars *vars)
 		env = env->next;
 		free_matrix(var);
 	}
-	g_exit_status = 127;
 }

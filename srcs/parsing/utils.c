@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 21:39:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:08:51 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	berr(char *token, t_vars *v)
 {
-	v->exit_status = 2;
+	(void)v;
+	g_exit_status = 2;
 	printfd(STDERR, "🦑: syntax error near unexpected token `%s%s%s'\n", PINK,
 		token, RESET);
 }
 
 void	eof_err(char *match, t_vars *v)
 {
-	v->exit_status = 2;
+	(void)v;
+	g_exit_status = 2;
 	printfd(STDERR, "🦑: unexpected EOF while looking for matching `%s%s%s'\n%s",
 		PINK, match, RESET, EOF_ERR);
 }

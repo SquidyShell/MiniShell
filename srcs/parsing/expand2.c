@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:43:32 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/15 21:46:54 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	var_is_exit_status(t_vars *v)
 {
 	char	*var_value;
 
-	var_value = ft_itoa(v->exit_status);
+	var_value = ft_itoa(g_exit_status);
 	if (!var_value)
 		return (perr("Malloc"), -1);
 	if (replace_var_name_by_value(v, var_value, 1) == -1)
