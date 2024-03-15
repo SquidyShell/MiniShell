@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:14:54 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,21 @@ bool	ft_atoll_bool(const char *nptr, long long *ptr)
 void	ft_exit(char **cmd, t_vars *vars)
 {
 	long long	exit_code;
+	bool		is_numeric;
 
+	if (vars->old_stdout)
+		close(vars->old_stdout);
 	append_to_history(vars);
-	exit_code = 0;
 	printfd(STDOUT, "exit\n");
 	if (cmd[1])
 	{
-		ft_atoll_bool(cmd[1], &exit_code);
-		if (cmd[2])
-			return (clean_vars(vars), printfd(STDERR,
-					"🦑: exit: too many arguments\n"));
+		exit_code = 0;
+		is_numeric = ft_atoll_bool(cmd[1], &exit_code);
+		if (cmd[2] && is_numeric)
+			return (printfd(STDERR, "🦑: exit: too many arguments\n"));
 		else
 		{
-			if (ft_atoll_bool(cmd[1], &exit_code))
+			if (is_numeric)
 				(clean_vars(vars), exit(exit_code % 256));
 			else
 				printfd(STDERR, "🦑: exit: %s%s%s: numeric argument required\n",
