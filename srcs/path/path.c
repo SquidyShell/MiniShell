@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 07:45:02 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 23:32:36 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
+/*   Updated: 2024/03/16 16:21:40 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	p_free(void *p)
+int	get_path(char *command, t_vars *vars)
 {
-	if (p)
+	char	*tested_path;
+	size_t	i;
+
+	if (!command || !ft_strcmp(command, ".") || !command[0])
+		return (0);
+	if (ft_strchr(command, '/'))
+		return (vars->cmd.path = ft_strdup(command), (vars->cmd.path != NULL)
+			- 1);
+	i = 0;
+	while (vars->env_path && vars->env_path[i])
 	{
-		free(p);
-		p = NULL;
+		tested_path = ft_strjoin3(vars->env_path[i], "/", command);
+		if (!tested_path)
+			return (-1);
+		if (access(tested_path, F_OK) == 0)
+			return (vars->cmd.path = tested_path, 0);
+		free(tested_path);
+		i++;
 	}
+	g_exit_status = 127;
+	return (0);
 }
-
-void	clean_vars(t_vars *vars)
-{
-	ft_lstclear(&vars->env_list, free);
-	ft_lstclear(&vars->history, free);
-	p_free(vars->cmd.path);
-	if (vars->tokens)
-		tok_clear(&vars->tokens);
-	free_matrix(vars->env_path);
-	free_matrix(vars->env);
-	p_free(vars->cmd.args);
-}
-
 void	search_and_execve(t_vars *vars)
 {
 	char	**args;

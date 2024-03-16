@@ -5,17 +5,26 @@ HEADER = $(NAME).h
 
 SRC_PATH = srcs
 PARS_PATH = $(SRC_PATH)/parsing
-SRC = main.c utils.c path.c history.c gnl.c init.c
+SRC = main.c
 PARS_SRC = parsing.c parsing3.c utils.c tokens_utils.c check_syntax.c parsing2.c parsing4.c tokens_utils2.c utils2.c expand.c expand2.c env.c
 BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_export2.c ft_export_print.c ft_pwd.c ft_unset.c builtins_utils.c
-EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c path.c exec_utils.c
+EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c exec_utils.c
 SIGNALS_SRC = signals.c
+PATH_SRC = path.c path_utils.c
+GNL_SRC = gnl.c
+HISTORY_SRC = history.c
+INIT_SRC = init.c
 
 SRC := $(addprefix $(SRC_PATH)/, $(SRC))
 SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))
 SRC += $(addprefix $(SRC_PATH)/builtins/, $(BUILTINS_SRC))
 SRC += $(addprefix $(SRC_PATH)/exec/, $(EXEC_SRC))
 SRC += $(addprefix $(SRC_PATH)/signals/, $(SIGNALS_SRC))
+SRC += $(addprefix $(SRC_PATH)/path/, $(PATH_SRC))
+SRC += $(addprefix $(SRC_PATH)/gnl/, $(GNL_SRC))
+SRC += $(addprefix $(SRC_PATH)/history/, $(HISTORY_SRC))
+SRC += $(addprefix $(SRC_PATH)/init/, $(INIT_SRC))
+
 OBJ = $(SRC:.c=.o)
 
 CC = clang
