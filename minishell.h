@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 02:40:08 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:44:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef enum e_type
 t_list				*create_env_list(char **env, bool *malloc_crampt);
 int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
-int					what_token_type_is_it(t_vars *vars);
+int					get_type_and_len(t_vars *vars);
 bool				is_syntax_correct(t_vars *v);
 int					there_is_a_quote(t_vars *v);
 int					there_is_a_dquote(t_vars *v);
@@ -133,6 +133,7 @@ bool				is_whitespace(char c);
 bool				is_symbol(char c);
 bool				is_tok_symbol(t_tokens token);
 size_t				len(const char *s);
+int					search_for_lenght(t_vars *vars);
 int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
@@ -169,6 +170,10 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					what_token_type_is_it(t_vars *vars);
+bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
+						int type);
+int					case_and(t_vars *vars);
 int					maybe_add_to_env(char *line, t_vars *v);
 char				*ft_getcwd(void);
 int					replace_the_var(t_list **env, char *line);
@@ -219,7 +224,7 @@ void				ft_unset(char **cmd, t_vars *vars);
 void				ft_env(char **cmd, t_vars *vars);
 void				ft_exit(char **cmd, t_vars *vars);
 
-# define SQUIDYSHELL "\033[1;35mSquidyShell\033[0m$ "
+# define SQUIDYSHELL "\001\033[1;35m\002SquidyShell\001\033[0m\002$ "
 # define WRITE 1
 # define READ 0
 # define STDIN STDIN_FILENO
