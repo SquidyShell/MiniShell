@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:38:15 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 15:18:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_tokens
 	bool			closed;
 	bool			is_single_quoted;
 	bool			is_double_quoted;
+	int				here_doc_fd[2];
 	struct s_tokens	*last;
 }					t_tokens;
 

@@ -18,7 +18,7 @@ SRC += $(addprefix $(SRC_PATH)/exec/, $(EXEC_SRC))
 SRC += $(addprefix $(SRC_PATH)/signals/, $(SIGNALS_SRC))
 OBJ = $(SRC:.c=.o)
 
-CC = cc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 
 RM = rm -f
