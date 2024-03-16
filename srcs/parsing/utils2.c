@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 17:54:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 10:52:26 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ int	protected_addback(t_list **lst, char *str)
 		return (free(new_str), -1);
 	ft_lstadd_back(lst, new_nod);
 	return (1);
+}
+
+/*handles parenthesis priority*/
+
+bool	should_continue(size_t type, size_t ignore_lvl)
+{
+	return ((type != OR_IF && type != AND_IF) || ignore_lvl > 1);
 }

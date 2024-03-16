@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:13:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 11:38:15 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	size_t			ignore_lvl;
 	bool			line_was_expanded;
 	t_list			*history;
 	t_list			*last_command;
@@ -170,6 +171,7 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+bool				should_continue(size_t type, size_t ignore_lvl);
 int					what_token_type_is_it(t_vars *vars);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
 						int type);

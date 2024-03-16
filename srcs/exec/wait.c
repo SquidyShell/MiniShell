@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:16:39 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 09:08:10 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	wait_commands(t_vars *vars)
 {
-	int	ret;
 	int	code;
 	int	pid;
 	int	wstatus;
@@ -33,10 +32,7 @@ int	wait_commands(t_vars *vars)
 		if (code == 131)
 			printfd(2, "Quit (core dumped)\n");
 		if (pid == vars->last_pid)
-			ret = code;
+			g_exit_status = code;
 	}
-	if (vars->command_was_built_in)
-		return (g_exit_status);
-	else
-		return (ret);
+	return (g_exit_status);
 }

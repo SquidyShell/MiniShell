@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 04:50:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 11:38:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 {
 	vars->cmd.len = 0;
-	while (tokens && tokens->type != PIPE)
+	while (tokens && tokens->type != PIPE && should_continue(tokens->type,
+			vars->ignore_lvl))
 	{
-		if (tokens->type == WORD)
+		if (tokens->type == PARENTHESES_IN && vars->ignore_lvl)
+			vars->ignore_lvl++;
+		else if (tokens->type == PARENTHESES_OUT && vars->ignore_lvl)
+			vars->ignore_lvl--;
+		else if (tokens->type == WORD)
 			vars->cmd.len++;
 		tokens = tokens->next;
 	}
@@ -30,15 +35,20 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 
 	if (get_cmd_len(vars, (*curr)) == -1)
 		return (-1);
-	vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
-	if (!vars->cmd.args)
-		return (-1);
-	vars->cmd.args[vars->cmd.len] = 0;
-	i = 0;
-	while ((*curr) && (*curr)->type != PIPE)
+	if (!vars->ignore_lvl)
 	{
+		vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
+		if (!vars->cmd.args)
+			return (-1);
+		vars->cmd.args[vars->cmd.len] = 0;
+	}
+	i = 0;
+	while ((*curr) && (i < vars->cmd.len || (*curr)->type == PARENTHESES_OUT))
+	{
+		if ((*curr)->type == WORD && !vars->ignore_lvl)
+			vars->cmd.args[i] = (*curr)->content;
 		if ((*curr)->type == WORD)
-			vars->cmd.args[i++] = (*curr)->content;
+			i++;
 		(*curr) = (*curr)->next;
 	}
 	if ((*curr) && (*curr)->type == PIPE)

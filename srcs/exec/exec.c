@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 23:30:45 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 11:27:47 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,52 @@ void	case_no_pipe(t_vars *vars)
 		pipex(vars);
 }
 
+int	exec_list(t_tokens **curr, t_vars *vars)
+{
+	vars->cmd_i = 0;
+	vars->last_pid = 0;
+	while ((*curr) && (*curr)->type != OR_IF && (*curr)->type != AND_IF)
+	{
+		set_signals_child(vars);
+		vars->infile_fd = -1;
+		vars->outfile_fd = -1;
+		vars->cmd.token = (*curr);
+		if (get_cmd_infos(curr, vars) == -1)
+			return (-1);
+		if (!vars->ignore_lvl)
+		{
+			if (vars->cmd.len && vars->pipe_nb)
+				pipex(vars);
+			else
+				case_no_pipe(vars);
+			p_free(vars->cmd.args);
+			vars->cmd_i++;
+		}
+	}
+	return (wait_commands(vars));
+}
+
 int	exec(t_vars *vars)
 {
 	t_tokens	*curr;
 
 	curr = vars->tokens;
 	vars->last_pid = 0;
+	vars->ignore_lvl = 0;
 	while (curr)
 	{
-		set_signals_child(vars);
-		vars->infile_fd = -1;
-		vars->outfile_fd = -1;
-		vars->cmd.token = curr;
-		if (get_cmd_infos(&curr, vars) == -1)
-			return (-1);
-		if (vars->cmd.len && vars->pipe_nb)
-			pipex(vars);
+		exec_list(&curr, vars);
+		if (vars->ignore_lvl > 0)
+			vars->ignore_lvl--;
+		if (curr && curr->type == OR_IF && g_exit_status == 0
+			&& !vars->ignore_lvl)
+			vars->ignore_lvl = 1;
+		else if (curr && curr->type == AND_IF && g_exit_status != 0
+			&& !vars->ignore_lvl)
+			vars->ignore_lvl = 1;
 		else
-			case_no_pipe(vars);
-		p_free(vars->cmd.args);
-		vars->cmd_i++;
+			continue ;
+		curr = curr->next;
 	}
-	return (wait_commands(vars));
+	return (g_exit_status);
 }
