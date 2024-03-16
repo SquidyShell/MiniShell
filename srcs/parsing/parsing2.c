@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 02:43:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:48:27 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ int	case_and(t_vars *vars)
 		vars->tokens->last->error = last_meta;
 	}
 	vars->index++;
-	return (0);
-}
-
-int	case_parenthese(t_vars *vars, int type)
-{
-	tok_close(vars);
-	tok_addback(&vars->tokens, vars, tok_new(NULL, type));
-	if (vars->tokens)
-		vars->tokens->last->type = type;
 	return (0);
 }
 

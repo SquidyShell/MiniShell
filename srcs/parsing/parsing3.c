@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 02:46:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:49:52 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,12 @@ int	what_token_type_is_it(t_vars *vars)
 	if (vars->line[vars->index] == '>')
 		return (case_great(vars));
 	return (case_word(vars));
+}
+
+int	case_parenthese(t_vars *vars, int type)
+{
+	tok_close_and_addback(&vars->tokens, vars, type);
+	if (vars->tokens)
+		vars->tokens->last->type = type;
+	return (0);
 }
