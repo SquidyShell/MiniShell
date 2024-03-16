@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 03:00:26 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 04:31:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	parse_the_actual_char(t_vars *v)
 {
 	if (needs_to_be_expanded(v))
 	{
-		s();
 		if (expand_this_shit(v) == -1)
 			return (-1);
 	}
@@ -62,8 +61,6 @@ int	parsing(t_vars *v)
 		return (-1);
 	while (v->line[v->index])
 	{
-		if (v->in_expanded_var)
-			printf("%c", v->line[v->index]);
 		if (v->in_expanded_var && v->index > v->end_of_var)
 			v->in_expanded_var = 0;
 		if (parse_the_actual_char(v) == -1)
