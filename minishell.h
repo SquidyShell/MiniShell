@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 02:44:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 03:00:51 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ t_list				*create_env_list(char **env, bool *malloc_crampt);
 int					parsing(t_vars *vars);
 void				init_vars(t_vars *v);
 int					get_type_and_len(t_vars *vars);
-bool				is_syntax_correct(t_vars *v);
+bool				is_syntax_correct(char *line, t_vars *v);
 int					there_is_a_quote(t_vars *v);
 int					there_is_a_dquote(t_vars *v);
 int					not_in_quote(t_vars *v);
@@ -133,7 +133,6 @@ bool				is_whitespace(char c);
 bool				is_symbol(char c);
 bool				is_tok_symbol(t_tokens token);
 size_t				len(const char *s);
-int					search_for_lenght(t_vars *vars);
 int					expand_this_shit(t_vars *v);
 
 /*		UTILS */
@@ -233,8 +232,7 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR \
-	"error retrieving\
+# define GETCWD_ERROR "error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 

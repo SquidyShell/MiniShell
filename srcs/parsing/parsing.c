@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 01:14:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 03:00:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_the_actual_char(t_vars *v)
 int	parsing(t_vars *v)
 {
 	v->line_was_expanded = 0;
-	if (!is_syntax_correct(v))
+	if (!is_syntax_correct(v->line, v))
 		return (-1);
 	while (v->line[v->index])
 	{
