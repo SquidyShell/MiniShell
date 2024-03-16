@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 02:48:03 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 15:49:14 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	is_metachar(t_tokens token)
 
 bool	is_tok_symbol(t_tokens token)
 {
-	return ((token.type >= 1 && token.type <= 7) || (token.type >= 14
-			&& token.type <= 15));
+	return ((token.type >= 1 && token.type <= 7) || token.type == PARENTHESES_IN
+		|| token.type == PARENTHESES_OUT);
 }
