@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 14:58:12 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:37:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_tokens
 	bool			closed;
 	bool			is_single_quoted;
 	bool			is_double_quoted;
-	int				here_doc_fd[2];
+	int				end_heredoc[2];
 	struct s_tokens	*last;
 }					t_tokens;
 
@@ -121,7 +121,6 @@ t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
 						bool d_quote);
 void				tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
-size_t				tok_size(t_tokens *tokens);
 void				tok_print(t_tokens *tokens);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
 						int type);
@@ -142,6 +141,10 @@ void				eof_err(char *match, t_vars *v);
 void				s(void);
 int					protected_addback(t_list **lst, char *str);
 void				p_free(void *p);
+
+/* HEREDOC */
+int					exec_heredoc(t_tokens *tok);
+void				hderr(size_t line_nb, char *limiter);
 
 /* GNL*/
 # ifndef BUFFER_SIZE
@@ -233,8 +236,12 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define STDERR STDERR_FILENO
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
+
+# define HDERR_0 "🦑: warning: here-document at line "
+# define HDERR_1 " delimited by end-of-file (wanted `"
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR "error retrieving\
+# define GETCWD_ERROR \
+	"error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 

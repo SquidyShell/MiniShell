@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 20:13:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 17:06:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FIRST_LIBFT_H
 # include <unistd.h>
 
-typedef int				t_v2i __attribute__((vector_size (8)));
+typedef int t_v2i	__attribute__((vector_size(8)));
 
 // PREMIERE PARTIES
 // easy
@@ -52,7 +52,7 @@ char				*ft_strdup(const char *s);
 
 // DEUXIEME PARTIE
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_substr_skip(char const *s, size_t start, size_t len,
+char				*substr_s(char const *s, size_t start, size_t len,
 						char to_skip);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_free(char *s1, char *s2);

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:14:04 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/11 17:55:23 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 17:06:48 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	*ft_substr_skip(char const *s, size_t start, size_t len, char to_skip)
+/* ft_substr but skips the "to_skip" char passed by argument */
+char	*substr_s(char const *s, size_t start, size_t len, char to_skip)
 {
 	char	*substr;
 	size_t	i;

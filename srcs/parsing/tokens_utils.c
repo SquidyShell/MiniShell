@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 01:31:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 17:37:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,19 @@ int	tok_close(t_vars *v)
 			v->tokens->last->content = ft_substr(v->line,
 					v->tokens->last->start, v->index - v->tokens->last->start);
 		else if (v->tokens->last->is_single_quoted)
-			v->tokens->last->content = ft_substr_skip(v->line,
-					v->tokens->last->start, v->index - v->tokens->last->start,
-					'\'');
+			v->tokens->last->content = substr_s(v->line, v->tokens->last->start,
+					v->index - v->tokens->last->start, '\'');
 		else
-			v->tokens->last->content = ft_substr_skip(v->line,
-					v->tokens->last->start, v->index - v->tokens->last->start,
-					'\"');
+			v->tokens->last->content = substr_s(v->line, v->tokens->last->start,
+					v->index - v->tokens->last->start, '\"');
 		if (!v->tokens->last->content)
 			return (perr("Malloc"), -1);
 		if (v->tokens->last->error)
 			return (berr(v->tokens->last->content, v), -1);
+		if (v->tokens->last->type != HEREDOC_DELIM)
+			*v->tokens->last->end_heredoc = 0;
+		else if (exec_heredoc(v->tokens->last) - 1)
+			return (-1);
 	}
 	return (0);
 }
