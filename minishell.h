@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 15:18:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 14:58:12 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_vars
 	t_list			*history;
 	t_list			*last_command;
 	bool			command_was_built_in;
-	int				last_command_exit_status;
 	t_list			*env_list;
 	char			*line;
 	size_t			index;
@@ -97,8 +96,6 @@ typedef enum e_type
 	FILE_OUT,
 	HEREDOC_DELIM,
 	DFILE_OUT,
-	ENV_VAR,
-	EXIT_STATUS,
 	PARENTHESES_IN,
 	PARENTHESES_OUT,
 }					t_type;
@@ -172,6 +169,7 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				change_ignore_lvl(size_t *ignore_lvl, size_t type);
 bool				should_continue(size_t type, size_t ignore_lvl);
 int					what_token_type_is_it(t_vars *vars);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
@@ -236,8 +234,7 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR \
-	"error retrieving\
+# define GETCWD_ERROR "error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 
