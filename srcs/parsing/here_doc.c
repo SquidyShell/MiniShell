@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 17:44:44 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 17:59:28 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ int	exec_heredoc(t_tokens *tok)
 	if (pipe(tok->end_heredoc) < 0)
 		return (perror("Pipe"), -1);
 	line_nb = 1;
-	g_exit_status == 0;
+	g_exit_status = 0;
 	while (1 || ++line_nb)
 	{
 		printfd(STDERR, "> ");
-		line = get_next_line(STDIN);
+		line = gnl_no_nl(STDIN);
 		if (g_exit_status == 130)
 			break ;
-		if (!line || g_exit_status == 128)
+		if (!line)
 			return (hderr(line_nb, tok->content), p_free(line),
 				close(tok->end_heredoc[WRITE]), 0);
-		if (!ft_strcmp(line, tok->content) && len(line) == len(tok->content))
+		if (!ft_strcmp(line, tok->content))
 			break ;
 		printfd(tok->end_heredoc[WRITE], line);
 		p_free(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 14:15:48 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:13:33 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,6 @@ int	redirect(t_vars *vars)
 	dup2_and_close(vars->outfile_fd, STDOUT_FILENO);
 	return (0);
 }
+
+// if (vars->cmd.token->type == HEREDOC_DELIM)
+// 	(dup2_and_close(vars->cmd.token->end_heredoc[READ], STDIN), is_heredoc = 1);
