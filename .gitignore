@@ -5,3 +5,4 @@ a.out
 *TEST*
 .vstags
 .vscode
+*.o

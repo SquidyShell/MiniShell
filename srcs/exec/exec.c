@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:27:47 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:27:52 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,16 @@ int	exec(t_vars *vars)
 		exec_list(&curr, vars);
 		if (vars->ignore_lvl > 0)
 			vars->ignore_lvl--;
-		if (curr && curr->type == OR_IF && g_exit_status == 0
-			&& !vars->ignore_lvl)
-			vars->ignore_lvl = 1;
-		else if (curr && curr->type == AND_IF && g_exit_status != 0
-			&& !vars->ignore_lvl)
-			vars->ignore_lvl = 1;
+		if (curr && curr->type == OR_IF)
+		{
+			if (g_exit_status == 0 && !vars->ignore_lvl)
+				vars->ignore_lvl = 1;
+		}
+		else if (curr && curr->type == AND_IF)
+		{
+			if (g_exit_status != 0 && !vars->ignore_lvl)
+				vars->ignore_lvl = 1;
+		}
 		else
 			continue ;
 		curr = curr->next;
