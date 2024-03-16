@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:38:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 14:19:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,24 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 	return (0);
 }
 
+bool	is_there_operation_err(t_vars *vars)
+{
+	return (vars->tokens && vars->tokens->last
+		&& vars->tokens->last->type == PARENTHESES_OUT
+		&& (!(vars->line[vars->index] == '&'
+				&& vars->line[vars->index + 1] == '&')
+			&& !(vars->line[vars->index] == '|'
+				|| vars->line[vars->index + 1] == '|')));
+}
+
 int	what_token_type_is_it(t_vars *vars)
 {
 	if (vars->line[vars->index] == '(')
 		return (case_parenthese(vars, PARENTHESES_IN));
 	if (vars->line[vars->index] == ')')
 		return (case_parenthese(vars, PARENTHESES_OUT));
+	if (is_there_operation_err(vars))
+		return (berr(")", vars), -1);
 	if (vars->line[vars->index] == '&' && vars->line[vars->index + 1] == '&')
 		return (case_and(vars));
 	if (vars->line[vars->index] == '|')
@@ -81,7 +93,17 @@ int	case_parenthese(t_vars *vars, int type)
 		if (vars->tokens->last->type == PARENTHESES_IN)
 			return (berr(")", vars), -1);
 	}
-	tok_close_and_addback(&vars->tokens, vars, type);
+	if (type == PARENTHESES_IN && vars->tokens)
+	{
+		if (vars->tokens->type != AND_IF && vars->tokens->type != OR_IF)
+		{
+			if (vars->tokens->last && (vars->tokens->last->type != AND_IF
+					&& vars->tokens->last->type != OR_IF))
+				return (berr("(", vars), -1);
+		}
+	}
+	if (!tok_close_and_addback(&vars->tokens, vars, type))
+		return (-1);
 	if (vars->tokens)
 		vars->tokens->last->type = type;
 	return (0);
