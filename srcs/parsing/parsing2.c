@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:57:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:40:26 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	case_and(t_vars *vars)
 {
 	bool	last_meta;
 
-	last_meta = false;
-	if (vars->tokens && is_metachar(*vars->tokens->last))
-		last_meta = true;
+	last_meta = (!vars->tokens || is_metachar(*vars->tokens->last));
 	if (!tok_close_and_addback(&vars->tokens, vars, AND_IF))
 		return (-1);
 	if (vars->tokens)
@@ -30,18 +28,25 @@ int	case_and(t_vars *vars)
 	return (0);
 }
 
+int	case_parenthese(t_vars *vars, int type)
+{
+	tok_close(vars);
+	tok_addback(&vars->tokens, vars, tok_new(NULL, type));
+	if (vars->tokens)
+		vars->tokens->last->type = type;
+	return (0);
+}
+
 int	case_pipe(t_vars *vars)
 {
 	bool	last_meta;
 
-	last_meta = false;
 	if (vars->tokens && vars->tokens->last->type == PIPE
 		&& vars->tokens->last->closed == false)
 		vars->tokens->last->type = OR_IF;
 	else
 	{
-		if (!vars->tokens || is_metachar(*vars->tokens->last))
-			last_meta = true;
+		last_meta = (!vars->tokens || is_metachar(*vars->tokens->last));
 		if (tok_close(vars) == -1)
 			return (-1);
 		tok_addback(&vars->tokens, vars, tok_new(NULL, PIPE));
@@ -104,7 +109,7 @@ int	case_word(t_vars *vars)
 	else if (vars->tokens && vars->tokens->last->type == DGREAT
 		&& !tok_close_and_addback(&vars->tokens, vars, DFILE_OUT))
 		return (-1);
-	else if (vars->tokens && (is_metachar(*vars->tokens->last)))
+	else if (vars->tokens && (is_tok_symbol(*vars->tokens->last)))
 		if (tok_close(vars) == -1)
 			return (-1);
 	if (!vars->tokens || vars->tokens->last->closed == true)

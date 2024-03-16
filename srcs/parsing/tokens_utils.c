@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 21:40:41 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 01:31:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	tok_print(t_tokens *tokens)
 	{
 		printf("%sToken:%s %s, %sType:%s %zu, %sIs_in_quote?:%s %d\n", BLUE,
 			RESET, tokens->content, GREEN, RESET, tokens->type, PINK, RESET,
-			tokens->is_single_quoted);
+			tokens->is_double_quoted);
 		if (last && tokens == last)
 			return ;
 		tokens = tokens->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 21:08:51 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:39:47 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,11 @@ void	s(void)
 
 int	is_metachar(t_tokens token)
 {
-	return (token.type >= 1 && token.type <= 7);
+	return ((token.type >= 1 && token.type <= 7));
+}
+
+bool	is_tok_symbol(t_tokens token)
+{
+	return ((token.type >= 1 && token.type <= 7) || (token.type >= 14
+			&& token.type <= 15));
 }

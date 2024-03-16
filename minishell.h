@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:51:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:40:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef enum e_type
 	DFILE_OUT,
 	ENV_VAR,
 	EXIT_STATUS,
+	PARENTHESES_IN,
+	PARENTHESES_OUT,
 }					t_type;
 
 /* PARSING */
@@ -123,10 +125,13 @@ void				tok_clear(t_tokens **tokens);
 void				tok_print(t_tokens *tokens);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
 						int type);
+bool				tok_addback_and_close(t_tokens **tokens, t_vars *vars,
+						int type);
 
 /*		PARSING UTILS */
 bool				is_whitespace(char c);
 bool				is_symbol(char c);
+bool				is_tok_symbol(t_tokens token);
 size_t				len(const char *s);
 int					expand_this_shit(t_vars *v);
 
@@ -184,6 +189,7 @@ int					save_line(t_vars *vars);
 void				get_history(t_vars *vars);
 int					dup2_and_close(int fd1, int fd2);
 int					redirect(t_vars *vars);
+int					case_parenthese(t_vars *vars, int type);
 int					case_and(t_vars *vars);
 int					case_pipe(t_vars *vars);
 int					case_less(t_vars *vars);
@@ -222,7 +228,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR "error retrieving\
+# define GETCWD_ERROR \
+	"error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 

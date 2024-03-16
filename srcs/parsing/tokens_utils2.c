@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/15 21:25:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 02:22:55 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,14 @@ bool	tok_close_and_addback(t_tokens **tokens, t_vars *vars, int type)
 		return (0);
 	tok_addback(tokens, vars, tok_new_quoted(NULL, type, vars->in_quote,
 			vars->in_dquote));
+	return (1);
+}
+
+bool	tok_addback_and_close(t_tokens **tokens, t_vars *vars, int type)
+{
+	tok_addback(tokens, vars, tok_new_quoted(NULL, type, vars->in_quote,
+			vars->in_dquote));
+	if (tok_close(vars) == -1)
+		return (0);
 	return (1);
 }
