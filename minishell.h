@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 03:00:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 10:10:53 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_cmd
 
 typedef struct s_vars
 {
+	size_t			ignore_lvl;
 	bool			line_was_expanded;
 	t_list			*history;
 	t_list			*last_command;
@@ -169,6 +170,7 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+bool				should_continue(size_t type, size_t ignore_lvl);
 int					what_token_type_is_it(t_vars *vars);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
 						int type);
