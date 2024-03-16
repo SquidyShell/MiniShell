@@ -6,27 +6,27 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 13:09:56 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:57:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
+static int	get_cmd_len(t_vars *vars, t_tokens *tokens, size_t ignore_lvl)
 {
+	bool	is_skipped;
+
+	is_skipped = ignore_lvl != 0;
 	vars->cmd.len = 0;
 	while (tokens && tokens->type != PIPE && should_continue(tokens->type,
-			vars->ignore_lvl))
+			ignore_lvl))
 	{
-		if (tokens->type == PARENTHESES_IN && vars->ignore_lvl)
-			vars->ignore_lvl++;
-		else if (tokens->type == PARENTHESES_OUT && vars->ignore_lvl)
-			vars->ignore_lvl--;
-		else if (tokens->type == WORD)
+		change_ignore_lvl(&ignore_lvl, tokens->type);
+		if (tokens->type == WORD)
 			vars->cmd.len++;
 		tokens = tokens->next;
 	}
-	if (!vars->ignore_lvl)
+	if (!is_skipped)
 	{
 		vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
 		if (!vars->cmd.args)
@@ -39,18 +39,17 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 {
 	size_t	i;
+	bool	is_skipped;
 
-	if (get_cmd_len(vars, (*curr)) == -1)
+	is_skipped = vars->ignore_lvl != 0;
+	if (get_cmd_len(vars, (*curr), vars->ignore_lvl) == -1)
 		return (-1);
 	i = 0;
 	while ((*curr) && (*curr)->type != PIPE && should_continue((*curr)->type,
 			vars->ignore_lvl))
 	{
-		if ((*curr)->type == PARENTHESES_IN && vars->ignore_lvl)
-			vars->ignore_lvl++;
-		else if ((*curr)->type == PARENTHESES_OUT && vars->ignore_lvl)
-			vars->ignore_lvl--;
-		if ((*curr)->type == WORD && !vars->ignore_lvl)
+		change_ignore_lvl(&vars->ignore_lvl, (*curr)->type);
+		if ((*curr)->type == WORD && !is_skipped)
 			vars->cmd.args[i] = (*curr)->content;
 		if ((*curr)->type == WORD)
 			i++;
