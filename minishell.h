@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 03:00:51 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 11:13:45 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_tokens			*tok_new_quoted(char *content, size_t type, bool s_quote,
 						bool d_quote);
 void				tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new);
 void				tok_clear(t_tokens **tokens);
+size_t				tok_size(t_tokens *tokens);
 void				tok_print(t_tokens *tokens);
 bool				tok_close_and_addback(t_tokens **tokens, t_vars *vars,
 						int type);
@@ -232,7 +233,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR "error retrieving\
+# define GETCWD_ERROR \
+	"error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 
