@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:38:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 13:09:56 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens)
 			vars->cmd.len++;
 		tokens = tokens->next;
 	}
+	if (!vars->ignore_lvl)
+	{
+		vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
+		if (!vars->cmd.args)
+			return (-1);
+		vars->cmd.args[vars->cmd.len] = 0;
+	}
 	return (0);
 }
 
@@ -35,16 +42,14 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 
 	if (get_cmd_len(vars, (*curr)) == -1)
 		return (-1);
-	if (!vars->ignore_lvl)
-	{
-		vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
-		if (!vars->cmd.args)
-			return (-1);
-		vars->cmd.args[vars->cmd.len] = 0;
-	}
 	i = 0;
-	while ((*curr) && (i < vars->cmd.len || (*curr)->type == PARENTHESES_OUT))
+	while ((*curr) && (*curr)->type != PIPE && should_continue((*curr)->type,
+			vars->ignore_lvl))
 	{
+		if ((*curr)->type == PARENTHESES_IN && vars->ignore_lvl)
+			vars->ignore_lvl++;
+		else if ((*curr)->type == PARENTHESES_OUT && vars->ignore_lvl)
+			vars->ignore_lvl--;
 		if ((*curr)->type == WORD && !vars->ignore_lvl)
 			vars->cmd.args[i] = (*curr)->content;
 		if ((*curr)->type == WORD)
