@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 18:13:33 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 22:41:35 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	redirect(t_vars *vars)
 		else if (vars->cmd.token->type == DFILE_OUT)
 			vars->outfile_fd = open(vars->cmd.token->content,
 					O_WRONLY | O_APPEND | O_CREAT, 0666);
+		if (vars->infile_fd == -1 || vars->outfile_fd == -1)
+			return (printfd(2, SQUID "%s: %s\n", vars->cmd.token->content,
+					strerror(errno)), -1);
 		vars->cmd.token = vars->cmd.token->next;
 	}
 	dup2_and_close(vars->infile_fd, STDIN_FILENO);

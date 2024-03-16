@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 17:12:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:03:36 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SUCCESS EXIT_SUCCESS
 # define FAILURE EXIT_FAILURE
 
-# define HDERR_0 "\n🦑: warning: here-document at line "
+# define SQUID "🦑: "
+# define HDERR_0 "warning: here-document at line "
 # define HDERR_1 " delimited by end-of-file (wanted `"
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
 # define GETCWD_ERROR \
