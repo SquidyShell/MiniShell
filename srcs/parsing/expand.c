@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:35:14 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/16 00:46:53 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
 	v->line = new_line_expanded(v, var_value, var_name_len, line_temp);
 	if (!v->line)
 		return (-1);
+	printf("%s\n", v->line);
 	v->line_was_expanded = true;
 	free(line_temp);
 	return (1);
