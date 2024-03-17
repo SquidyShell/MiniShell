@@ -3,37 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:48:32 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 18:15:13 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 01:36:49 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_matching(char *s, char *file)
+bool	is_matching(const char *pattern, const char *filename)
 {
-	size_t	i;
-	char	to_match;
-
-	i = 0;
-	while (s[i] && file[i])
+	if (*pattern == 0)
+		return (*filename == 0);
+	if (*pattern == '*')
 	{
-		if (s[i] == file[i])
-			i++;
-		else if (s[i] == '*')
-		{
-			to_match = s[i + 1];
-			if (!to_match)
-				return (true);
-			while (file[i] && file[i] != to_match)
-				i++;
-		}
-		else if (s[i] != file[i])
-			return (false);
+		if (is_matching(pattern + 1, filename))
+			return (1);
+		return (*filename != 0 && is_matching(pattern, filename + 1));
 	}
-	return (true);
+	if (*pattern == *filename)
+		return (is_matching(pattern + 1, filename + 1));
+	return (0);
 }
 
 int	main(int argc, char *argv[])
@@ -55,7 +46,8 @@ int	main(int argc, char *argv[])
 		file = readdir(dir);
 		if (!file)
 			break ;
-		if (file->d_type == 8)
+		if ((file->d_type == 8 || file->d_type == 4) && *file->d_name != '.'
+			&& ft_strcmp(file->d_name, ".."))
 		{
 			if (is_matching(argv[1], file->d_name))
 				printf(GREEN "%s matched with %s\n" RESET, file->d_name,

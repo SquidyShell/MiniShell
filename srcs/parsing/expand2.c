@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 11:29:19 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:11:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	var_is_exit_status(t_vars *v)
 
 	var_value = ft_itoa(g_exit_status);
 	if (!var_value)
-		return (perr("Malloc"), -1);
+		return (err_squid("Malloc", true), -1);
 	if (replace_var_name_by_value(v, var_value, 1) == -1)
-		return (free(var_value), perr("Malloc"), -1);
+		return (free(var_value), err_squid("Malloc", true), -1);
 	free(var_value);
 	return (1);
 }

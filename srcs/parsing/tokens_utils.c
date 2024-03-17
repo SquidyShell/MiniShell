@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 02:13:03 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:30:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 t_tokens	*tok_new(char *content, size_t type)
 {
@@ -80,7 +80,7 @@ int	tok_close(t_vars *v)
 			v->tokens->last->content = substr_s(v->line, v->tokens->last->start,
 					v->index - v->tokens->last->start, '\"');
 		if (!v->tokens->last->content)
-			return (perr("Malloc"), -1);
+			return (err_squid("Malloc", true), -1);
 		if (v->tokens->last->error)
 			return (berr(v->tokens->last->content, v), -1);
 		if (v->tokens->last->type != HEREDOC_DELIM)

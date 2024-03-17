@@ -6,8 +6,7 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 
 # FILES
-SRC = get_next_line.c \
-		get_next_line_utils.c
+SRC = get_next_line.c
 OBJ = $(SRC:.c=.o)
 
 # TEXT

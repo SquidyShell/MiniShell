@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 22:03:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:30:36 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,20 +153,6 @@ void				hderr(size_t line_nb, char *limiter);
 #  define BUFFER_SIZE 4000
 # endif
 
-typedef struct s_string
-{
-	char			*content;
-	size_t			len;
-	size_t			max_size;
-}					t_string;
-
-typedef struct s_dyn_env
-{
-	char			**env;
-	size_t			len;
-	size_t			max_size;
-}					t_dyn_env;
-
 /* COLOR CODES */
 # define BLUE "\033[0;34m"
 # define PINK "\033[0;35m"
@@ -174,6 +160,7 @@ typedef struct s_dyn_env
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				err_squid(const char *s, bool print_strerrno);
 void				change_ignore_lvl(size_t *ignore_lvl, size_t type);
 bool				should_continue(size_t type, size_t ignore_lvl);
 int					what_token_type_is_it(t_vars *vars);

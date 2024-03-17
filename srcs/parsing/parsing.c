@@ -6,24 +6,11 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 11:37:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 03:40:46 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	init_vars(t_vars *v)
-{
-	v->pipe_nb = 0;
-	v->index = 0;
-	v->in_quote = 0;
-	v->in_dquote = 0;
-	v->in_expanded_var = 0;
-	v->end_of_var = 0;
-	v->command_was_built_in = 0;
-	v->tokens = NULL;
-	v->cmd.args = NULL;
-}
 
 int	parse_the_actual_char(t_vars *v)
 {
@@ -70,6 +57,9 @@ int	parsing(t_vars *v)
 		return (-1);
 	if (v->tokens && is_metachar(*v->tokens->last))
 		return (berr("newline", v), -1);
+	tok_print(v->tokens);
+	// if (parse_token_list(&v->tokens) == -1)
+	// 	return (-1);
 	tok_print(v->tokens);
 	return (0);
 }

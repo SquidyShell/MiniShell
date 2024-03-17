@@ -6,11 +6,24 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 23:37:33 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 04:16:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	init_vars(t_vars *v)
+{
+	v->pipe_nb = 0;
+	v->index = 0;
+	v->in_quote = 0;
+	v->in_dquote = 0;
+	v->in_expanded_var = 0;
+	v->end_of_var = 0;
+	v->command_was_built_in = 0;
+	v->tokens = NULL;
+	v->cmd.args = NULL;
+}
 
 char	**ft_strdup_matrix(char **matrix)
 {
@@ -50,7 +63,7 @@ static void	set_pwd(t_vars *vars)
 	{
 		pwd = ft_strjoin("PWD=", dir);
 		if (!pwd || maybe_add_to_env(pwd, vars) == -1)
-			perr("squidyshell-init: Malloc error, PWD will not be set");
+			printfd(2, "squidyshell-init: Malloc error, PWD will not be set");
 		free(dir);
 		free(pwd);
 	}

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 18:14:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 04:28:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	search_and_execve(t_vars *vars)
 	if (!args || get_path(args[0], vars) == -1)
 		(clean_vars(vars), exit(EXIT_FAILURE));
 	if (vars->cmd.path == NULL)
-		printfd(STDERR, "%s: command not found\n", args[0]);
+		printfd(STDERR, SQUID "%s: command not found\n", args[0]);
 	else if (access(vars->cmd.path, F_OK) == -1 && errno == ENOENT)
-		perror(vars->cmd.path);
+		err_squid(vars->cmd.path, true);
 	else
 	{
 		execve(vars->cmd.path, args, vars->env);
-		perror(vars->cmd.path);
+		err_squid(vars->cmd.path, true);
 		g_exit_status = 126;
 	}
 	clean_vars(vars);

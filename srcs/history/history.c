@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 18:33:22 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:15:13 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*get_history_name(t_vars *vars)
 
 	ret = search_var_in_env(vars, "HOME", &malloc_crampted);
 	if (malloc_crampted)
-		perr("Malloc error");
+		err_squid("Malloc", true);
 	return (ret);
 }
 
@@ -57,7 +57,7 @@ int	save_line(t_vars *vars)
 	add_history(vars->line);
 	new = ft_lstnew(vars->line);
 	if (!new)
-		return (perr("Malloc error"), -1);
+		return (err_squid("Malloc", true), -1);
 	if (!vars->history)
 		vars->history = new;
 	else
@@ -79,7 +79,7 @@ void	append_to_history(t_vars *vars)
 	free(path_to_history);
 	free(history);
 	if (fd == -1)
-		return ((void)perr("could not append to history"));
+		return (err_squid("could not append to history", false));
 	while (vars->history)
 	{
 		next = vars->history->next;

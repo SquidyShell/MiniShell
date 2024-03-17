@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 02:22:55 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 03:38:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,8 @@ t_tokens	*tok_new_quoted(char *content, size_t type, bool s_quote,
 	tok->closed = 0;
 	tok->next = NULL;
 	tok->error = false;
-	if (s_quote)
-		tok->is_single_quoted = 1;
-	else
-		tok->is_single_quoted = 0;
-	if (d_quote)
-		tok->is_double_quoted = 1;
-	else
-		tok->is_double_quoted = 0;
+	tok->is_single_quoted = s_quote;
+	tok->is_double_quoted = d_quote;
 	return (tok);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/13 23:15:15 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 04:16:53 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_list	*create_env_list(char **env, bool *malloc_crampt)
 	{
 		ft_lstadd_back(&env_list, ft_lstnew(ft_strdup(env[i])));
 		if (!ft_lstlast(env_list)->content)
-			return (*malloc_crampt = 1, perr("Malloc"), ft_lstclear(&env_list,
-					free), NULL);
+			return (*malloc_crampt = 1, err_squid("Malloc", true),
+				ft_lstclear(&env_list, free), NULL);
 		i++;
 	}
 	return (env_list);

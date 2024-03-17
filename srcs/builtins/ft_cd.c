@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 22:09:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 04:28:08 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void	replace_pwd(t_vars *vars)
 	else
 		new_pwd = ft_strjoin_free(ft_strdup("PWD="), new_pwd);
 	if (!new_pwd || maybe_add_to_env(new_pwd, vars) == -1)
-		return (cd_free(old_pwd, new_pwd, NULL),
-			(void)perr("cd: Malloc error, PWD will not be set"));
+		return (cd_free(old_pwd, new_pwd, NULL), 
+			err_squid("cd: Malloc error, PWD will not be set", 0));
 	new_old_pwd = ft_strjoin("OLDPWD=", old_pwd);
 	if (!new_old_pwd || maybe_add_to_env(new_old_pwd, vars) == -1)
-		(void)perr("Malloc error, OLDPWD will not be set");
+		err_squid("Malloc error, OLDPWD will not be set", 0);
 	(free(old_pwd), free(new_pwd), free(new_old_pwd));
 }
 
@@ -97,7 +97,7 @@ void	ft_cd(char **cmd, t_vars *vars)
 		return (case_home(vars));
 	if (cmd[2])
 	{
-		perr("cd: too many arguments");
+		err_squid("cd: too many arguments", false);
 		g_exit_status = 1;
 		return ;
 	}

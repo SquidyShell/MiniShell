@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 00:46:53 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 04:13:06 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,13 @@ int	expand_this_shit(t_vars *v)
 	{
 		var_to_find = whats_the_var(v->line, v->index);
 		if (!var_to_find)
-			return (perr("Malloc"), -1);
+			return (err_squid("Malloc", true), -1);
 		var_value = search_var_in_env(v, var_to_find, &malloc_crampt);
 		if (malloc_crampt)
-			return (free(var_to_find), perr("Malloc"), -1);
+			return (free(var_to_find), err_squid("Malloc", true), -1);
 		if (replace_var_name_by_value(v, var_value, len(var_to_find)) == -1)
-			return (free(var_value), free(var_to_find), perr("Malloc"), -1);
+			return (free(var_value), free(var_to_find), err_squid("Malloc",
+					true), -1);
 		free(var_value);
 		free(var_to_find);
 	}
