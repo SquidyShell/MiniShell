@@ -6,7 +6,8 @@ HEADER = $(NAME).h
 SRC_PATH = srcs
 PARS_PATH = $(SRC_PATH)/parsing
 SRC = main.c
-PARS_SRC = parsing.c parsing_quotes_handling.c utils.c tokens_utils.c check_syntax.c parsing_type_cases.c parsing_type_cases2.c tokens_utils2.c utils2.c expand.c expand2.c env.c here_doc.c utils3.c
+PARS_SRC =	parsing.c parsing_quotes_handling.c utils.c tokens_utils.c check_syntax.c parsing_type_cases.c parsing_type_cases2.c \
+			tokens_utils2.c utils2.c expand.c expand2.c env.c heredoc.c utils3.c heredoc_expand.c heredoc_utils.c
 BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_export2.c ft_export_print.c ft_pwd.c ft_unset.c builtins_utils.c
 EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c exec_utils.c
 SIGNALS_SRC = signals.c

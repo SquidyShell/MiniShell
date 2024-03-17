@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:30:36 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 08:42:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int					protected_addback(t_list **lst, char *str);
 void				p_free(void *p);
 
 /* HEREDOC */
-int					exec_heredoc(t_tokens *tok);
+int					exec_heredoc(t_tokens *tok, t_vars *v);
 void				hderr(size_t line_nb, char *limiter);
 
 /* GNL*/
@@ -160,8 +160,19 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
-bool	there_is_this_char(char *line, char c)
-;
+int					expand_this_shit_hd(char **new_line, size_t *index,
+						t_vars *v);
+void				hderr(size_t line_nb, char *limiter);
+bool				is_there_delimiter(char *line, char *limiter,
+						size_t limiter_len);
+int					var_is_exit_status_hd(char **new_line, size_t *i);
+int					replace_var_name_by_value_hd(size_t *i, char **line,
+						char *value, size_t var_name_len);
+char				*whats_the_var(char *line, size_t index);
+bool				is_snakecase_or_qmark(char c);
+int					expand_line(char *line, char **new_line, t_vars *v);
+
+bool				there_is_this_char(char *line, char c);
 void				err_squid(const char *s, bool print_strerrno);
 void				change_ignore_lvl(size_t *ignore_lvl, size_t type);
 bool				should_continue(size_t type, size_t ignore_lvl);
@@ -232,8 +243,7 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define HDERR_0 "warning: here-document at line "
 # define HDERR_1 " delimited by end-of-file (wanted `"
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR \
-	"error retrieving\
+# define GETCWD_ERROR "error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 

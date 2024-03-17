@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:28:08 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 08:51:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	replace_pwd(t_vars *vars)
 	else
 		new_pwd = ft_strjoin_free(ft_strdup("PWD="), new_pwd);
 	if (!new_pwd || maybe_add_to_env(new_pwd, vars) == -1)
-		return (cd_free(old_pwd, new_pwd, NULL), 
+		return (cd_free(old_pwd, new_pwd, NULL),
 			err_squid("cd: Malloc error, PWD will not be set", 0));
 	new_old_pwd = ft_strjoin("OLDPWD=", old_pwd);
 	if (!new_old_pwd || maybe_add_to_env(new_old_pwd, vars) == -1)

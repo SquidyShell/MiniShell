@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 08:54:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 08:47:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*whats_the_var(char *line, size_t index)
-{
-	size_t	i;
-
-	i = index + 1;
-	while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
-		i++;
-	return (ft_substr(line, index + 1, i - index - 1));
-}
-
-char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
+char	*search_var_in_env_hd(t_vars *v, char *var_to_find, bool *malloc_crampt)
 {
 	char	*var_value;
 	t_list	*current;
@@ -50,75 +40,87 @@ char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
 	return (var_value);
 }
 
-char	*new_line_expanded(t_vars *v, char *var_value, size_t var_name_len,
+char	*new_line_expanded_hd(size_t index, char *value, size_t var_name_len,
 		char *old_line)
 {
 	char	*new_line;
 	int		i;
 	int		j;
 
-	new_line = malloc(sizeof(char) * (len(old_line) - var_name_len
-				+ len(var_value) + 1));
+	new_line = malloc(sizeof(char) * (len(old_line) - var_name_len + len(value)
+				+ 1));
 	if (!new_line)
 		return (NULL);
 	new_line[0] = 0;
 	i = -1;
-	while (++i < (int)v->index)
+	while (++i < (int)index)
 		new_line[i] = old_line[i];
 	j = 0;
-	if (var_value)
-		while (var_value[j])
-			new_line[i++] = var_value[j++];
-	v->end_of_var = i;
-	j = (int)v->index + var_name_len + 1;
+	if (value)
+		while (value[j])
+			new_line[i++] = value[j++];
+	j = index + var_name_len + 1;
 	while (old_line[j])
 		new_line[i++] = old_line[j++];
 	new_line[i] = 0;
 	return (new_line);
 }
 
-int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
+int	replace_var_name_by_value_hd(size_t *i, char **line, char *value,
+		size_t var_name_len)
 {
-	char	*line_temp;
+	char	*temp;
 
-	line_temp = ft_strdup(v->line);
-	if (!line_temp)
+	temp = ft_strdup(*line);
+	if (!temp)
 		return (-1);
-	if (v->line_was_expanded)
-		p_free(v->line);
-	v->line = new_line_expanded(v, var_value, var_name_len, line_temp);
-	if (!v->line)
-		return (-1);
-	v->line_was_expanded = true;
-	free(line_temp);
+	p_free(*line);
+	*line = new_line_expanded_hd(*i, value, var_name_len, temp);
+	if (!*line)
+		return (p_free(temp), -1);
+	*i += len(value);
+	p_free(temp);
 	return (1);
 }
 
-int	expand_this_shit(t_vars *v)
+int	expand_this_shit_hd(char **new_line, size_t *index, t_vars *v)
 {
 	char	*to_find;
 	char	*value;
 	bool	malloc_crampt;
 
-	v->in_expanded_var = 1;
-	if (v->line[v->index + 1] == '?')
+	value = NULL;
+	if (*new_line[*index + 1] == '?')
 	{
-		if (var_is_exit_status(v) == -1)
+		if (var_is_exit_status_hd(new_line, index) == -1)
 			return (-1);
 	}
 	else
 	{
-		to_find = whats_the_var(v->line, v->index);
+		to_find = whats_the_var(*new_line, *index);
 		if (!to_find)
 			return (err_squid("Malloc", true), -1);
-		value = search_var_in_env(v, to_find, &malloc_crampt);
+		value = search_var_in_env_hd(v, to_find, &malloc_crampt);
 		if (malloc_crampt)
 			return (free(to_find), err_squid("Malloc", true), -1);
-		if (replace_var_name_by_value(v, value, len(to_find)) == -1)
+		if (replace_var_name_by_value_hd(index, new_line, value,
+				len(to_find)) == -1)
 			return (free(value), free(to_find), err_squid("Malloc", true), -1);
 		free(value);
 		free(to_find);
 	}
-	v->index -= 1;
 	return (0);
+}
+
+int	var_is_exit_status_hd(char **new_line, size_t *i)
+{
+	char	*value;
+
+	value = ft_itoa(g_exit_status);
+	if (!value)
+		return (err_squid("Malloc", true), -1);
+	if (replace_var_name_by_value_hd(i, new_line, value, 1) == -1)
+		return (free(value), err_squid("Malloc", true), -1);
+	free(value);
+	return (1);
 }

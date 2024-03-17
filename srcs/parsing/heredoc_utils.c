@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_in_heredoc.c                                :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 05:44:25 by cviegas          ###   ########.fr       */
+/*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
+/*   Updated: 2024/03/17 08:55:02 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	var_is_exit_status(t_vars *v)
+void	hderr(size_t line_nb, char *limiter)
 {
-	char	*var_value;
-
-	var_value = ft_itoa(g_exit_status);
-	if (!var_value)
-		return (err_squid("Malloc", true), -1);
-	if (replace_var_name_by_value(v, var_value, 1) == -1)
-		return (free(var_value), err_squid("Malloc", true), -1);
-	free(var_value);
-	return (1);
+	g_exit_status = 0;
+	dprintf(STDERR,
+		"\n" SQUID HDERR_0 PINK "%zu" RESET HDERR_1 PINK "%s" RESET "')\n",
+		line_nb, limiter);
 }
 
-int	expand_line(char *line)
+bool	is_there_delimiter(char *line, char *limiter, size_t limiter_len)
 {
-	return (0);
+	return (!ft_strncmp(line, limiter, limiter_len)
+		&& line[limiter_len] == '\n');
 }

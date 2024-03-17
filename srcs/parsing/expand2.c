@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 06:05:23 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 08:52:35 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	is_snakecase_or_qmark(char c)
 bool	is_quote_after_and_not_in_quote(t_vars *v)
 {
 	return ((v->line[v->index + 1] == '"' || v->line[v->index + 1] == '\'')
-			&& !v->in_dquote);
+		&& !v->in_dquote);
 }
 
 bool	needs_to_be_expanded(t_vars *v)

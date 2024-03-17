@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 04:30:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 06:44:31 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	tok_close(t_vars *v)
 			return (berr(v->tokens->last->content, v), -1);
 		if (v->tokens->last->type != HEREDOC_DELIM)
 			*v->tokens->last->end_heredoc = 0;
-		else if (exec_heredoc(v->tokens->last))
+		else if (exec_heredoc(v->tokens->last, v))
 			return (-1);
 	}
 	return (0);
