@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 03:40:46 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 05:55:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ int	parsing(t_vars *v)
 	tok_print(v->tokens);
 	// if (parse_token_list(&v->tokens) == -1)
 	// 	return (-1);
-	tok_print(v->tokens);
 	return (0);
 }
