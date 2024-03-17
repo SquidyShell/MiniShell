@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 22:41:35 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:52:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	redirect(t_vars *vars)
 		else if (vars->cmd.token->type == DFILE_OUT)
 			vars->outfile_fd = open(vars->cmd.token->content,
 					O_WRONLY | O_APPEND | O_CREAT, 0666);
+		else if (vars->cmd.token->type == HEREDOC_DELIM)
+			vars->infile_fd = vars->cmd.token->end_heredoc[0];
 		if (vars->infile_fd == -1 || vars->outfile_fd == -1)
 			return (printfd(2, SQUID "%s: %s\n", vars->cmd.token->content,
 					strerror(errno)), -1);
