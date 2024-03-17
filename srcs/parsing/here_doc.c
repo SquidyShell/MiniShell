@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 04:41:50 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 05:47:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ int	exec_heredoc(t_tokens *tok)
 				close(tok->end_heredoc[WRITE]), 0);
 		if (is_there_delimiter(line, tok->content, len(tok->content)))
 			break ;
+		// if (!tok->is_double_quoted && !tok->is_single_quoted
+		// 	&& there_is_this_char(tok->content, '$'))
+		// {
+		// 	if (expand_line(tok->content) == -1)
+		// 		return (p_free(line), close(tok->end_heredoc[WRITE]), -1);
+		// }
+		// else
 		printfd(tok->end_heredoc[WRITE], line);
 		p_free(line);
 		line_nb++;

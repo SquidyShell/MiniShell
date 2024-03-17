@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:05:13 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/14 00:49:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/17 05:09:22 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ void	print_env_export(char **env)
 	}
 }
 
-bool	there_is_an_equal(char *line)
+bool	there_is_this_char(char *line, char c)
 {
 	while (*line)
 	{
-		if (*line == '=')
+		if (*line == c)
 			return (1);
 		line++;
 	}

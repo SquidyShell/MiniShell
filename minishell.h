@@ -160,6 +160,8 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+bool	there_is_this_char(char *line, char c)
+;
 void				err_squid(const char *s, bool print_strerrno);
 void				change_ignore_lvl(size_t *ignore_lvl, size_t type);
 bool				should_continue(size_t type, size_t ignore_lvl);

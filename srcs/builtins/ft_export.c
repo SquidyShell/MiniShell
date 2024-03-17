@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:28:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 05:31:59 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	is_correct_arg(char *cmd)
 
 	if (!cmd[0])
 		return (0);
-	if (ft_isdigit(cmd[0]))
+	if (ft_isdigit(cmd[0]) || cmd[0] == '=')
 		return (0);
 	i = 0;
 	while (cmd[i] && cmd[i] != '=')
@@ -78,9 +78,11 @@ int	replace_the_var(t_list **env, char *line)
 
 int	maybe_add_to_env(char *line, t_vars *v)
 {
+	if (line[0] == '=')
+		return (1);
 	if (!var_is_already_in_env(line, v->env_list))
 		return (protected_addback(&v->env_list, line));
-	if (!there_is_an_equal(line))
+	if (!there_is_this_char(line, '='))
 		return (1);
 	else
 		return (replace_the_var(&v->env_list, line));
@@ -98,8 +100,9 @@ void	ft_export(char **cmd, t_vars *vars)
 	{
 		if (!is_correct_arg(cmd[i]))
 		{
-			printfd(2, "🦑: export: `%s%s%s': not a valid identifier\n", PINK,
-				cmd[i], RESET);
+			printfd(2,
+				SQUID "export: `" PINK "%s" RESET "': not a valid identifier\n",
+				cmd[i]);
 			g_exit_status = 1;
 		}
 		else if (maybe_add_to_env(cmd[i], vars) == -1)
