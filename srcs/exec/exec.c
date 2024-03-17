@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 00:18:13 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/17 02:21:53 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	case_no_pipe(t_vars *vars)
 			g_exit_status = 1;
 		else
 			vars->function(vars->cmd.args, vars);
-		// dup2_and_close(vars->old_stdout, STDOUT_FILENO);
+		dup2_and_close(vars->old_stdout, STDOUT_FILENO);
 	}
 	else
 		pipex(vars);
