@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:16:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:09:01 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,12 @@ void	init_minishell(t_vars *vars, char **env)
 {
 	bool	does_malloc_crampt;
 
-	vars->env = ft_strdup_matrix(env);
-	if (!vars->env)
-		exit(FAILURE);
+	if (env)
+	{
+		vars->env = ft_strdup_matrix(env);
+		if (!vars->env)
+			(err_squid("Maloc error", 0), exit(EXIT_FAILURE));
+	}
 	does_malloc_crampt = 0;
 	vars->env_list = create_env_list(env, &does_malloc_crampt);
 	if (does_malloc_crampt)

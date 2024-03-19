@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:16:53 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:03:35 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	turn_env_into_char(t_vars *v)
 		return (-1);
 	while (v->env_list)
 	{
-		v->env[i] = v->env_list->content;
+		v->env[i++] = v->env_list->content;
 		v->env_list = v->env_list->next;
 	}
 	v->env[i] = 0;
-	return (1);
+	return (0);
 }

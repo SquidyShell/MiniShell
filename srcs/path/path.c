@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:28:37 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:02:05 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void	search_and_execve(t_vars *vars)
 		err_squid(vars->cmd.path, true);
 	else
 	{
+		if (turn_env_into_char(vars) == -1)
+			s();
+		s();
 		execve(vars->cmd.path, args, vars->env);
 		err_squid(vars->cmd.path, true);
 		g_exit_status = 126;

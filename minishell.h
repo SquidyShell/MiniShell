@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 08:42:05 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:09:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					turn_env_into_char(t_vars *v);
 int					expand_this_shit_hd(char **new_line, size_t *index,
 						t_vars *v);
 void				hderr(size_t line_nb, char *limiter);
