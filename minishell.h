@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 12:34:49 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:41:42 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,9 +160,10 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int					parse_tokens(t_tokens *tok);
+int					tok_add_inbetween(t_tokens **first, t_tokens **new);
 int					turn_env_into_char(t_vars *v);
-int					tok_add_inbetween(t_tokens *first, t_tokens *second,
-						t_tokens *new);
+
 int					expand_this_shit_hd(char **new_line, size_t *index,
 						t_vars *v);
 void				hderr(size_t line_nb, char *limiter);
@@ -246,8 +247,7 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define HDERR_0 "warning: here-document at line "
 # define HDERR_1 " delimited by end-of-file (wanted `"
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR \
-	"error retrieving\
+# define GETCWD_ERROR "error retrieving\
  current directory: getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 

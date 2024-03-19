@@ -6,13 +6,13 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 12:31:34 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 15:14:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_matching(const char *pattern, const char *filename)
+static bool	is_matching(const char *pattern, const char *filename)
 {
 	if (*pattern == 0)
 		return (*filename == 0);
@@ -27,26 +27,57 @@ bool	is_matching(const char *pattern, const char *filename)
 	return (0);
 }
 
-bool	is_expandable(t_tokens *prev, t_tokens *curr)
+static bool	is_expandable(t_tokens *curr)
 {
 	return ((curr->type == WORD || curr->type == FILE_IN
 			|| curr->type == FILE_OUT || curr->type == DFILE_OUT)
 		&& !curr->is_double_quoted && !curr->is_single_quoted
-		&& prev->type != AND_IF && prev->type != OR_IF
 		&& there_is_this_char(curr->content, '*'));
 }
 
-int	maybe_expand(t_tokens *curr)
+static int	maybe_turn_file_into_tok(struct dirent *file, t_tokens *curr,
+		char *pattern, bool *already_expanded)
 {
-	char			*new;
+	char		*new;
+	t_tokens	*tok_new;
+
+	if (is_matching(pattern, file->d_name))
+	{
+		if (!(*already_expanded))
+		{
+			(p_free(curr->content), curr->content = ft_strdup(file->d_name));
+			if (!curr->content)
+				return (-1);
+			*already_expanded = true;
+		}
+		else
+		{
+			new = ft_strdup(file->d_name);
+			if (!new)
+				return (-1);
+			tok_new = tok_new_quoted(new, curr->type, 0, 0);
+			if (tok_add_inbetween(&curr, &tok_new) == -1)
+				return (free(new), -1);
+			curr = curr->next;
+		}
+	}
+	return (0);
+}
+
+static int	maybe_expand(t_tokens *curr)
+{
 	DIR				*dir;
 	struct dirent	*file;
-	size_t			i;
-	size_t			nb_expands;
+	char			*pattern;
+	bool			already_expanded;
 
+	already_expanded = false;
 	dir = opendir(".");
-	i = 0;
-	nb_expands = 0;
+	if (!dir)
+		return (0);
+	pattern = ft_strdup(curr->content);
+	if (!pattern)
+		return (closedir(dir), -1);
 	while (dir)
 	{
 		file = readdir(dir);
@@ -54,48 +85,29 @@ int	maybe_expand(t_tokens *curr)
 			break ;
 		if ((file->d_type == 8 || file->d_type == 4) && *file->d_name != '.')
 		{
-			if (is_matching(curr->content, file->d_name))
-			{
-				if (nb_expands == 0)
-				{
-					p_free(curr->content);
-					curr->content = ft_strdup(file->d_name);
-					if (!curr->content)
-						return (-1);
-				}
-				else
-				{
-					new = ft_strdup(file->d_name);
-					if (!new)
-						return (-1);
-					if (tok_add_inbetween(curr, curr->next, tok_new(ft_strdup)))
-					// Ajoute un token entre curr et curr->next avec comme type le type de curr
-					// et comme content file->d_name
-				}
-			}
+			if (maybe_turn_file_into_tok(file, curr, pattern,
+					&already_expanded) == -1)
+				return (p_free(pattern), -1);
 		}
 	}
-	if (dir)
-		closedir(dir);
+	return (closedir(dir), p_free(pattern), 0);
 }
 
-int	parse_tokens(t_vars *v, t_tokens *tok)
+int	parse_tokens(t_tokens *tok)
 {
-	t_tokens	*prev;
 	t_tokens	*curr;
 
-	if (!tok->next)
+	if (!(tok))
 		return (0);
-	prev = tok;
-	while (prev->next)
+	curr = tok;
+	while (curr)
 	{
-		curr = prev->next;
-		if (is_expandable(prev, curr))
+		if (is_expandable(curr))
 		{
 			if (maybe_expand(curr) == -1)
 				return (-1);
 		}
-		prev = curr;
+		curr = curr->next;
 	}
 	return (0);
 }
