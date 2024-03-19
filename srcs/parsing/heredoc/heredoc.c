@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 16:58:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:25:37 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void static	write_heredoc(t_tokens *tok, t_vars *v)
 	line = NULL;
 	line_nb = 1;
 	malloc_crampted = 0;
+	new_line = NULL;
 	while (1)
 	{
 		(printfd(STDERR, "> "), line = get_next_line(STDIN));
