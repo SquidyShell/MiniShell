@@ -160,6 +160,8 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+int	tok_add_inbetween(t_tokens *first, t_tokens *second, t_tokens *new)
+;
 int					expand_this_shit_hd(char **new_line, size_t *index,
 						t_vars *v);
 void				hderr(size_t line_nb, char *limiter);
