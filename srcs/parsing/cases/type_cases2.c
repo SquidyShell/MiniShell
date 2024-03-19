@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing3.c                                         :+:      :+:    :+:   */
+/*   type_cases2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 15:00:44 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:18:30 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	get_cmd_len(t_vars *vars, t_tokens *tokens, size_t ignore_lvl)
 	{
 		vars->cmd.args = malloc(sizeof(*vars->cmd.args) * (vars->cmd.len + 1));
 		if (!vars->cmd.args)
-			return (-1);
+			(clean_vars(vars), err_squid("Malloc error during parsing", 0),
+				exit(EXIT_FAILURE));
 		vars->cmd.args[vars->cmd.len] = 0;
 	}
 	return (0);

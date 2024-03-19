@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 16:58:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:07:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ int	exec_heredoc(t_tokens *tok, t_vars *v)
 		return (err_squid("Pipe", true), -1);
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
 		write_heredoc(tok, v);
+	}
 	wait(&wstatus);
 	close(tok->end_heredoc[WRITE]);
 	if (WIFEXITED(wstatus))
