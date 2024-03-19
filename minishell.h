@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 12:09:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:14:46 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ char				*search_var_in_env(t_vars *v, char *var_to_find,
 char				*search_var_in_env(t_vars *v, char *var_to_find,
 						bool *malloc_crampt);
 bool				var_is_already_in_env(char *line, t_list *env);
-void				set_signals_child(t_vars *vars);
+void				set_signals_cmd(t_vars *vars);
 void				set_signals(t_vars *vars);
 void				get_fds(t_vars *vars);
 void				search_and_execve(t_vars *vars);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:15:49 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 17:26:23 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:59:12 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	handler_sig_child(int sig)
 		g_exit_status = 130;
 }
 
-void	set_signals_child(t_vars *vars)
+void	set_signals_cmd(t_vars *vars)
 {
 	(void)vars;
 	signal(SIGINT, &handler_sig_child);

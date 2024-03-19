@@ -72,7 +72,6 @@ int	exec_list(t_tokens **curr, t_vars *vars)
 	while ((*curr) && (*curr)->type != OR_IF && (*curr)->type != AND_IF)
 	{
 		is_ignored = vars->ignore_lvl != 0;
-		set_signals_child(vars);
 		vars->infile_fd = -2;
 		vars->outfile_fd = -2;
 		vars->cmd.token = (*curr);
