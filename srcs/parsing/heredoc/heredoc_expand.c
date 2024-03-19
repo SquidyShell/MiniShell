@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 08:47:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 19:25:20 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	expand_this_shit_hd(char **new_line, size_t *index, t_vars *v)
 	bool	malloc_crampt;
 
 	value = NULL;
-	if (*new_line[*index + 1] == '?')
+	if ((*new_line)[(*index) + 1] == '?')
 	{
 		if (var_is_exit_status_hd(new_line, index) == -1)
 			return (-1);
