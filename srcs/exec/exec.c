@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 02:21:53 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:31:40 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	pipex(t_vars *vars)
 	if ((vars->last_pid) == 0)
 		exec_child(vars);
 	if (vars->cmd_i)
-		close(vars->last_fd);
+		ft_close(&vars->last_fd);
 	vars->last_fd = vars->fildes[0];
 	if (vars->cmd_i != vars->pipe_nb)
-		close(vars->fildes[1]);
+		ft_close(&vars->fildes[1]);
 	return (0);
 }
 
@@ -57,7 +57,7 @@ void	case_no_pipe(t_vars *vars)
 			g_exit_status = 1;
 		else
 			vars->function(vars->cmd.args, vars);
-		dup2_and_close(vars->old_stdout, STDOUT_FILENO);
+		dup2_and_close(&vars->old_stdout, STDOUT_FILENO);
 	}
 	else
 		pipex(vars);

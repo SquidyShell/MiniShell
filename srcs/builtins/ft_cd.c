@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 08:51:57 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 22:48:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	replace_pwd(t_vars *vars)
 		old_pwd = ft_strdup("");
 	new_pwd = ft_getcwd();
 	if (!new_pwd)
-		(printfd(2, "cd: " GETCWD_ERROR " %s\n", strerror(errno)),
+		(printfd(2, "cd: " DIR_ERROR GETCWD_ERROR " %s\n", strerror(errno)),
 			new_pwd = ft_strjoin_free(ft_strdup("PWD="), ft_strjoin3(old_pwd,
 					"/", vars->cmd.args[1])));
 	else

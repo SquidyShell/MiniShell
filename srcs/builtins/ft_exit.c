@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 22:47:58 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 23:29:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_exit(char **cmd, t_vars *vars)
 	bool		is_numeric;
 
 	if (vars->old_stdout)
-		close(vars->old_stdout);
+		ft_close(&vars->old_stdout);
 	append_to_history(vars);
 	printfd(STDOUT, "exit\n");
 	if (cmd[1])

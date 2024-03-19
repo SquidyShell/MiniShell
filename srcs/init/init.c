@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 16:16:47 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:49:29 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	set_pwd(t_vars *vars)
 	if (!dir)
 	{
 		g_exit_status = 1;
-		printfd(2, "squidyshell-init: " GETCWD_ERROR " %s\n", strerror(errno));
+		printfd(2, "squidyshell-init: " DIR_ERROR GETCWD_ERROR " %s\n",
+			strerror(errno));
 	}
 	else
 	{

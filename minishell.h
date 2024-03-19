@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 17:00:49 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:39:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				ft_close(int *fd);
 int					parse_tokens(t_tokens *tok);
 int					tok_add_inbetween(t_tokens **first, t_tokens **new);
 int					turn_env_into_char(t_vars *v);
@@ -202,7 +203,7 @@ void				append_to_history(t_vars *vars);
 char				*gnl_no_nl(int fd);
 int					save_line(t_vars *vars);
 void				get_history(t_vars *vars);
-int					dup2_and_close(int fd1, int fd2);
+int					dup2_and_close(int *fd1, int fd2);
 int					redirect(t_vars *vars);
 int					case_parenthese(t_vars *vars, int type);
 int					case_and(t_vars *vars);
@@ -247,9 +248,8 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define HDERR_0 "warning: here-document at line "
 # define HDERR_1 " delimited by end-of-file (wanted `"
 # define EOF_ERR "🦑: syntax error: unexpected end of file\n"
-# define GETCWD_ERROR \
-	"error retrieving\
- current directory: getcwd: cannot access parent directories:"
+# define DIR_ERROR "error retrieving current directory: "
+# define GETCWD_ERROR "getcwd: cannot access parent directories:"
 # define HISTORY_NAME ".squidyshell_history"
 
 #endif // !MINISHELL_H

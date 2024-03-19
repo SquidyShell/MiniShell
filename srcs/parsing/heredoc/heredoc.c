@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 20:11:35 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:30:52 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void static	write_heredoc(t_tokens *tok, t_vars *v)
 	new_line = NULL;
 	while (1)
 	{
-		(printfd(STDERR, "> "), line = get_next_line(STDIN));
+		line = readline("> ");
 		if (!line)
 			hderr(line_nb, tok->content);
 		if (!line || is_there_delimiter(line, tok->content, len(tok->content)))
@@ -65,8 +65,7 @@ void static	write_heredoc(t_tokens *tok, t_vars *v)
 		(printfd(tok->end_heredoc[WRITE], new_line), free(new_line),
 			p_free(line), line_nb++);
 	}
-	(p_free(line), close(tok->end_heredoc[WRITE]),
-		close(tok->end_heredoc[READ]), clean_vars(v));
+	(p_free(line), clean_vars(v));
 	exit(malloc_crampted);
 }
 
@@ -84,7 +83,7 @@ int	exec_heredoc(t_tokens *tok, t_vars *v)
 		write_heredoc(tok, v);
 	}
 	wait(&wstatus);
-	close(tok->end_heredoc[WRITE]);
+	ft_close(&tok->end_heredoc[WRITE]);
 	if (WIFEXITED(wstatus))
 	{
 		if (wstatus != 0)

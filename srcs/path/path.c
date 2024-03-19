@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 12:02:05 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:37:35 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ void	search_and_execve(t_vars *vars)
 		err_squid(vars->cmd.path, true);
 	else
 	{
+		g_exit_status = 1;
 		if (turn_env_into_char(vars) == -1)
-			s();
-		s();
-		execve(vars->cmd.path, args, vars->env);
-		err_squid(vars->cmd.path, true);
-		g_exit_status = 126;
+			err_squid("Malloc error durring command parsing", 0);
+		else
+		{
+			execve(vars->cmd.path, args, vars->env);
+			err_squid(vars->cmd.path, true);
+			g_exit_status = 126;
+		}
 	}
 	clean_vars(vars);
 	exit(g_exit_status);

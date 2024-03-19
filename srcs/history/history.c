@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 04:15:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 23:30:47 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	get_history(t_vars *vars)
 		add_history(s);
 		free(s);
 	}
-	close(fd);
+	ft_close(&fd);
 }
 
 int	save_line(t_vars *vars)
@@ -87,5 +87,5 @@ void	append_to_history(t_vars *vars)
 		free(vars->history);
 		vars->history = next;
 	}
-	close(fd);
+	ft_close(&fd);
 }
