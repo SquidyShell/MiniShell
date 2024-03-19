@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 03:38:05 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 15:14:11 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,16 @@ bool	tok_addback_and_close(t_tokens **tokens, t_vars *vars, int type)
 	if (tok_close(vars) == -1)
 		return (0);
 	return (1);
+}
+
+int	tok_add_inbetween(t_tokens **first, t_tokens **new)
+{
+	t_tokens	*temp;
+
+	if (!new)
+		return (-1);
+	temp = (*first)->next;
+	(*first)->next = (*new);
+	(*new)->next = temp;
+	return (0);
 }
