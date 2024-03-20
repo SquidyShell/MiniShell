@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 17:46:04 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:49:58 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_vars(t_vars *v)
 	v->command_was_built_in = 0;
 	v->tokens = NULL;
 	v->cmd.args = NULL;
+	v->fildes[0] = -2;
+	v->fildes[1] = -2;
 	if (g_exit_status == 666)
 		g_exit_status = 130;
 }
