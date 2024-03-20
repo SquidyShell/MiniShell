@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 13:55:43 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 14:40:43 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int static	write_heredoc(t_tokens *tok, t_vars *v)
 			free(v->hdc.new_line), p_free(v->hdc.line), v->hdc.line_nb++);
 		write(tok->end_heredoc[WRITE], "\n", 1);
 	}
+	ft_close(&tok->end_heredoc[WRITE]);
 	close(STDIN_FILENO);
 	p_free(v->hdc.line);
 	dup2(v->old_stdin, STDIN_FILENO);
