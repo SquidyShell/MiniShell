@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 18:10:26 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:56:33 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
