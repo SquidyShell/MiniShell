@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:47:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/13 21:25:40 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/19 19:12:00 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_printfd.h"
 #include "limits.h"
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
 static int	case_percent(const char *s, t_v2i ij, va_list ap, char buffer[])
@@ -43,9 +44,9 @@ static int	count_percent(const char *s, t_v2i ij, va_list ap)
 	ij[0]++;
 	if (s[ij[0]] == '%')
 		return (1);
-	else if (s[ij[0]] == 'c')
+	if (s[ij[0]] == 'c')
 		return (1);
-	else if (s[ij[0]] == 's')
+	if (s[ij[0]] == 's')
 	{
 		temp = va_arg(ap, char *);
 		if (!temp[0])
@@ -53,7 +54,9 @@ static int	count_percent(const char *s, t_v2i ij, va_list ap)
 		else
 			return (ft_strlen(temp) + 1);
 	}
-	return (0);
+	if (s[ij[0]] == 'z' && s[ij[0] + 1] == 'u')
+		return (count_print_sizet(va_arg(ap, size_t)));
+	return (1);
 }
 
 void	fill_in_buffer(char *buffer, const char *s, va_list ap)

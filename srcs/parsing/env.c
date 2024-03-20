@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 12:03:35 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:16:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,18 @@ t_list	*create_env_list(char **env, bool *malloc_crampt)
 int	turn_env_into_char(t_vars *v)
 {
 	size_t	i;
+	t_list	*curr;
 
 	i = 0;
 	free_matrix(v->env);
+	curr = v->env_list;
 	v->env = malloc(sizeof(char *) * (ft_lstsize(v->env_list) + 1));
 	if (!v->env)
 		return (-1);
-	while (v->env_list)
+	while (curr)
 	{
-		v->env[i++] = v->env_list->content;
-		v->env_list = v->env_list->next;
+		v->env[i++] = curr->content;
+		curr = curr->next;
 	}
 	v->env[i] = 0;
 	return (0);

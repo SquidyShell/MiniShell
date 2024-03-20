@@ -6,13 +6,13 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 04:44:26 by cviegas           #+#    #+#             */
-/*   Updated: 2023/12/04 16:36:13 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:12:17 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "first_libft.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	ft_lstsize(t_list *lst)
 {
@@ -20,10 +20,7 @@ int	ft_lstsize(t_list *lst)
 
 	i = 0;
 	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
+		(i++, lst = lst->next);
 	return (i);
 }
 

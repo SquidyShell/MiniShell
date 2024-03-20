@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 16:21:55 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:25:53 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	clean_vars(t_vars *vars)
 	if (vars->tokens)
 		tok_clear(&vars->tokens);
 	free_matrix(vars->env_path);
-	free_matrix(vars->env);
+	p_free(vars->env);
 	p_free(vars->cmd.args);
 }
