@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 13:00:38 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 14:00:46 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_vars(t_vars *v)
 	v->command_was_built_in = 0;
 	v->tokens = NULL;
 	v->cmd.args = NULL;
+	if (g_exit_status == 666)
+		g_exit_status = 130;
 }
 
 char	**ft_strdup_matrix(char **matrix)
