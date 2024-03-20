@@ -6,11 +6,19 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 23:30:52 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:13:42 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	heredoc_handler(int sig)
+{
+	(void)sig;
+	close(STDIN_FILENO);
+	write(1, "\n", 1);
+	g_exit_status = 666;
+}
 
 bool	needs_to_expand(char *line, size_t i)
 {
@@ -41,56 +49,43 @@ int	expand_line(char *line, char **new_line, t_vars *v)
 	return (0);
 }
 
-void static	write_heredoc(t_tokens *tok, t_vars *v)
+int static	write_heredoc(t_tokens *tok, t_vars *v)
 {
-	char	*line;
-	char	*new_line;
-	size_t	line_nb;
-	bool	malloc_crampted;
-
-	line = NULL;
-	line_nb = 1;
-	malloc_crampted = 0;
-	new_line = NULL;
-	while (1)
+	while (g_exit_status != 666)
 	{
-		line = readline("> ");
-		if (!line)
-			hderr(line_nb, tok->content);
-		if (!line || is_there_delimiter(line, tok->content, len(tok->content)))
+		v->hdc.line = readline("> ");
+		if (!v->hdc.line && g_exit_status != 666)
+			hderr(v->hdc.line_nb, tok->content);
+		if (!v->hdc.line || is_there_delimiter(v->hdc.line, tok->content,
+				len(tok->content)))
 			break ;
 		if (!tok->is_double_quoted && !tok->is_single_quoted)
-			if (expand_line(line, &new_line, v) == -1 && ++malloc_crampted)
+			if (expand_line(v->hdc.line, &v->hdc.new_line, v) == -1
+				&& ++v->hdc.malloc_crampted)
 				break ;
-		(printfd(tok->end_heredoc[WRITE], new_line), free(new_line),
-			p_free(line), line_nb++);
+		(printfd(tok->end_heredoc[WRITE], v->hdc.new_line),
+			free(v->hdc.new_line), p_free(v->hdc.line), v->hdc.line_nb++);
+		write(tok->end_heredoc[WRITE], "\n", 1);
 	}
-	(p_free(line), clean_vars(v));
-	exit(malloc_crampted);
+	close(STDIN_FILENO);
+	free(v->hdc.line);
+	dup2(v->old_stdin, STDIN_FILENO);
+	close(v->old_stdin);
+	return ((v->hdc.malloc_crampted == 0) - 1);
 }
 
 int	exec_heredoc(t_tokens *tok, t_vars *v)
 {
-	int	pid;
-	int	wstatus;
-
+	v->hdc.line = NULL;
+	v->hdc.line_nb = 1;
+	v->hdc.malloc_crampted = 0;
+	v->hdc.new_line = NULL;
+	v->old_stdin = dup(STDIN_FILENO);
 	if (pipe(tok->end_heredoc) < 0)
 		return (err_squid("Pipe", true), -1);
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		write_heredoc(tok, v);
-	}
-	wait(&wstatus);
-	ft_close(&tok->end_heredoc[WRITE]);
-	if (WIFEXITED(wstatus))
-	{
-		if (wstatus != 0)
-			return (err_squid("Malloc error during here_doc initilization", 0),
-				clean_vars(v), -1);
-	}
-	else
-		return (write(2, "\n", 1), -1);
+	signal(SIGINT, &heredoc_handler);
+	if (write_heredoc(tok, v) == -1)
+		return (err_squid("Malloc error during here_doc initilization", 0),
+			clean_vars(v), -1);
 	return (0);
 }

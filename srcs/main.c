@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 20:09:05 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:15:58 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		set_signals_cmd(&vars);
 		save_line(&vars);
-		if (parsing(&vars) != -1)
+		if (parsing(&vars) != -1 && g_exit_status != 666)
 		{
 			if (vars.line_was_expanded)
 				free(vars.line);

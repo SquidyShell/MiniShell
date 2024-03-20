@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:15:49 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 16:59:12 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 01:50:20 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	handler_sig(int sig)
 {
 	(void)sig;
 	g_exit_status = 130;
-	printfd(2, "\n");
+	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

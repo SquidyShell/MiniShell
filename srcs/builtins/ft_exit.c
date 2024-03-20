@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 23:29:55 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:57:41 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	ft_exit(char **cmd, t_vars *vars)
 	long long	exit_code;
 	bool		is_numeric;
 
-	if (vars->old_stdout)
-		ft_close(&vars->old_stdout);
+	ft_close(&vars->old_stdout);
 	append_to_history(vars);
 	printfd(STDOUT, "exit\n");
 	if (cmd[1])
