@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 23:37:35 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:48:59 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	get_path(char *command, t_vars *vars)
 	char	*tested_path;
 	size_t	i;
 
-	if (!command || !ft_strcmp(command, ".") || !command[0])
+	if (!command || !ft_strcmp(command, ".") || !ft_strcmp(command, "..")
+		|| !command[0])
 		return (0);
 	if (ft_strchr(command, '/'))
 		return (vars->cmd.path = ft_strdup(command), (vars->cmd.path != NULL)
