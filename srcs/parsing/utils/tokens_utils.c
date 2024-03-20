@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 23:30:58 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:49:03 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_tokens	*tok_new(char *content, size_t type)
 
 void	tok_addback(t_tokens **tokens, t_vars *vars, t_tokens *new)
 {
+	if (!new)
+		return (clean_vars(vars), exit(FAILURE));
 	new->start = vars->index;
 	if (!*tokens)
 	{
