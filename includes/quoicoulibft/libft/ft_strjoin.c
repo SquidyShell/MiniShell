@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:58:03 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/10 00:08:13 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:16:52 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	i = 0;
 	if (!s1 || !s2)
-		return (NULL);
+		return (free(s1), free(s2), NULL);
 	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!join)
-		return (NULL);
+		return (free(s1), free(s2), NULL);
 	while (s1[i])
 	{
 		join[i] = s1[i];

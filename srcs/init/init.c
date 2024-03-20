@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:39:04 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:14:57 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	set_pwd(t_vars *vars)
 	{
 		pwd = ft_strjoin("PWD=", dir);
 		if (!pwd || maybe_add_to_env(pwd, vars) == -1)
-			printfd(2, "squidyshell-init: Malloc error, PWD will not be set");
+			err_squid("squidyshell-init: Malloc error, PWD will not be set", 0);
 		free(dir);
 		free(pwd);
 	}

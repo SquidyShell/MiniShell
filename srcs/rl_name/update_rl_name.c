@@ -31,17 +31,11 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 
 void	update_rl_name(t_vars *v)
 {
-	bool	malloc_crampt;
 	char	*pwd;
 
-	malloc_crampt = 0;
-	pwd = search_var_in_env(v, "PWD", &malloc_crampt);
-	if (malloc_crampt)
-		return (err_squid("Malloc", false), clean_vars(v), exit(FAILURE));
+	pwd = ft_getcwd();
 	if (!pwd)
-		pwd = ft_strdup("");
-	if (!pwd)
-		return (clean_vars(v), exit(FAILURE));
-	create_new_name(pwd, !pwd[1], v);
+		return ;
+	create_new_name(pwd, !ft_strcmp(pwd, "/"), v);
 	p_free(pwd);
 }

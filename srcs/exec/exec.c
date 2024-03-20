@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 14:42:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:40:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	case_no_pipe(t_vars *vars)
 	if (vars->cmd.args[0] && vars->cmd.len && is_builtin(vars))
 	{
 		vars->old_stdin = dup(STDIN_FILENO);
+		if (vars->old_stdin == -1)
+			(clean_vars(vars), err_squid("dup()", 1), exit(EXIT_FAILURE));
 		vars->old_stdout = dup(STDOUT_FILENO);
+		if (vars->old_stdout == -1)
+			(clean_vars(vars), err_squid("dup()", 1), exit(EXIT_FAILURE));
 		if (redirect(vars) == -1)
 			g_exit_status = 1;
 		else

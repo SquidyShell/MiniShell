@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:06:00 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:12:12 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_path(char *command, t_vars *vars)
 	{
 		tested_path = ft_strjoin3(vars->env_path[i], "/", command);
 		if (!tested_path)
-			return (-1);
+			return (err_squid("Malloc error during exec", 0), -1);
 		if (access(tested_path, F_OK) == 0)
 			return (vars->cmd.path = tested_path, 0);
 		p_free(tested_path);

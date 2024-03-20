@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 16:02:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:34:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	exec_heredoc(t_tokens *tok, t_vars *v)
 	v->hdc.malloc_crampted = 0;
 	v->hdc.new_line = NULL;
 	v->old_stdin = dup(STDIN_FILENO);
+	if (v->old_stdin == -1)
+		return (err_squid("dup()", true), -1);
 	if (pipe(tok->end_heredoc) < 0)
 		return (err_squid("Pipe", true), -1);
 	signal(SIGINT, &heredoc_handler);
