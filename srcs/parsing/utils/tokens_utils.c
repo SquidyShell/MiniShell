@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 23:30:58 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:51:58 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,8 @@ int	tok_close(t_vars *v)
 
 void	tok_print(t_tokens *tokens)
 {
-	t_tokens	*curr;
-
 	if (!tokens)
 		return ;
-	curr = tokens;
 	while (tokens)
 	{
 		printf("%sToken:%s %s, %sType:%s %zu, %sIs_in_quote?:%s %d\n", BLUE,
