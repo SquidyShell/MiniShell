@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 17:46:41 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:25:42 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	ft_exit(char **cmd, t_vars *vars)
 		exit_code = 0;
 		is_numeric = ft_atoll_bool(cmd[1], &exit_code);
 		if (cmd[2] && is_numeric)
-			return (printfd(STDERR, "🦑: exit: too many arguments\n"));
+			return (g_exit_status = 1, printfd(STDERR,
+					"🦑: exit: too many arguments\n"));
 		else
 		{
 			if (is_numeric)

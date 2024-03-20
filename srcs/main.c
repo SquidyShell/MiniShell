@@ -34,6 +34,8 @@ int	main(int ac, char **av, char **env)
 				free(vars.line);
 			if (vars.tokens)
 				g_exit_status = exec(&vars);
+			else
+				g_exit_status = 0;
 		}
 		tok_clear(&vars.tokens);
 	}

@@ -97,7 +97,7 @@ static int	general_case(t_vars *v)
 	value = search_var_in_env(v, to_find, &malloc_crampt);
 	if (malloc_crampt)
 		return (free(to_find), -1);
-	if (!value && (v->tokens->last->type == LESS
+	if (!value && v->tokens && (v->tokens->last->type == LESS
 			|| v->tokens->last->type == GREAT
 			|| v->tokens->last->type == DGREAT))
 		return (free(to_find), err_squid("ambiguous redirect", 0), -1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2.c                                         :+:      :+:    :+:   */
+/*   type_cases.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/16 02:48:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 18:32:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	case_great(t_vars *vars)
 		vars->tokens->last->type = DGREAT;
 	else
 	{
-		if (vars->tokens && is_metachar(*vars->tokens->last))
+		if (vars->tokens && is_metachar(*vars->tokens->last)
+			&& vars->tokens->last->type != PIPE)
 			last_meta = true;
 		if (tok_close(vars) == -1)
 			return (-1);
