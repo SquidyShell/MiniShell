@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 04:44:26 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 11:12:17 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:19:55 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	i = 0;
-	while (lst)
-		(i++, lst = lst->next);
+	i = -1;
+	while (lst && ++i)
+		lst = lst->next;
 	return (i);
 }
 

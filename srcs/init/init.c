@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 22:49:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:07:56 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_strdup_matrix(char **matrix)
 	i = 0;
 	while (matrix[i])
 	{
-		new[i] = ft_strdup(matrix[i]);
+		new[i] = matrix[i];
 		if (!new[i])
 			return (free_matrix(new), NULL);
 		i++;

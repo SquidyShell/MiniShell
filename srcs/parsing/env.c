@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 11:16:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:18:27 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	turn_env_into_char(t_vars *v)
 	t_list	*curr;
 
 	i = 0;
-	free_matrix(v->env);
+	p_free(v->env);
 	curr = v->env_list;
 	v->env = malloc(sizeof(char *) * (ft_lstsize(v->env_list) + 1));
 	if (!v->env)
