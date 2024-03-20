@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:44 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 10:57:41 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:46:41 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	ft_exit(char **cmd, t_vars *vars)
 
 	ft_close(&vars->old_stdout);
 	append_to_history(vars);
-	printfd(STDOUT, "exit\n");
+	if (!vars->is_child)
+		printfd(STDOUT, "exit\n");
 	if (cmd[1])
 	{
 		exit_code = 0;

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 17:14:57 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:46:04 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->old_stdout = -2;
 	vars->old_stdin = -2;
 	vars->cmd.args = NULL;
+	vars->is_child = false;
 }
