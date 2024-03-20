@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 23:30:47 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:09:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	get_history(t_vars *vars)
 
 	history = get_history_name(vars);
 	path_to_history = ft_strjoin(history, "/" HISTORY_NAME);
+	if (!path_to_history)
+		return ;
 	fd = open(path_to_history, O_RDONLY);
 	free(path_to_history);
 	free(history);
@@ -75,6 +77,8 @@ void	append_to_history(t_vars *vars)
 
 	history = get_history_name(vars);
 	path_to_history = ft_strjoin(history, "/" HISTORY_NAME);
+	if (!path_to_history)
+		return ;
 	fd = open(path_to_history, O_WRONLY | O_APPEND | O_CREAT, 0600);
 	free(path_to_history);
 	free(history);
