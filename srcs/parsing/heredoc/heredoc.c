@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 14:40:43 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:02:06 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	exec_heredoc(t_tokens *tok, t_vars *v)
 		return (err_squid("Pipe", true), -1);
 	signal(SIGINT, &heredoc_handler);
 	if (write_heredoc(tok, v) == -1)
-		return (err_squid("Malloc error during here_doc initilization", 0),
-			clean_vars(v), -1);
+		return (clean_vars(v), -1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 14:41:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:28:11 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tokens	*tok_new(char *content, size_t type)
 
 	tok = malloc(sizeof(t_tokens));
 	if (!tok)
-		return (NULL);
+		return (err_squid("Malloc error during parsing", 0), NULL);
 	tok->content = content;
 	tok->type = type;
 	tok->closed = 0;
@@ -61,6 +61,7 @@ void	tok_clear(t_tokens **tokens)
 		current = next;
 		next = current->next;
 		p_free(current->content);
+		ft_close(&current->end_heredoc[1]);
 		ft_close(&current->end_heredoc[0]);
 		p_free(current);
 	}

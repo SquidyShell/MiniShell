@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/17 08:54:30 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:19:30 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*new_line_expanded(t_vars *v, char *var_value, size_t var_name_len,
 	new_line = malloc(sizeof(char) * (len(old_line) - var_name_len
 				+ len(var_value) + 1));
 	if (!new_line)
-		return (NULL);
+		return (err_squid("Malloc error during expansion", 0), NULL);
 	new_line[0] = 0;
 	i = -1;
 	while (++i < (int)v->index)
@@ -87,10 +87,10 @@ int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
 	if (v->line_was_expanded)
 		p_free(v->line);
 	v->line = new_line_expanded(v, var_value, var_name_len, line_temp);
+	free(line_temp);
 	if (!v->line)
 		return (-1);
 	v->line_was_expanded = true;
-	free(line_temp);
 	return (1);
 }
 
@@ -115,7 +115,7 @@ int	expand_this_shit(t_vars *v)
 		if (malloc_crampt)
 			return (free(to_find), err_squid("Malloc", true), -1);
 		if (replace_var_name_by_value(v, value, len(to_find)) == -1)
-			return (free(value), free(to_find), err_squid("Malloc", true), -1);
+			return (free(value), free(to_find), -1);
 		free(value);
 		free(to_find);
 	}

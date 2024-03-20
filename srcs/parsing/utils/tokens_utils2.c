@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 23:16:21 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:31:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_tokens	*tok_new_quoted(char *content, size_t type, bool s_quote,
 
 	tok = malloc(sizeof(t_tokens));
 	if (!tok)
-		return (NULL);
+		return (err_squid("Malloc error during parsing", 0), NULL);
 	tok->content = content;
 	tok->type = type;
 	tok->closed = 0;

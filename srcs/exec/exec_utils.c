@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 12:56:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:13:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 void	change_ignore_lvl(size_t *ignore_lvl, size_t type)
 {
@@ -34,6 +34,7 @@ void	p_free(void *p)
 
 void	clean_vars(t_vars *vars)
 {
+	ft_close(&vars->old_stdin);
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear(&vars->history, free);
 	p_free(vars->cmd.path);

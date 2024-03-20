@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 13:56:18 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:06:00 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	search_and_execve(t_vars *vars)
 	{
 		g_exit_status = 1;
 		if (turn_env_into_char(vars) == -1)
-			err_squid("Malloc error durring command parsing", 0);
+			err_squid("Malloc error during env conversion", 0);
 		else
 		{
 			execve(vars->cmd.path, args, vars->env);

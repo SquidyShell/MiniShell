@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 19:25:20 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:24:28 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ char	*new_line_expanded_hd(size_t index, char *value, size_t var_name_len,
 	int		j;
 
 	new_line = malloc(sizeof(char) * (len(old_line) - var_name_len + len(value)
-				+ 1));
+				- +1));
 	if (!new_line)
-		return (NULL);
+		return (err_squid("Malloc error during heredoc initilization", 0),
+			NULL);
 	new_line[0] = 0;
 	i = -1;
 	while (++i < (int)index)
@@ -105,7 +106,7 @@ int	expand_this_shit_hd(char **new_line, size_t *index, t_vars *v)
 			return (free(to_find), err_squid("Malloc", true), -1);
 		if (replace_var_name_by_value_hd(index, new_line, value,
 				len(to_find)) == -1)
-			return (free(value), free(to_find), err_squid("Malloc", true), -1);
+			(free(value), free(to_find), clean_vars(v), exit(FAILURE));
 		free(value);
 		free(to_find);
 	}

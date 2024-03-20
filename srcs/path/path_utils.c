@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 13:59:07 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:35:21 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ void	get_paths(t_vars *vars)
 	{
 		var = ft_split(env->content, '=');
 		if (!var)
-			(clean_vars(vars), exit(FAILURE));
+			(err_squid("Malloc error during path finding", 0), clean_vars(vars),
+				exit(FAILURE));
 		if (var[0] && var[1] && !ft_strcmp("PATH", var[0]))
 		{
 			vars->env_path = ft_split(var[1], ':');
 			free_matrix(var);
 			if (!vars->env_path)
-				(clean_vars(vars), exit(FAILURE));
+				(err_squid("Malloc error during path finding", 0),
+					clean_vars(vars), exit(FAILURE));
 			break ;
 		}
 		env = env->next;
