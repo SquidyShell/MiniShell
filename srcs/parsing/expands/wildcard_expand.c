@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 15:14:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:00:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	maybe_expand(t_tokens *curr)
 		file = readdir(dir);
 		if (!file)
 			break ;
-		if ((file->d_type == 8 || file->d_type == 4) && *file->d_name != '.')
+		if (*file->d_name != '.')
 		{
 			if (maybe_turn_file_into_tok(file, curr, pattern,
 					&already_expanded) == -1)
