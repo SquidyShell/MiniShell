@@ -6,21 +6,11 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:19:30 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:08:56 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-char	*whats_the_var(char *line, size_t index)
-{
-	size_t	i;
-
-	i = index + 1;
-	while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
-		i++;
-	return (ft_substr(line, index + 1, i - index - 1));
-}
+#include "../../minishell.h"
 
 char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
 {
@@ -41,7 +31,8 @@ char	*search_var_in_env(t_vars *v, char *var_to_find, bool *malloc_crampt)
 				var_value = ft_substr(env_line, ft_strlen(var_to_find) + 1,
 						ft_strlen(env_line) - (ft_strlen(var_to_find) + 1));
 				if (!var_value)
-					return (*malloc_crampt = 1, NULL);
+					return (err_squid("Malloc error during env searching", 0),
+						*malloc_crampt = 1, NULL);
 				break ;
 			}
 		}
@@ -94,31 +85,39 @@ int	replace_var_name_by_value(t_vars *v, char *var_value, size_t var_name_len)
 	return (1);
 }
 
-int	expand_this_shit(t_vars *v)
+static int	general_case(t_vars *v)
 {
 	char	*to_find;
 	char	*value;
 	bool	malloc_crampt;
 
+	to_find = whats_the_var(v->line, v->index);
+	if (!to_find)
+		return (err_squid("Malloc", true), -1);
+	value = search_var_in_env(v, to_find, &malloc_crampt);
+	if (malloc_crampt)
+		return (free(to_find), -1);
+	if (!value && (v->tokens->last->type == LESS
+			|| v->tokens->last->type == GREAT
+			|| v->tokens->last->type == DGREAT))
+		return (free(to_find), err_squid("ambiguous redirect", 0), -1);
+	if (replace_var_name_by_value(v, value, len(to_find)) == -1)
+		return (free(value), free(to_find), -1);
+	free(value);
+	free(to_find);
+	return (0);
+}
+
+int	expand_this_shit(t_vars *v)
+{
 	v->in_expanded_var = 1;
 	if (v->line[v->index + 1] == '?')
 	{
 		if (var_is_exit_status(v) == -1)
 			return (-1);
 	}
-	else
-	{
-		to_find = whats_the_var(v->line, v->index);
-		if (!to_find)
-			return (err_squid("Malloc", true), -1);
-		value = search_var_in_env(v, to_find, &malloc_crampt);
-		if (malloc_crampt)
-			return (free(to_find), err_squid("Malloc", true), -1);
-		if (replace_var_name_by_value(v, value, len(to_find)) == -1)
-			return (free(value), free(to_find), -1);
-		free(value);
-		free(to_find);
-	}
+	else if (general_case(v) == -1)
+		return (-1);
 	v->index -= 1;
 	return (0);
 }
