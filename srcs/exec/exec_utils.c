@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:38:42 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:44:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ void	clean_vars(t_vars *vars)
 	free_matrix(vars->env_path);
 	p_free(vars->env);
 	p_free(vars->cmd.args);
+	ft_close(&vars->fildes[0]);
+	ft_close(&vars->fildes[1]);
 }
