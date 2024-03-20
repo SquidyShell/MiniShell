@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 23:39:07 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 01:29:06 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ typedef struct s_cmd
 	int				builtin;
 }					t_cmd;
 
+typedef struct s_hdc
+{
+	char			*line;
+	char			*new_line;
+	size_t			line_nb;
+	bool			malloc_crampted;
+}					t_hdc;
+
 typedef struct s_vars
 {
 	size_t			ignore_lvl;
@@ -82,6 +90,8 @@ typedef struct s_vars
 	size_t			end_of_var;
 	void			(*function)(char **, struct s_vars *);
 	int				old_stdout;
+	int				old_stdin;
+	t_hdc			hdc;
 }					t_vars;
 
 typedef enum e_type

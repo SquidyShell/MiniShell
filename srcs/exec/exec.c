@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/19 23:31:40 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:12:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ void	case_no_pipe(t_vars *vars)
 {
 	if (vars->cmd.args[0] && vars->cmd.len && is_builtin(vars))
 	{
+		vars->old_stdin = dup(STDIN_FILENO);
 		vars->old_stdout = dup(STDOUT_FILENO);
 		if (redirect(vars) == -1)
 			g_exit_status = 1;
 		else
 			vars->function(vars->cmd.args, vars);
+		dup2_and_close(&vars->old_stdin, STDIN_FILENO);
 		dup2_and_close(&vars->old_stdout, STDOUT_FILENO);
 	}
 	else
