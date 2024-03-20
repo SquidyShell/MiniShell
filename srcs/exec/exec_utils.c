@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 12:56:10 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 15:28:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	p_free(void *p)
 
 void	clean_vars(t_vars *vars)
 {
+	p_free(vars->readlinestring);
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear(&vars->history, free);
 	p_free(vars->cmd.path);

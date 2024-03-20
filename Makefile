@@ -17,6 +17,7 @@ PARS_EXPANDS_SRC = expand.c expand2.c wildcard_expand.c
 BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_export2.c \
 				ft_export_print.c ft_pwd.c ft_unset.c builtins_utils.c
 EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c exec_utils.c
+RL_NAME_SRC = update_rl_name.c
 SIGNALS_SRC = signals.c
 PATH_SRC = path.c path_utils.c
 GNL_SRC = gnl.c
@@ -36,6 +37,7 @@ SRC += $(addprefix $(SRC_PATH)/path/, $(PATH_SRC))
 SRC += $(addprefix $(SRC_PATH)/gnl/, $(GNL_SRC))
 SRC += $(addprefix $(SRC_PATH)/history/, $(HISTORY_SRC))
 SRC += $(addprefix $(SRC_PATH)/init/, $(INIT_SRC))
+SRC += $(addprefix $(SRC_PATH)/rl_name/, $(RL_NAME_SRC))
 
 OBJ = $(patsubst %.c,$(OBJ_PATH)/%.o,$(SRC))
 

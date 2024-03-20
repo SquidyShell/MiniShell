@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 14:00:46 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 15:52:00 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->line = NULL;
 	vars->env_path = NULL;
 	vars->old_stdout = 0;
+	vars->readlinestring = NULL;
 	set_pwd(vars);
 	get_history(vars);
 	g_exit_status = 0;
