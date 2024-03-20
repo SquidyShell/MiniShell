@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 11:12:23 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:30:31 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	exec_list(t_tokens **curr, t_vars *vars)
 		vars->cmd.token = (*curr);
 		if (get_cmd_infos(curr, vars) == -1)
 			return (-1);
-		if (!is_ignored)
+		if (!is_ignored && vars->cmd.len)
 		{
 			if (vars->cmd.len && vars->pipe_nb)
 				pipex(vars);
