@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 00:52:52 by cviegas           #+#    #+#             */
-/*   Updated: 2024/01/13 18:55:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 13:49:40 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ int	skip_sep(int i, char c, char const *s)
 	return (i);
 }
 
-static char	**free_splitted(char ***split)
+void	free_splitted(char **t)
 {
-	int	i;
+	size_t	i;
 
+	if (!t)
+		return ;
 	i = 0;
-	while (*split[i])
-		free(*split[i++]);
-	free(*split);
-	return (NULL);
+	while (t[i])
+		free(t[i++]);
+	free(t);
+	t = NULL;
 }
 
 char	**ft_split(char const *s, char c)
@@ -85,7 +87,7 @@ char	**ft_split(char const *s, char c)
 		j = 0;
 		splitted[word] = malloc((size_until_sep(s, c, i) + 1) * sizeof(char));
 		if (!splitted[word])
-			return (free_splitted(&splitted));
+			return (free_splitted(splitted), NULL);
 		while (s[i] != c && s[i])
 			splitted[word][j++] = s[i++];
 		splitted[word++][j] = 0;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 06:39:45 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:20:31 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:59:07 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	free_matrix(char **t)
 		return ;
 	i = 0;
 	while (t[i])
-		free(t[i++]);
-	free(t);
+		p_free(t[i++]);
+	p_free(t);
 	t = NULL;
 }
 
@@ -37,10 +37,14 @@ void	get_paths(t_vars *vars)
 	while (env && env->content)
 	{
 		var = ft_split(env->content, '=');
+		if (!var)
+			(clean_vars(vars), exit(FAILURE));
 		if (var[0] && var[1] && !ft_strcmp("PATH", var[0]))
 		{
 			vars->env_path = ft_split(var[1], ':');
 			free_matrix(var);
+			if (!vars->env_path)
+				(clean_vars(vars), exit(FAILURE));
 			break ;
 		}
 		env = env->next;

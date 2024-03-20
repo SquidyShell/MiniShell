@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 12:48:59 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:56:18 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_path(char *command, t_vars *vars)
 			return (-1);
 		if (access(tested_path, F_OK) == 0)
 			return (vars->cmd.path = tested_path, 0);
-		free(tested_path);
+		p_free(tested_path);
 		i++;
 	}
 	g_exit_status = 127;

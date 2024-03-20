@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 12:18:27 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:35:27 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,28 @@
 t_list	*create_env_list(char **env, bool *malloc_crampt)
 {
 	t_list	*env_list;
-	size_t	i;
+	int		i;
+	t_list	*new;
+	char	*new_content;
 
 	env_list = NULL;
-	i = 0;
-	if (!env || !env[i])
+	i = -1;
+	if (!env || !env[0])
 		return (NULL);
-	while (env[i])
+	while (env[++i])
 	{
-		ft_lstadd_back(&env_list, ft_lstnew(ft_strdup(env[i])));
+		new_content = ft_strdup(env[i]);
+		if (!new_content)
+			return (*malloc_crampt = 1, err_squid("Malloc", true),
+				ft_lstclear(&env_list, free), NULL);
+		new = ft_lstnew(new_content);
+		if (!new)
+			return (*malloc_crampt = 1, err_squid("Malloc", true),
+				ft_lstclear(&env_list, free), p_free(new_content), NULL);
+		ft_lstadd_back(&env_list, new);
 		if (!ft_lstlast(env_list)->content)
 			return (*malloc_crampt = 1, err_squid("Malloc", true),
 				ft_lstclear(&env_list, free), NULL);
-		i++;
 	}
 	return (env_list);
 }

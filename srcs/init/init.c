@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 12:07:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 13:00:38 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_minishell(t_vars *vars, char **env)
 	does_malloc_crampt = 0;
 	vars->env_list = create_env_list(env, &does_malloc_crampt);
 	if (does_malloc_crampt)
-		(free_matrix(vars->env), exit(FAILURE));
+		(p_free(vars->env), exit(FAILURE));
 	vars->history = NULL;
 	vars->tokens = NULL;
 	vars->line = NULL;
