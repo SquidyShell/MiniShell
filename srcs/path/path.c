@@ -6,11 +6,21 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:13:12 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:22:20 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	is_present(char *name)
+{
+	if (access(name, F_OK) == -1 && errno == ENOENT)
+	{
+		g_exit_status = 127;
+		return (false);
+	}
+	return (true);
+}
 
 static bool	is_dir(char *name)
 {
@@ -18,7 +28,10 @@ static bool	is_dir(char *name)
 
 	fd = open(name, O_WRONLY);
 	if (fd == -1 && errno == EISDIR)
+	{
+		g_exit_status = 126;
 		return (true);
+	}
 	ft_close(&fd);
 	return (false);
 }
@@ -58,10 +71,10 @@ void	search_and_execve(t_vars *vars)
 		(clean_vars(vars), exit(EXIT_FAILURE));
 	if (vars->cmd.path == NULL)
 		printfd(STDERR, SQUID "%s: command not found\n", args[0]);
-	else if (access(vars->cmd.path, F_OK) == -1 && errno == ENOENT)
-		(g_exit_status = 127, err_squid(vars->cmd.path, true));
+	else if (!is_present(vars->cmd.path))
+		err_squid(vars->cmd.path, true);
 	else if (is_dir(vars->cmd.path))
-		(g_exit_status = 126, err_squid(vars->cmd.path, true));
+		err_squid(vars->cmd.path, true);
 	else
 	{
 		g_exit_status = 1;

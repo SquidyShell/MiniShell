@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 18:48:11 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:13:38 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	exec_list(t_tokens **curr, t_vars *vars)
 				pipex(vars);
 			else
 				case_no_pipe(vars);
-			p_free(vars->cmd.args);
+			(p_free(vars->cmd.args), vars->cmd.args = NULL);
 			vars->cmd_i++;
 		}
 		if (!vars->cmd.len)
@@ -103,6 +103,10 @@ int	exec(t_vars *vars)
 {
 	t_tokens	*curr;
 
+	if (vars->line_was_expanded)
+		free(vars->line);
+	if (!vars->tokens)
+		return (0);
 	curr = vars->tokens;
 	vars->last_pid = 0;
 	vars->ignore_lvl = 0;
@@ -111,19 +115,12 @@ int	exec(t_vars *vars)
 		exec_list(&curr, vars);
 		if (vars->ignore_lvl > 0)
 			vars->ignore_lvl--;
-		if (curr && curr->type == OR_IF)
-		{
-			if (g_exit_status == 0 && !vars->ignore_lvl)
-				vars->ignore_lvl = 1;
-		}
-		else if (curr && curr->type == AND_IF)
-		{
-			if (g_exit_status != 0 && !vars->ignore_lvl)
-				vars->ignore_lvl = 1;
-		}
-		else
-			continue ;
-		curr = curr->next;
+		if (curr && curr->type == OR_IF && g_exit_status == 0
+			&& !vars->ignore_lvl && ++vars->ignore_lvl)
+			curr = curr->next;
+		else if (curr && curr->type == AND_IF && g_exit_status != 0
+			&& !vars->ignore_lvl && ++vars->ignore_lvl)
+			curr = curr->next;
 	}
 	return (g_exit_status);
 }

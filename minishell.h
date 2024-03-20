@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 18:56:33 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:00:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_vars
 	int				old_stdin;
 	t_hdc			hdc;
 	bool			is_child;
+	bool			dash_c;
 }					t_vars;
 
 typedef enum e_type
@@ -156,7 +157,6 @@ void				berr(char *token, t_vars *v);
 void				eof_err(char *match, t_vars *v);
 void				s(void);
 int					protected_addback(t_list **lst, char *str);
-void				p_free(void *p);
 
 /* HEREDOC */
 int					exec_heredoc(t_tokens *tok, t_vars *v);
@@ -174,6 +174,7 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				p_free(void *p);
 void				update_rl_name(t_vars *v);
 void				ft_close(int *fd);
 int					parse_tokens(t_tokens *tok);
