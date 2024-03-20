@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 13:55:59 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/20 14:41:36 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	tok_clear(t_tokens **tokens)
 		current = next;
 		next = current->next;
 		p_free(current->content);
-		if (current->end_heredoc[1] > 2)
-			ft_close(&current->end_heredoc[1]);
-		if (current->end_heredoc[0] > 2)
-			ft_close(&current->end_heredoc[0]);
+		ft_close(&current->end_heredoc[0]);
 		p_free(current);
 	}
 	*tokens = NULL;
