@@ -37,7 +37,7 @@ void	update_rl_name(t_vars *v)
 	malloc_crampt = 0;
 	pwd = search_var_in_env(v, "PWD", &malloc_crampt);
 	if (malloc_crampt)
-		return (err_squid("Malloc", true), clean_vars(v), exit(FAILURE));
+		return (err_squid("Malloc", false), clean_vars(v), exit(FAILURE));
 	if (!pwd)
 		pwd = ft_strdup("");
 	if (!pwd)
