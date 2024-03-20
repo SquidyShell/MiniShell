@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 20:00:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:26:27 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_hdc
 	char			*line;
 	char			*new_line;
 	size_t			line_nb;
-	bool			malloc_crampted;
+	int				malloc_crampted;
 }					t_hdc;
 
 typedef struct s_vars

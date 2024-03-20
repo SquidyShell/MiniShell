@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/20 19:44:10 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:26:02 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	expand_line(char *line, char **new_line, t_vars *v)
 	return (0);
 }
 
-int static	write_heredoc(t_tokens *tok, t_vars *v)
+static int	write_heredoc(t_tokens *tok, t_vars *v)
 {
 	while (g_exit_status != 666)
 	{
