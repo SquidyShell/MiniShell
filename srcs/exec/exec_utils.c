@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:13:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:38:42 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	p_free(void *p)
 void	clean_vars(t_vars *vars)
 {
 	ft_close(&vars->old_stdin);
+	p_free(vars->readlinestring);
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear(&vars->history, free);
 	p_free(vars->cmd.path);

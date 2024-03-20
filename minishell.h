@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 01:29:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:40:05 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_hdc
 typedef struct s_vars
 {
 	size_t			ignore_lvl;
+	char			*readlinestring;
+	int				git_repo_name[2];
 	bool			line_was_expanded;
 	t_list			*history;
 	t_list			*last_command;
@@ -170,6 +172,7 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				update_rl_name(t_vars *v);
 void				ft_close(int *fd);
 int					parse_tokens(t_tokens *tok);
 int					tok_add_inbetween(t_tokens **first, t_tokens **new);
@@ -245,7 +248,10 @@ void				ft_unset(char **cmd, t_vars *vars);
 void				ft_env(char **cmd, t_vars *vars);
 void				ft_exit(char **cmd, t_vars *vars);
 
-# define SQUIDYSHELL "\001\033[1;35m\002SquidyShell\001\033[0m\002$ "
+# define SQUIDYSHELL "\001\033[1;35m\002SquidyShell\001\033[0m\002 "
+# define GREENARROW "\001\033[1;32m\002➜\001\033[0m\002 "
+# define REDARROW "\001\033[1;31m\002➜\001\033[0m\002 "
+# define BBLUE "\033[1;36m"
 # define WRITE 1
 # define READ 0
 # define STDIN STDIN_FILENO
