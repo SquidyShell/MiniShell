@@ -31,9 +31,9 @@ int	get_git_r(int end[2], char *git_r, t_vars *v)
 	}
 	else
 	{
-		close(end[WRITE]);
-		waitpid(child_searching, &status, 0);
-		(read(end[READ], git_r, 100), close(end[READ]));
+		(close(end[WRITE]), waitpid(child_searching, &status, 0));
+		read(end[READ], git_r, 100);
+		close(end[READ]);
 	}
 	if (status)
 		return (0);
@@ -59,9 +59,9 @@ int	get_git_b(int end[2], char *git_b, t_vars *v)
 	}
 	else
 	{
-		close(end[WRITE]);
-		waitpid(child_searching, &status, 0);
-		(read(end[READ], git_b, 100), close(end[READ]));
+		(close(end[WRITE]), waitpid(child_searching, &status, 0));
+		read(end[READ], git_b, 100);
+		close(end[READ]);
 	}
 	if (status)
 		return (0);

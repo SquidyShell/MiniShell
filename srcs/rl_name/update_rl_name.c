@@ -19,7 +19,7 @@ void	rm_suffix(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '.' || s[i] == '\n')
+		if (s[i] == '.' || s[i] == '\n' || is_whitespace(s[i]))
 		{
 			return ((void)(s[i] = 0));
 		}
@@ -89,7 +89,7 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 		print_gitname = get_git_b(end, git_b, v);
 		if (print_gitname == -1)
 			return (p_free(pwd), clean_vars(v), exit(FAILURE));
-		(add_arrow(git_b), rm_suffix(git_b), rm_suffix(to_print));
+		(rm_suffix(git_b), add_arrow(git_b), rm_suffix(to_print));
 	}
 	else if (pwd_is_root || !ft_strcmp(".", pwd))
 		to_print = pwd;
