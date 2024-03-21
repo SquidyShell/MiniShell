@@ -1,5 +1,5 @@
 # PATH : /libft
-NAME		= libft.a
+NAME		= ../objs/libft.a
 
 # COMPILATION
 CC			= cc
@@ -17,13 +17,16 @@ SRCS		=	ft_striteri.c ft_strmapi.c ft_putnbr_fd.c ft_putchar_fd.c \
 BONUS_SRCS	=	ft_lstmap_bonus.c ft_lstiter_bonus.c ft_lstclear_bonus.c \
 				ft_lstdelone_bonus.c ft_lstadd_back_bonus.c ft_lstlast_bonus.c \
 				ft_lstsize_bonus.c ft_lstadd_front_bonus.c ft_lstnew_bonus.c
-OBJS		= $(SRCS:.c=.o)
-BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
+OBJS		= $(addprefix ../objs/, $(SRCS:.c=.o))
+BONUS_OBJS	= $(addprefix ../objs/, $(BONUS_SRCS:.c=.o))
 
-all: $(NAME) bonus
+all: ../objs $(NAME) bonus
 
-.o: .c
-	@$(CC) $(CFLAGS) -o $(SRCS) $(OBJS) -I .
+../objs:
+	mkdir -p ../objs
+
+../objs/%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@ar rc $@ $^
@@ -32,7 +35,7 @@ bonus: $(BONUS_OBJS)
 	@ar rc $(NAME) $^
 
 _bonus.o: _bonus.c
-	@$(CC) $(CFLAGS) -o $(BONUS_SRCS) $(BONUS_OBJS) -I .
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)

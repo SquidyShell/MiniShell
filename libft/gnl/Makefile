@@ -1,5 +1,5 @@
-# PATH : /libft
-NAME = gnl.a
+# PATH : /gnl
+NAME = ../objs/gnl.a
 
 # COMPILATION
 CC = cc 
@@ -7,24 +7,19 @@ FLAGS = -Wall -Wextra -Werror
 
 # FILES
 SRC = get_next_line.c
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix ../objs/, $(SRC:.c=.o))
 
 # TEXT
 UP = \033[1A
 ERASE = \033[0J
 
-all: libft.a ccc $(NAME) echo 
+all: $(NAME) echo 
 
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 
-libft.a:
-	@make --silent -C ../libft
-	@echo "       \033[32mGreenlight first libft!\033[0m"
-	@cp ../libft/libft.a $(NAME)
-
-ccc:
-	@cc -Wall -Wextra -Werror -c get_next_line.c -I .
+../objs/%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
 echo:
 	@echo "$(UP)$(ERASE)         \033[32m Greenlight gnl!\033[0m"

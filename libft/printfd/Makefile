@@ -1,5 +1,5 @@
 # PATH : /printfd
-NAME		= libftprintf.a
+NAME		= ../objs/libftprintf.a
 
 # COMPILATION
 CC			= cc
@@ -7,20 +7,19 @@ CFLAGS		= -Wall -Wextra -Werror
 
 # FILES
 SRCS		= ft_printfd.c ft_printf.c ft_putunsigned.c ft_putaddr.c ft_puthexa.c printfd.c printfd_utils.c
-OBJS		= $(SRCS:.c=.o)
+OBJS		= $(addprefix ../objs/, $(SRCS:.c=.o))
 
 # TEXT
 UP = \033[1A
 ERASE = \033[0J
 
-all: libft.a $(NAME) echo clean
-
-.o: .c ${INCLUDE}
-	$(CC) $(CFLAGS) -o $(SRCS) $(OBJS)
+all: libft.a $(NAME) echo
 
 $(NAME): $(OBJS)
-	@cp ../libft/libft.a $@
 	@ar rc $@ $^
+
+../objs/%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 libft.a:
 	@make --silent -C ../libft

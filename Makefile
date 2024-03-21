@@ -46,9 +46,8 @@ CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 
 RM = rm -f
 
-INCLUDES = -I $(LIBFT_PATH) -I.
-
-LIBFT_PATH = includes/quoicoulibft
+LIBFT_PATH = ./libft
+INCLUDES = -I$(LIBFT_PATH) -I.
 LIBFT = $(LIBFT_PATH)/libft.a
 
 all : $(NAME)
