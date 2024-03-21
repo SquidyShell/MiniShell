@@ -13,7 +13,7 @@ PARS_SRC = parsing.c env.c check_syntax.c
 PARS_UTILS_SRC = utils.c tokens_utils.c tokens_utils2.c utils2.c utils3.c
 PARS_HEREDOC_SRC = heredoc.c heredoc_expand.c heredoc_utils.c
 PARS_CASES_SRC = quotes_handling.c type_cases.c type_cases2.c
-PARS_EXPANDS_SRC = expand.c expand2.c wildcard_expand.c expand_utils.c
+PARS_EXPANDS_SRC = expand.c expand2.c wildcard_expand.c expand_utils.c remove_quotes.c
 BUILTINS_SRC = ft_cd.c ft_env.c ft_echo.c ft_exit.c ft_export.c ft_export2.c \
 				ft_export_print.c ft_pwd.c ft_unset.c builtins_utils.c
 EXEC_SRC = exec.c wait.c redirs.c redirs_utils.c exec_utils.c

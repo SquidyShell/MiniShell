@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 10:23:08 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:29:00 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ int	parse_the_actual_char(t_vars *v)
 			if (not_in_quote(v) == -1)
 				return (-1);
 		}
+	}
+	return (0);
+}
+
+int	parse_tokens(t_tokens *tok)
+{
+	t_tokens	*curr;
+
+	if (!(tok))
+		return (0);
+	curr = tok;
+	while (curr)
+	{
+		if (needs_to_remove_quotes(curr) && maybe_remove_quotes(curr) == -1)
+			return (-1);
+		if (is_expandable(curr) && maybe_expand(curr) == -1)
+			return (-1);
+		curr = curr->next;
 	}
 	return (0);
 }

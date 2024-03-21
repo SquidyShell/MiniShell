@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:05:13 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/17 05:09:22 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:57:24 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	print_env_export(char **env)
 
 bool	there_is_this_char(char *line, char c)
 {
+	if (!line || !line[0])
+		return (0);
 	while (*line)
 	{
 		if (*line == c)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 10:30:29 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:27:42 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static int	write_heredoc(t_tokens *tok, t_vars *v)
 
 int	exec_heredoc(t_tokens *tok, t_vars *v)
 {
+	if (needs_to_remove_quotes(tok) && maybe_remove_quotes(tok) == -1)
+		return (-1);
 	v->hdc.line = NULL;
 	v->hdc.line_nb = 1;
 	v->hdc.malloc_crampted = 0;
