@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 23:14:04 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/16 17:06:48 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 10:39:12 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,35 @@ char	*substr_s(char const *s, size_t start, size_t len, char to_skip)
 	while (j < len && s[j + start])
 	{
 		if (s[j + start] != to_skip)
+			substr[i++] = s[j + start];
+		j++;
+	}
+	substr[i] = 0;
+	return (substr);
+}
+
+/* ft_substr but skips the "to_skip" char passed by argument */
+char	*substr_2s(char const *s, size_t start, size_t len, char to_skip[2])
+{
+	char	*substr;
+	size_t	i;
+	size_t	j;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	if (start >= ft_strlen(s))
+		return (create_null_char());
+	while (i < len && s[i + start])
+		i++;
+	substr = malloc((i + 1) * sizeof(char));
+	if (!substr)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (j < len && s[j + start])
+	{
+		if (s[j + start] != to_skip[0] && s[j + start] != to_skip[1])
 			substr[i++] = s[j + start];
 		j++;
 	}
