@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 04:21:47 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:03:57 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ void				hderr(size_t line_nb, char *limiter);
 # define BLUE "\033[0;34m"
 # define PINK "\033[0;35m"
 # define BOLD "\033[1m"
-# define RESET "\033[0m"
 
 /* FUNCTIONS */
 void				init_cmd(t_vars *v);
@@ -255,7 +254,7 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define SQUIDYSHELL "\001\033[1;35m\002SquidyShell\001\033[0m\002 "
 # define GREENARROW "\001\033[1;32m\002➜\001\033[0m\002 "
 # define REDARROW "\001\033[1;31m\002➜\001\033[0m\002 "
-# define BBLUE "\033[1;36m"
+# define BBLUE "\001\033[1;36m\002"
 # define WRITE 1
 # define READ 0
 # define STDIN STDIN_FILENO

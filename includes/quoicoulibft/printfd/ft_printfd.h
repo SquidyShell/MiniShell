@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 18:22:49 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 10:03:01 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define BOLD "\033[1m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"
-# define RESET "\033[0m"
+# define RESET "\001\033[0m\002"
 
 # define BUFF_SIZE 16384
 
