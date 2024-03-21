@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:33:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 10:03:01 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:54:32 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define BUFF_SIZE 16384
 
 void	printfd(int fd, const char *s, ...);
+void	fill_in_sizet(char *buffer, size_t u_nb);
 size_t	count_print_sizet(size_t u_nb);
 int		ft_printf(const char *s, ...);
 int		ft_printfd(int fd, const char *s, ...);
