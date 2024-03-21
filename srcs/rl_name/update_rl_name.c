@@ -57,8 +57,8 @@ void	join_line(t_vars *v, char *to_print, char *git_b, bool print_gitname)
 			v->readlinestring = ft_strjoin3(GREENARROW " " SQUIDYSHELL BBLUE,
 					to_print, RESET " ");
 		else
-			v->readlinestring = ft_strjoin_4(GREENARROW " " SQUIDYSHELL BLUE
-					"git:(" RESET RRED, to_print, git_b, BLUE ") " RESET);
+			v->readlinestring = ft_strjoin_4(GREENARROW " " SQUIDYSHELL BLUE "git:(" RESET RRED,
+					to_print, git_b, BLUE ") " RESET);
 	}
 	else
 	{
@@ -66,8 +66,8 @@ void	join_line(t_vars *v, char *to_print, char *git_b, bool print_gitname)
 			v->readlinestring = ft_strjoin3(REDARROW " " SQUIDYSHELL BBLUE,
 					to_print, RESET " ");
 		else
-			v->readlinestring = ft_strjoin_4(REDARROW " " SQUIDYSHELL BLUE
-					"git:(" RESET RRED, to_print, git_b, BLUE ") " RESET);
+			v->readlinestring = ft_strjoin_4(REDARROW " " SQUIDYSHELL BLUE "git:(" RESET RRED,
+					to_print, git_b, BLUE ") " RESET);
 	}
 }
 
@@ -85,7 +85,7 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 		return (p_free(pwd), clean_vars(v), exit(FAILURE));
 	if (print_gitname)
 	{
-		to_print = ft_strchr(git_r, '/') + 1;
+		to_print = ft_strrchr(git_r, '/') + 1;
 		print_gitname = get_git_b(end, git_b, v);
 		if (print_gitname == -1)
 			return (p_free(pwd), clean_vars(v), exit(FAILURE));

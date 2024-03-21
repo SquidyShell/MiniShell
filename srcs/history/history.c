@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:18:24 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:50:12 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:27:15 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	get_history(t_vars *vars)
 	char	*history;
 	char	*path_to_history;
 
+	vars->history = NULL;
 	history = get_history_name(vars);
 	path_to_history = ft_strjoin(history, "/" HISTORY_NAME);
 	if (!path_to_history)
