@@ -25,8 +25,8 @@ int	get_git_r(int end[2], char *git_r, t_vars *v)
 	if (!child_searching)
 	{
 		(dup2(end[WRITE], STDOUT), close(end[READ]), close(end[WRITE]));
-		execve("/usr/bin/git", (char *[5]){"git", "config", "--get",
-			"remote.origin.url", NULL}, v->env);
+		execve("/usr/bin/git", (char *[4]){"git", "remote", "-v", NULL},
+			v->env);
 		(clean_vars(v), exit(EXIT_FAILURE));
 	}
 	else
