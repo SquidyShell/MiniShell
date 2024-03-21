@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 12:31:31 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 15:25:19 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,9 @@ void				hderr(size_t line_nb, char *limiter);
 #  define BUFFER_SIZE 4000
 # endif
 
-/* COLOR CODES */
-# define BLUE "\033[0;34m"
-# define PINK "\033[0;35m"
-# define BOLD "\033[1m"
-
 /* FUNCTIONS */
+int					get_git_b(int end[2], char *git_b, t_vars *v);
+int					get_git_r(int end[2], char *git_r, t_vars *v);
 bool				needs_to_remove_quotes(t_tokens *tok);
 int					maybe_remove_quotes(t_tokens *tok);
 int					maybe_expand(t_tokens *curr);
@@ -260,6 +257,10 @@ void				ft_exit(char **cmd, t_vars *vars);
 # define GREENARROW "\001\033[1;32m\002➜\001\033[0m\002 "
 # define REDARROW "\001\033[1;31m\002➜\001\033[0m\002 "
 # define BBLUE "\001\033[1;36m\002"
+# define RRED "\001\033[1;31m\002"
+# define BLUE "\001\033[1;34m\002"
+# define PINK "\001\033[0;35m\002"
+# define BBOLD "\001\033[1m\002"
 # define WRITE 1
 # define READ 0
 # define STDIN STDIN_FILENO

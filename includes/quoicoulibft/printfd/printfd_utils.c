@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:47:49 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 19:12:47 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 13:15:58 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,28 @@ size_t	count_print_sizet(size_t u_nb)
 	if (u_nb == 0)
 		return (1);
 	return (count_sizet_aux(u_nb, &count));
+}
+
+void	fill_in_sizet_aux(char *buffer, size_t u_nb, size_t *i)
+{
+	if (u_nb >= 10)
+	{
+		fill_in_sizet_aux(buffer, u_nb / 10, i);
+	}
+	buffer[(*i)++] = (u_nb % 10) + '0';
+}
+
+void	fill_in_sizet(char *buffer, size_t u_nb)
+{
+	size_t	i;
+
+	if (u_nb == 0)
+	{
+		buffer[0] = '0';
+		buffer[1] = '\0';
+		return ;
+	}
+	i = 0;
+	fill_in_sizet_aux(buffer, u_nb, &i);
+	buffer[i + 1] = '\0';
 }
