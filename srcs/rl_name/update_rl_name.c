@@ -30,11 +30,10 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 		v->readlinestring = ft_strjoin3(REDARROW BBLUE " ", pwd_to_print,
 				RESET " " SQUIDYSHELL);
 	if (!v->readlinestring)
-		return (clean_vars(v), exit(FAILURE));
+		return (p_free(pwd), clean_vars(v), exit(FAILURE));
 }
 
 /*Omz behavior for prompt name when cwd is null*/
-
 void	update_rl_name(t_vars *v)
 {
 	char	*pwd;
