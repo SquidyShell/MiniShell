@@ -18,9 +18,11 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 
 	p_free(v->readlinestring);
 	if (pwd_is_root)
-		pwd_to_print = strrchr(pwd, '/');
+		pwd_to_print = pwd;
+	else if (!ft_strcmp(".", pwd))
+		pwd_to_print = pwd;
 	else
-		pwd_to_print = strrchr(pwd, '/') + 1;
+		pwd_to_print = ft_strrchr(pwd, '/') + 1;
 	if (!g_exit_status)
 		v->readlinestring = ft_strjoin3(GREENARROW BBLUE " ", pwd_to_print,
 				RESET " " SQUIDYSHELL);
@@ -29,13 +31,18 @@ void	create_new_name(char *pwd, bool pwd_is_root, t_vars *v)
 				RESET " " SQUIDYSHELL);
 }
 
+/*Omz behavior for prompt name when cwd is null*/
+
 void	update_rl_name(t_vars *v)
 {
 	char	*pwd;
 
 	pwd = ft_getcwd();
 	if (!pwd)
-		return ;
-	create_new_name(pwd, !ft_strcmp(pwd, "/"), v);
-	p_free(pwd);
+		pwd = ft_strdup(".");
+	if (pwd)
+	{
+		create_new_name(pwd, !ft_strcmp(pwd, "/"), v);
+		p_free(pwd);
+	}
 }

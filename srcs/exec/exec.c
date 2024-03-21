@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 21:05:36 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 01:30:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	exec_child(t_vars *vars)
 {
+	signal(SIGQUIT, SIG_DFL);
 	vars->is_child = true;
 	get_fds(vars);
 	if (redirect(vars) == -1)

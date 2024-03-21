@@ -3,7 +3,7 @@ NAME		= libft.a
 
 # COMPILATION
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 # FILES
 SRCS		=	ft_striteri.c ft_strmapi.c ft_putnbr_fd.c ft_putchar_fd.c \
