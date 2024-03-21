@@ -54,8 +54,6 @@ int	save_line(t_vars *vars)
 {
 	t_list	*new;
 
-	if (!*vars->line)
-		return (0);
 	add_history(vars->line);
 	new = ft_lstnew(vars->line);
 	if (!new)
