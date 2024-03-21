@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 12:23:09 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:37:28 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_tokens	*tok_new(char *content, size_t type)
 	tok->error = false;
 	tok->is_double_quoted = 0;
 	tok->is_single_quoted = 0;
-	tok->end_heredoc[0] = -2;
-	tok->end_heredoc[1] = -2;
+	tok->hdc_file = NULL;
 	return (tok);
 }
 
@@ -61,8 +60,12 @@ void	tok_clear(t_tokens **tokens)
 		current = next;
 		next = current->next;
 		p_free(current->content);
-		ft_close(&current->end_heredoc[1]);
-		ft_close(&current->end_heredoc[0]);
+		if (current->hdc_file)
+		{
+			unlink(current->hdc_file);
+			p_free(current->hdc_file);
+			current->hdc_file = NULL;
+		}
 		p_free(current);
 	}
 	*tokens = NULL;
@@ -81,9 +84,8 @@ int	tok_close(t_vars *v)
 			return (err_squid("Malloc", true), -1);
 		if (v->tokens->last->error)
 			return (berr(v->tokens->last->content, v), -1);
-		if (v->tokens->last->type != HEREDOC_DELIM)
-			*v->tokens->last->end_heredoc = 0;
-		else if (exec_heredoc(v->tokens->last, v))
+		if (v->tokens->last->type == HEREDOC_DELIM
+			&& exec_heredoc(v->tokens->last, v))
 			return (-1);
 	}
 	return (0);

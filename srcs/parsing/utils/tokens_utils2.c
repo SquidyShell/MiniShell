@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:29:12 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 11:18:11 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 12:37:20 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ t_tokens	*tok_new_quoted(char *content, size_t type, bool s_quote,
 	tok->error = false;
 	tok->is_single_quoted = s_quote;
 	tok->is_double_quoted = d_quote;
-	tok->end_heredoc[0] = -2;
-	tok->end_heredoc[1] = -2;
+	tok->hdc_file = NULL;
 	return (tok);
 }
 

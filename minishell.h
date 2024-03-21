@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 15:25:19 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 15:28:34 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_tokens
 	bool			*is_quoted[2];
 	bool			is_single_quoted;
 	bool			is_double_quoted;
-	int				end_heredoc[2];
+	char			*hdc_file;
 	struct s_tokens	*last;
 }					t_tokens;
 
@@ -175,6 +175,8 @@ bool				needs_to_remove_quotes(t_tokens *tok);
 int					maybe_remove_quotes(t_tokens *tok);
 int					maybe_expand(t_tokens *curr);
 bool				is_expandable(t_tokens *curr);
+bool				hd_needs_to_expand(char *line, size_t i);
+void				heredoc_handler(int sig);
 void				init_cmd(t_vars *v);
 void				p_free(void *p);
 void				update_rl_name(t_vars *v);
