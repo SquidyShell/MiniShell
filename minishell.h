@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 20:26:27 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:21:47 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void				hderr(size_t line_nb, char *limiter);
 # define RESET "\033[0m"
 
 /* FUNCTIONS */
+void				init_cmd(t_vars *v);
 void				p_free(void *p);
 void				update_rl_name(t_vars *v);
 void				ft_close(int *fd);

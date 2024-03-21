@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 08:23:53 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 16:22:05 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:18:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 		(*curr) = (*curr)->next;
 	}
 	if ((*curr) && (*curr)->type == PIPE)
+	{
+		vars->pipe_nb++;
 		(*curr) = (*curr)->next;
+	}
 	vars->cmd.builtin = 0;
 	return (0);
 }

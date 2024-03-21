@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 01:30:16 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:23:16 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ int	exec_list(t_tokens **curr, t_vars *vars)
 {
 	bool	is_ignored;
 
-	vars->cmd_i = 0;
-	vars->last_pid = 0;
+	init_cmd(vars);
 	while ((*curr) && (*curr)->type != OR_IF && (*curr)->type != AND_IF)
 	{
 		is_ignored = vars->ignore_lvl != 0;

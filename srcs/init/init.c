@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:43:10 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:19:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_vars(t_vars *v)
 {
-	v->pipe_nb = 0;
 	v->index = 0;
 	v->in_quote = 0;
 	v->in_dquote = 0;

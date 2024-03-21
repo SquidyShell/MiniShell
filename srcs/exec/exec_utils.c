@@ -6,11 +6,18 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:31:56 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:21:30 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	init_cmd(t_vars *v)
+{
+	v->pipe_nb = 0;
+	v->cmd_i = 0;
+	v->last_pid = 0;
+}
 
 void	change_ignore_lvl(size_t *ignore_lvl, size_t type)
 {

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/19 22:38:34 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 04:23:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	hderr(size_t line_nb, char *limiter)
 {
 	g_exit_status = 0;
-	dprintf(STDERR,
+	printfd(STDERR,
 		SQUID HDERR_0 PINK "%zu" RESET HDERR_1 PINK "%s" RESET "')\n", line_nb,
 		limiter);
 }
