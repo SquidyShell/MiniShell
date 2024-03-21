@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 02:11:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:30:29 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ static int	write_heredoc(t_tokens *tok, t_vars *v)
 		if (!v->hdc.line || is_there_delimiter(v->hdc.line, tok->content,
 				len(tok->content)))
 			break ;
-		if (!tok->is_double_quoted && !tok->is_single_quoted)
-			if (expand_line(v->hdc.line, &v->hdc.new_line, v) == -1
-				&& ++v->hdc.malloc_crampted)
-				break ;
+		if (!tok->is_double_quoted && !tok->is_single_quoted
+			&& expand_line(v->hdc.line, &v->hdc.new_line, v) == -1
+			&& ++v->hdc.malloc_crampted)
+			break ;
+		else if (tok->is_double_quoted || tok->is_single_quoted)
+			v->hdc.new_line = ft_strdup(v->hdc.line);
 		(printfd(tok->end_heredoc[WRITE], v->hdc.new_line),
 			free(v->hdc.new_line), p_free(v->hdc.line), v->hdc.line_nb++);
 		write(tok->end_heredoc[WRITE], "\n", 1);
