@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 10:35:54 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:29:07 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ int	redirect(t_vars *vars)
 			vars->outfile_fd = open(vars->cmd.token->content,
 					O_WRONLY | O_APPEND | O_CREAT, 0666);
 		else if (vars->cmd.token->type == HEREDOC_DELIM)
-			vars->infile_fd = vars->cmd.token->end_heredoc[0];
+			vars->infile_fd = open(vars->cmd.token->hdc_file, O_RDONLY);
+		if (vars->cmd.token->type == HEREDOC_DELIM && vars->infile_fd == -1)
+			return (err_squid("Error retrieving heredoc file", 0), -1);
 		if (vars->infile_fd == -1 || vars->outfile_fd == -1)
-			return (printfd(2, SQUID "%s: %s\n", vars->cmd.token->content,
-					strerror(errno)), -1);
+			return (err_squid(vars->cmd.token->content, true), -1);
 		vars->cmd.token = vars->cmd.token->next;
 	}
 	dup2_and_close(&vars->infile_fd, STDIN_FILENO);
 	dup2_and_close(&vars->outfile_fd, STDOUT_FILENO);
 	return (0);
 }
-
-// if (vars->cmd.token->type == HEREDOC_DELIM)
-// 	(dup2_and_close(vars->cmd.token->end_heredoc[READ], STDIN), is_heredoc = 1);

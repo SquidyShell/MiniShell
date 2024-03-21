@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 10:16:56 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:20:24 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_tokens
 	bool			closed;
 	bool			is_single_quoted;
 	bool			is_double_quoted;
-	int				end_heredoc[2];
+	char			*hdc_file;
 	struct s_tokens	*last;
 }					t_tokens;
 
@@ -173,6 +173,8 @@ void				hderr(size_t line_nb, char *limiter);
 # define BOLD "\033[1m"
 
 /* FUNCTIONS */
+bool				hd_needs_to_expand(char *line, size_t i);
+void				heredoc_handler(int sig);
 void				init_cmd(t_vars *v);
 void				p_free(void *p);
 void				update_rl_name(t_vars *v);
