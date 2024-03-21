@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:44:02 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:14:02 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*new_line_expanded_hd(size_t index, char *value, size_t var_name_len,
 	int		j;
 
 	new_line = malloc(sizeof(char) * (len(old_line) - var_name_len + len(value)
-				- +1));
+				+ 1));
 	if (!new_line)
 		return (err_squid("Malloc error during heredoc initilization", 0),
 			NULL);
