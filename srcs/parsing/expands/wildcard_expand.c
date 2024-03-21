@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 19:43:53 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:38:40 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	maybe_expand(t_tokens *curr)
 		file = readdir(dir);
 		if (!file)
 			break ;
-		if (*file->d_name != '.')
+		if (*file->d_name != '.' || *curr->content == '.')
 		{
 			if (maybe_turn_file_into_tok(file, curr, pattern,
 					&already_expanded) == -1)
