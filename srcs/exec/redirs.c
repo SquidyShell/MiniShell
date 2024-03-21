@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 07:32:27 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 02:21:26 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:35:54 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	get_fds(t_vars *vars)
 
 int	redirect(t_vars *vars)
 {
-	while (vars->cmd.token && vars->cmd.token->type != PIPE)
+	while (vars->cmd.token && vars->cmd.token->type != PIPE
+		&& vars->cmd.token->type != AND_IF && vars->cmd.token->type != OR_IF)
 	{
 		if (vars->cmd.token->type == FILE_IN)
 			vars->infile_fd = open(vars->cmd.token->content, O_RDONLY);
