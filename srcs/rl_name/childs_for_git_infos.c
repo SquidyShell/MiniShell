@@ -25,15 +25,15 @@ int	get_git_r(int end[2], char *git_r, t_vars *v)
 	if (!child_searching)
 	{
 		(dup2(end[WRITE], STDOUT), close(end[READ]), close(end[WRITE]));
-		execve("/usr/bin/git", (char *[4]){"git", "remote", "-v", NULL},
-			v->env);
+		execve("/usr/bin/git", (char *[5]){"git", "config", "--get",
+			"remote.origin.url", NULL}, v->env);
 		(clean_vars(v), exit(EXIT_FAILURE));
 	}
 	else
 	{
-		close(end[WRITE]);
-		waitpid(child_searching, &status, 0);
-		(read(end[READ], git_r, 100), close(end[READ]));
+		(close(end[WRITE]), waitpid(child_searching, &status, 0));
+		read(end[READ], git_r, 100);
+		close(end[READ]);
 	}
 	if (status)
 		return (0);
@@ -59,9 +59,9 @@ int	get_git_b(int end[2], char *git_b, t_vars *v)
 	}
 	else
 	{
-		close(end[WRITE]);
-		waitpid(child_searching, &status, 0);
-		(read(end[READ], git_b, 100), close(end[READ]));
+		(close(end[WRITE]), waitpid(child_searching, &status, 0));
+		read(end[READ], git_b, 100);
+		close(end[READ]);
 	}
 	if (status)
 		return (0);
