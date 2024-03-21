@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 11:20:24 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:36:08 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_tokens
 	size_t			len;
 	size_t			start;
 	bool			closed;
+	bool			*is_quoted[2];
 	bool			is_single_quoted;
 	bool			is_double_quoted;
 	char			*hdc_file;
@@ -155,7 +156,7 @@ int					expand_this_shit(t_vars *v);
 void				clean_vars(t_vars *vars);
 void				berr(char *token, t_vars *v);
 void				eof_err(char *match, t_vars *v);
-void				s(void);
+void				s(int color);
 int					protected_addback(t_list **lst, char *str);
 
 /* HEREDOC */
@@ -173,6 +174,10 @@ void				hderr(size_t line_nb, char *limiter);
 # define BOLD "\033[1m"
 
 /* FUNCTIONS */
+bool				needs_to_remove_quotes(t_tokens *tok);
+int					maybe_remove_quotes(t_tokens *tok);
+int					maybe_expand(t_tokens *curr);
+bool				is_expandable(t_tokens *curr);
 bool				hd_needs_to_expand(char *line, size_t i);
 void				heredoc_handler(int sig);
 void				init_cmd(t_vars *v);

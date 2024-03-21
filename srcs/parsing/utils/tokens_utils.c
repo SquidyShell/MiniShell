@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 12:30:18 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:37:28 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,6 @@ void	tok_clear(t_tokens **tokens)
 	*tokens = NULL;
 }
 
-static void	close_quoted_or_not_toks(t_vars *v)
-{
-	if (!v->tokens->last->is_single_quoted
-		&& !v->tokens->last->is_double_quoted)
-		v->tokens->last->content = ft_substr(v->line, v->tokens->last->start,
-				v->index - v->tokens->last->start);
-	else if (v->tokens->last->is_single_quoted
-		&& v->tokens->last->is_double_quoted)
-		v->tokens->last->content = substr_2s(v->line, v->tokens->last->start,
-				v->index - v->tokens->last->start, "\"\'");
-	else if (v->tokens->last->is_single_quoted)
-		v->tokens->last->content = substr_s(v->line, v->tokens->last->start,
-				v->index - v->tokens->last->start, '\'');
-	else
-		v->tokens->last->content = substr_s(v->line, v->tokens->last->start,
-				v->index - v->tokens->last->start, '\"');
-}
-
 int	tok_close(t_vars *v)
 {
 	if (v->tokens && v->tokens->last->closed == false)
@@ -96,7 +78,8 @@ int	tok_close(t_vars *v)
 		if (v->tokens->last->type == PIPE)
 			v->pipe_nb++;
 		v->tokens->last->closed = true;
-		close_quoted_or_not_toks(v);
+		v->tokens->last->content = ft_substr(v->line, v->tokens->last->start,
+				v->index - v->tokens->last->start);
 		if (!v->tokens->last->content)
 			return (err_squid("Malloc", true), -1);
 		if (v->tokens->last->error)

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:26:58 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 12:26:21 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:37:14 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	exec_heredoc(t_tokens *tok, t_vars *v)
 {
 	int	fd;
 
+	if (needs_to_remove_quotes(tok) && maybe_remove_quotes(tok) == -1)
+		return (-1);
 	v->hdc.line = NULL;
 	v->hdc.line_nb = 1;
 	v->hdc.malloc_crampted = 0;

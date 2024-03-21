@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 10:38:40 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:26:44 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	is_matching(const char *pattern, const char *filename)
 	return (0);
 }
 
-static bool	is_expandable(t_tokens *curr)
+bool	is_expandable(t_tokens *curr)
 {
 	return ((curr->type == WORD || curr->type == FILE_IN
 			|| curr->type == FILE_OUT || curr->type == DFILE_OUT)
@@ -64,7 +64,7 @@ static int	maybe_turn_file_into_tok(struct dirent *file, t_tokens *curr,
 	return (0);
 }
 
-static int	maybe_expand(t_tokens *curr)
+int	maybe_expand(t_tokens *curr)
 {
 	DIR				*dir;
 	struct dirent	*file;
@@ -91,23 +91,4 @@ static int	maybe_expand(t_tokens *curr)
 		}
 	}
 	return (closedir(dir), p_free(pattern), 0);
-}
-
-int	parse_tokens(t_tokens *tok)
-{
-	t_tokens	*curr;
-
-	if (!(tok))
-		return (0);
-	curr = tok;
-	while (curr)
-	{
-		if (is_expandable(curr))
-		{
-			if (maybe_expand(curr) == -1)
-				return (-1);
-		}
-		curr = curr->next;
-	}
-	return (0);
 }
