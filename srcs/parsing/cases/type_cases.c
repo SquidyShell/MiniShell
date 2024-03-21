@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_cases.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 10:40:15 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/21 19:57:09 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	case_pipe(t_vars *vars)
 		tok_addback(&vars->tokens, vars, tok_new(NULL, PIPE));
 		vars->tokens->last->error = last_meta;
 	}
+	if (vars->last_token_type == PARENTHESES_IN)
+		vars->tokens->last->error = true;
 	return (0);
 }
 

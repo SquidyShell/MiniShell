@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/21 12:37:28 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:18:45 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,15 @@ int	tok_close(t_vars *v)
 				v->index - v->tokens->last->start);
 		if (!v->tokens->last->content)
 			return (err_squid("Malloc", true), -1);
-		if (v->tokens->last->error)
+		if (v->tokens->last->error || (v->last_token_type == PARENTHESES_OUT
+				&& v->tokens->last->type != OR_IF
+				&& v->tokens->last->type != AND_IF
+				&& v->tokens->last->type != PARENTHESES_OUT))
 			return (berr(v->tokens->last->content, v), -1);
 		if (v->tokens->last->type == HEREDOC_DELIM
 			&& exec_heredoc(v->tokens->last, v))
 			return (-1);
+		v->last_token_type = v->tokens->last->type;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 17:24:17 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:29:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_vars
 	int				code;
 	int				pid;
 	int				wstatus;
+	size_t			last_token_type;
 }					t_vars;
 
 typedef enum e_type

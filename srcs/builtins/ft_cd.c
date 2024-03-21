@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 18:26:48 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 17:32:50 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:51:05 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	replace_pwd(t_vars *vars)
 
 	old_pwd = search_var_in_env(vars, "PWD", &malloc_crampt);
 	if (malloc_crampt)
-		return ((void)perr("Malloc error, OLDPWD will not be set"));
+		return (err_squid("Malloc error, OLDPWD will not be set", 0));
 	if (!old_pwd)
 		old_pwd = ft_strdup("");
 	new_pwd = ft_getcwd();

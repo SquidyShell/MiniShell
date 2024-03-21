@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 17:32:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:29:58 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	wait_commands(t_vars *vars)
 		vars->pid = wait(&vars->wstatus);
 		if (vars->pid == -1)
 			break ;
-		if (WIFSIGNALED(vars->wstatus) && WTERMSIG(vars->wstatus) + 128 == 130
-			&& !nl && ++nl)
+		if (WIFSIGNALED(vars->wstatus) && WTERMSIG(vars->wstatus) + 128 == 128
+			+ SIGINT && !nl && ++nl)
 			printfd(2, "\n");
 		if (vars->pid != vars->last_pid)
 			continue ;

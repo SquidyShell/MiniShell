@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 04:19:08 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:49:23 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_vars(t_vars *v)
 	v->fildes[1] = -2;
 	if (g_exit_status == 666)
 		g_exit_status = 130;
+	v->last_token_type = 0;
 }
 
 char	**ft_strdup_matrix(char **matrix)
