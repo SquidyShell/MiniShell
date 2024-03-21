@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+static void	ignore_stderr(void)
+{
+	int	fd;
+
+	fd = open("/dev/null", O_RDONLY);
+	if (fd == -1)
+		return ;
+	if (dup2(fd, STDERR) == -1)
+		return ;
+	close(fd);
+}
+
 int	get_git_r(int end[2], char *git_r, t_vars *v)
 {
 	pid_t	child_searching;
@@ -24,6 +36,7 @@ int	get_git_r(int end[2], char *git_r, t_vars *v)
 		return (close(end[1]), close(end[2]), err_squid("Pipe", true), -1);
 	if (!child_searching)
 	{
+		ignore_stderr();
 		(dup2(end[WRITE], STDOUT), close(end[READ]), close(end[WRITE]));
 		execve("/usr/bin/git", (char *[5]){"git", "config", "--get",
 			"remote.origin.url", NULL}, v->env);
@@ -52,6 +65,7 @@ int	get_git_b(int end[2], char *git_b, t_vars *v)
 		return (close(end[1]), close(end[2]), err_squid("Pipe", true), -1);
 	if (!child_searching)
 	{
+		ignore_stderr();
 		(dup2(end[WRITE], STDOUT), close(end[READ]), close(end[WRITE]));
 		execve("/usr/bin/git", (char *[5]){"git", "rev-parse", "--abbrev-ref",
 			"HEAD", NULL}, v->env);
