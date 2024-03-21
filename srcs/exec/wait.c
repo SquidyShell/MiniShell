@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:58:12 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 01:31:39 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:32:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 int	wait_commands(t_vars *vars)
 {
-	int	code;
-	int	pid;
-	int	wstatus;
+	int	nl;
 
+	nl = 0;
 	while (1)
 	{
-		pid = wait(&wstatus);
-		if (pid == -1)
+		vars->pid = wait(&vars->wstatus);
+		if (vars->pid == -1)
 			break ;
-		if (pid != vars->last_pid)
+		if (WIFSIGNALED(vars->wstatus) && WTERMSIG(vars->wstatus) + 128 == 130
+			&& !nl && ++nl)
+			printfd(2, "\n");
+		if (vars->pid != vars->last_pid)
 			continue ;
-		if (WIFEXITED(wstatus))
-			code = WEXITSTATUS(wstatus);
+		if (WIFEXITED(vars->wstatus))
+			vars->code = WEXITSTATUS(vars->wstatus);
 		else
 		{
-			code = 128 + WTERMSIG(wstatus);
-			if (code == 131)
+			vars->code = 128 + WTERMSIG(vars->wstatus);
+			if (vars->code == 131)
 				printfd(2, "Quit (core dumped)\n");
 		}
-		g_exit_status = code;
+		g_exit_status = vars->code;
 	}
 	return (g_exit_status);
 }

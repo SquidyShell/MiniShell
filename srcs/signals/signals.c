@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:15:49 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 01:30:06 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:34:21 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	set_signals(t_vars *vars)
 static void	handler_sig_child(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
 }
 
 void	set_signals_cmd(t_vars *vars)
