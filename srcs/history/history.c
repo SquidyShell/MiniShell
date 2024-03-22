@@ -19,7 +19,7 @@ static char	*get_history_name(t_vars *vars)
 
 	ret = search_var_in_env(vars, "HOME", &malloc_crampted);
 	if (malloc_crampted)
-		err_squid("Malloc", true);
+		err_squid("malloc error, could not get history", false);
 	return (ret);
 }
 

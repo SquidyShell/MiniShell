@@ -22,7 +22,7 @@ SIGNALS_SRC = signals.c
 PATH_SRC = path.c path_utils.c
 GNL_SRC = gnl.c
 HISTORY_SRC = history.c
-INIT_SRC = init.c
+INIT_SRC = init.c shlvl.c
 
 SRC := $(addprefix $(SRC_PATH)/, $(SRC))
 SRC += $(addprefix $(PARS_PATH)/, $(PARS_SRC))

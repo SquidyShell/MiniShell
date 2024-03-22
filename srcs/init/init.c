@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 00:43:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:58:43 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,21 @@ static void	set_pwd(t_vars *vars)
 	}
 }
 
+void	init_minishell_vars(t_vars *vars)
+{
+	vars->gigit = 1;
+	vars->tokens = NULL;
+	vars->line = NULL;
+	vars->env_path = NULL;
+	vars->old_stdout = 0;
+	vars->readlinestring = NULL;
+	g_exit_status = 0;
+	vars->old_stdout = -2;
+	vars->old_stdin = -2;
+	vars->cmd.args = NULL;
+	vars->is_child = false;
+}
+
 void	init_minishell(t_vars *vars, char **env)
 {
 	bool	does_malloc_crampt;
@@ -88,17 +103,8 @@ void	init_minishell(t_vars *vars, char **env)
 	vars->env_list = create_env_list(env, &does_malloc_crampt);
 	if (does_malloc_crampt)
 		(p_free(vars->env), exit(FAILURE));
-	vars->gigit = 1;
-	vars->tokens = NULL;
-	vars->line = NULL;
-	vars->env_path = NULL;
-	vars->old_stdout = 0;
-	vars->readlinestring = NULL;
 	set_pwd(vars);
 	get_history(vars);
-	g_exit_status = 0;
-	vars->old_stdout = -2;
-	vars->old_stdin = -2;
-	vars->cmd.args = NULL;
-	vars->is_child = false;
+	get_shlvl(vars);
+	init_minishell_vars(vars);
 }
