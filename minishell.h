@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 01:50:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:40:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_vars
 	size_t			last_token_type;
 	bool			gigit;
 	char			*pwd;
+	char			*tmp;
 }					t_vars;
 
 typedef enum e_type

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 14:04:58 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:46:05 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ int	exec_list(t_tokens **curr, t_vars *vars)
 			return (-1);
 		if (!is_ignored)
 		{
+			ft_unset((char *[]){"unset", "_", NULL}, vars);
+			vars->tmp = ft_strjoin("_=", vars->cmd.args[vars->cmd.len - 1]);
+			(ft_export((char *[]){"export", vars->tmp, NULL}, vars), free(tmp));
 			if (vars->pipe_nb)
 				pipex(vars);
 			else
