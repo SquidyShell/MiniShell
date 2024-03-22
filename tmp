@@ -1,8 +1,0 @@
-ignore.txt
-includes
-Makefile
-minishell
-minishell.h
-objs
-srcs
-tmp
