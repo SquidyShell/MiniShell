@@ -27,11 +27,11 @@ static void	ignore_stderr(void)
 void	gigit(char **cmd, t_vars *vars)
 {
 	(void)cmd;
+	vars->gigit = vars->gigit == 0;
 	if (!vars->gigit)
 		printf("is no longer showing git branch and origin url\n");
 	else
 		printf("is now showing git branch and origin url\n");
-	vars->gigit = vars->gigit == 0;
 }
 
 int	get_git_r(int end[2], char *git_r, t_vars *v)

@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 10:46:05 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:47:26 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,33 +71,33 @@ void	case_no_pipe(t_vars *vars)
 		pipex(vars);
 }
 
-int	exec_list(t_tokens **curr, t_vars *vars)
+int	exec_list(t_tokens **curr, t_vars *v)
 {
 	bool	is_ignored;
 
-	init_cmd(vars);
+	init_cmd(v);
 	while ((*curr) && (*curr)->type != OR_IF && (*curr)->type != AND_IF)
 	{
-		is_ignored = vars->ignore_lvl != 0;
-		vars->infile_fd = -2;
-		vars->outfile_fd = -2;
-		vars->cmd.token = (*curr);
-		if (get_cmd_infos(curr, vars) == -1)
+		is_ignored = v->ignore_lvl != 0;
+		v->infile_fd = -2;
+		v->outfile_fd = -2;
+		v->cmd.token = (*curr);
+		if (get_cmd_infos(curr, v) == -1)
 			return (-1);
 		if (!is_ignored)
 		{
-			ft_unset((char *[]){"unset", "_", NULL}, vars);
-			vars->tmp = ft_strjoin("_=", vars->cmd.args[vars->cmd.len - 1]);
-			(ft_export((char *[]){"export", vars->tmp, NULL}, vars), free(tmp));
-			if (vars->pipe_nb)
-				pipex(vars);
+			ft_unset((char *[]){"unset", "_", NULL}, v);
+			v->tmp = ft_strjoin("_=", v->cmd.args[v->cmd.len - 1]);
+			(ft_export((char *[]){"export", v->tmp, NULL}, v), free(v->tmp));
+			if (v->pipe_nb)
+				pipex(v);
 			else
-				case_no_pipe(vars);
-			(p_free(vars->cmd.args), vars->cmd.args = NULL);
-			vars->cmd_i++;
+				case_no_pipe(v);
+			(p_free(v->cmd.args), v->cmd.args = NULL);
+			v->cmd_i++;
 		}
 	}
-	return (wait_commands(vars));
+	return (wait_commands(v));
 }
 
 int	exec(t_vars *vars)
