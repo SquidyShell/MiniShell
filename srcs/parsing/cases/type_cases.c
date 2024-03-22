@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 19:57:09 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:03:55 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int	case_less(t_vars *vars)
 	else
 	{
 		if (vars->tokens && is_metachar(*vars->tokens->last)
-			&& vars->tokens->last->type != PIPE)
+			&& vars->tokens->last->type != PIPE
+			&& vars->tokens->last->type != OR_IF
+			&& vars->tokens->last->type != AND_IF)
 			last_meta = true;
 		if (tok_close(vars) == -1)
 			return (-1);
@@ -80,7 +82,9 @@ int	case_great(t_vars *vars)
 	else
 	{
 		if (vars->tokens && is_metachar(*vars->tokens->last)
-			&& vars->tokens->last->type != PIPE)
+			&& vars->tokens->last->type != PIPE
+			&& vars->tokens->last->type != OR_IF
+			&& vars->tokens->last->type != AND_IF)
 			last_meta = true;
 		if (tok_close(vars) == -1)
 			return (-1);

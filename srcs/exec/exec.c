@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 11:54:57 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:27:45 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	case_no_pipe(t_vars *vars)
 		pipex(vars);
 }
 
-int	exec_list(t_tokens **curr, t_vars *v)
+static void	exec_list(t_tokens **curr, t_vars *v)
 {
 	bool	is_ignored;
 
@@ -82,8 +82,7 @@ int	exec_list(t_tokens **curr, t_vars *v)
 		v->infile_fd = -2;
 		v->outfile_fd = -2;
 		v->cmd.token = (*curr);
-		if (get_cmd_infos(curr, v) == -1)
-			return (-1);
+		get_cmd_infos(curr, v);
 		if (!is_ignored)
 		{
 			if (v->cmd.len)
@@ -96,7 +95,7 @@ int	exec_list(t_tokens **curr, t_vars *v)
 			v->cmd_i++;
 		}
 	}
-	return (wait_commands(v));
+	g_exit_status = wait_commands(v);
 }
 
 int	exec(t_vars *vars)

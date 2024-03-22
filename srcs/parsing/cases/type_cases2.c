@@ -43,8 +43,7 @@ int	get_cmd_infos(t_tokens **curr, t_vars *vars)
 	bool	is_skipped;
 
 	is_skipped = vars->ignore_lvl != 0;
-	if (get_cmd_len(vars, (*curr), vars->ignore_lvl) == -1)
-		return (-1);
+	get_cmd_len(vars, (*curr), vars->ignore_lvl);
 	i = 0;
 	while ((*curr) && (*curr)->type != PIPE && should_continue((*curr)->type,
 			vars->ignore_lvl))
