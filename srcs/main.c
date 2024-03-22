@@ -6,7 +6,7 @@
 /*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:46:32 by cviegas           #+#    #+#             */
-/*   Updated: 2024/03/22 13:36:49 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/22 13:44:09 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int	main(int ac, char **av, char **env)
 			vars.line = readline(vars.readlinestring);
 		if (!vars.line)
 			break ;
-		if (!vars.line[0] && (free(vars.line), 1))
-			continue ;
-		if (!vars.dash_c && !*vars.line)
+		if (!vars.line[0] && (free(vars.line), 1) && !vars.dash_c)
 			continue ;
 		(save_line(&vars), set_signals_cmd(&vars));
 		if (parsing(&vars) != -1 && g_exit_status != 666)
