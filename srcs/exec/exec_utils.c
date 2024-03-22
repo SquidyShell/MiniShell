@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 11:59:58 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:03:50 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	clean_vars(t_vars *vars)
 	p_free(vars->cmd.args);
 	ft_close(&vars->fildes[0]);
 	ft_close(&vars->fildes[1]);
+	ft_close(&vars->fd_file);
 }

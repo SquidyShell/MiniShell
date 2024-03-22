@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 06:09:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 14:14:02 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:14:22 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ int	expand_this_shit_hd(char **new_line, size_t *index, t_vars *v)
 	{
 		to_find = whats_the_var(*new_line, *index);
 		if (!to_find)
-			return (err_squid("Malloc", true), -1);
+			return (err_squid("Malloc error durring heredoc", false), -1);
 		value = search_var_in_env_hd(v, to_find, &malloc_crampt);
 		if (malloc_crampt)
-			return (free(to_find), err_squid("Malloc", true), -1);
+			return (free(to_find), err_squid("Malloc error", false), -1);
 		if (replace_var_name_by_value_hd(index, new_line, value,
 				len(to_find)) == -1)
 			(free(value), free(to_find), clean_vars(v), exit(FAILURE));
@@ -119,9 +119,9 @@ int	var_is_exit_status_hd(char **new_line, size_t *i)
 
 	value = ft_itoa(g_exit_status);
 	if (!value)
-		return (err_squid("Malloc", true), -1);
+		return (err_squid("Malloc error", false), -1);
 	if (replace_var_name_by_value_hd(i, new_line, value, 1) == -1)
-		return (free(value), err_squid("Malloc", true), -1);
+		return (free(value), err_squid("Malloc error", false), -1);
 	free(value);
 	return (1);
 }

@@ -46,11 +46,10 @@ OBJS = $(addprefix objs/, $(OBJS_FILES))
 all: check_libft
 
 check_libft:
-	@if [ ! -f $(NAME) ]; then \
-			$(MS) making; \
-			$(MS) $(NAME); \
-			$(MS) echo; \
-	fi
+		$(MS) making; \
+		$(MS) $(NAME); \
+		$(MS) echo; \
+
 
 $(NAME):
 	@$(MS) -C $(PD)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:40:22 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 13:24:49 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:03:30 by cviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_vars(t_vars *v)
 	if (g_exit_status == 666)
 		g_exit_status = 130;
 	v->last_token_type = 0;
+	v->fd_file = -2;
 }
 
 char	**ft_strdup_matrix(char **matrix)
