@@ -6,14 +6,14 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 01:35:34 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:50:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 // # define _XOPEN_SOURCE 600
-# include "includes/quoicoulibft/libft.h"
+# include "includes/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>

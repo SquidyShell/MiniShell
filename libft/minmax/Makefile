@@ -1,9 +1,9 @@
 # Path: /minmax
 
-NAME = minmax.a
+NAME = ../objs/minmax.a
 
 SRC = ft_min_max.c
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix ../objs/, $(SRC:.c=.o))
 
 CC = cc 
 FLAGS = -Wall -Wextra -Werror
@@ -11,13 +11,13 @@ FLAGS = -Wall -Wextra -Werror
 UP = \033[1A
 ERASE = \033[0J
 
-all: ccc $(NAME) echo
+all: $(NAME) echo
 
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 
-ccc:
-	@$(CC) $(FLAGS) -c $(SRC)
+../objs/%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
 echo:
 	@echo "$(UP)$(ERASE)         \033[32mGreenlight minmax!\033[0m"
