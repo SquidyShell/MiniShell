@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 17:59:30 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/20 20:22:20 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:24:49 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	search_and_execve(t_vars *vars)
 		err_squid(vars->cmd.path, true);
 	else
 	{
-		g_exit_status = 1;
 		if (turn_env_into_char(vars) == -1)
 			err_squid("Malloc error during env conversion", 0);
 		else

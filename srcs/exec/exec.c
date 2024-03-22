@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 12:27:45 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:24:48 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	exec_child(t_vars *vars)
 	}
 	if (vars->cmd.len && is_builtin(vars))
 		vars->function(vars->cmd.args, vars);
-	else
+	else if (vars->cmd.len)
 		search_and_execve(vars);
 	clean_vars(vars);
 	exit(EXIT_SUCCESS);
