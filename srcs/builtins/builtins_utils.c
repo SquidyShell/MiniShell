@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:44:16 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/15 21:07:54 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 00:30:57 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	is_builtin(t_vars *vars)
 		vars->function = ft_env;
 	else if (!ft_strcmp(vars->cmd.args[0], "exit"))
 		vars->function = ft_exit;
+	else if (!ft_strcmp(vars->cmd.args[0], "gigit"))
+		vars->function = gigit;
 	else
 		return (0);
 	g_exit_status = 0;

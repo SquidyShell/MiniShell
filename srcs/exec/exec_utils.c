@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cviegas <cviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 10:16:52 by cviegas          ###   ########.fr       */
+/*   Updated: 2024/03/22 01:40:50 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	clean_vars(t_vars *vars)
 {
 	ft_close(&vars->old_stdin);
 	p_free(vars->readlinestring);
+	vars->readlinestring = NULL;
 	ft_lstclear(&vars->env_list, free);
 	ft_lstclear(&vars->history, free);
 	p_free(vars->cmd.path);

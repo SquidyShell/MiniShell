@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/21 19:29:32 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:35:34 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ typedef struct s_vars
 	int				pid;
 	int				wstatus;
 	size_t			last_token_type;
+	bool			gigit;
+	char			*pwd;
 }					t_vars;
 
 typedef enum e_type
@@ -173,6 +175,7 @@ void				hderr(size_t line_nb, char *limiter);
 # endif
 
 /* FUNCTIONS */
+void				gigit(char **cmd, t_vars *vars);
 int					get_git_b(int end[2], char *git_b, t_vars *v);
 int					get_git_r(int end[2], char *git_r, t_vars *v);
 bool				needs_to_remove_quotes(t_tokens *tok);
