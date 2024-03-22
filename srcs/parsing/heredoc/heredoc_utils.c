@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-/*is being changed to not dprintf*/
 void	hderr(size_t line_nb, char *limiter)
 {
 	g_exit_status = 0;
-	dprintf(STDERR,
+	printfd(STDERR,
 		SQUID HDERR_0 PINK "%zu" RESET HDERR_1 PINK "%s" RESET "')\n", line_nb,
 		limiter);
 }
