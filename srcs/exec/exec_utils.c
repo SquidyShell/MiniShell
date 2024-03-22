@@ -6,11 +6,19 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 22:48:09 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 01:40:50 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:58:22 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	update_dash(t_vars *v)
+{
+	printf("%ld\n", v->cmd.len);
+	ft_unset((char *[]){"unset", "_", NULL}, v);
+	v->tmp = ft_strjoin("_=", v->cmd.args[v->cmd.len - 1]);
+	(ft_export((char *[]){"export", v->tmp, NULL}, v), free(v->tmp));
+}
 
 void	init_cmd(t_vars *v)
 {

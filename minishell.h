@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:30:58 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 11:37:22 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:55:18 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void				hderr(size_t line_nb, char *limiter);
 # endif
 
 /* FUNCTIONS */
+void				update_dash(t_vars *v);
 void				get_shlvl(t_vars *vars);
 void				gigit(char **cmd, t_vars *vars);
 int					get_git_b(int end[2], char *git_b, t_vars *v);
