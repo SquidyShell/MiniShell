@@ -24,12 +24,12 @@ int	find_hd_name(t_tokens *tok, t_vars *vars)
 	length = 0;
 	while (length != 257)
 	{
-		if (read(fd + length, buff, 1) == -1)
+		if (read(fd, buff + length, 1) == -1)
 			return (-1);
 		buff[length] = 48 + (unsigned char)buff[length] % (126 - 48);
 		buff[length + 1] = 0;
 		tok->hdc_file = ft_strjoin("/tmp/", buff);
-		vars->fd_file = open(tok->hdc_file, O_RDWR | O_CREAT | O_TRUNC, 0600);
+		vars->fd_file = open(tok->hdc_file, O_RDWR | O_CREAT | O_EXCL, 0600);
 		if (vars->fd_file != -1)
 			return (ft_close(&fd), vars->fd_file);
 		free(tok->hdc_file);
