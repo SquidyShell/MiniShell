@@ -6,7 +6,7 @@
 /*   By: legrandc <legrandc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:41:04 by legrandc          #+#    #+#             */
-/*   Updated: 2024/03/22 13:24:48 by legrandc         ###   ########.fr       */
+/*   Updated: 2024/03/31 05:02:32 by legrandc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	pipex(t_vars *vars)
 	}
 	vars->last_pid = fork();
 	if ((vars->last_pid) == -1)
-		return (-1);
+		return (err_squid("fork", 1), ft_close(&vars->fildes[0]),
+			ft_close(&vars->fildes[1]), ft_close(&vars->last_fd), -1);
 	if ((vars->last_pid) == 0)
 		exec_child(vars);
 	if (vars->cmd_i)

@@ -43,7 +43,7 @@ int	get_git_r(int end[2], char *git_r, t_vars *v)
 		return (err_squid("Pipe", true), -1);
 	child_searching = fork();
 	if (child_searching < 0)
-		return (close(end[1]), close(end[2]), err_squid("Pipe", true), -1);
+		return (close(end[0]), close(end[1]), err_squid("Fork", true), -1);
 	if (!child_searching)
 	{
 		ignore_stderr();
